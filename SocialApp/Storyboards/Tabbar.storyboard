@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="wzz-je-MLq">
+            <objects>
+                <tabBarController storyboardIdentifier="Tabbar" id="TtZ-5l-gip" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" itemPositioning="fill" id="uki-Q5-H46">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.85447895529999995" green="0.45823931690000003" blue="0.32436162229999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.85447895529999995" green="0.45823931690000003" blue="0.32436162229999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="W1p-iS-UvW" kind="relationship" relationship="viewControllers" id="Gqa-Ef-fqc"/>
+                        <segue destination="ip8-61-RAW" kind="relationship" relationship="viewControllers" id="RZQ-g8-XtT"/>
+                        <segue destination="Ogh-lz-v2I" kind="relationship" relationship="viewControllers" id="89Y-AW-nXq"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oGg-zZ-ZTj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1218" y="153"/>
+        </scene>
+        <!--NavDashboard-->
+        <scene sceneID="mVI-0d-Nh2">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Dashboard" referencedIdentifier="NavDashboard" id="W1p-iS-UvW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="tab_dash_a" id="ksM-To-sVE">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iu8-La-XUK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2249" y="-135"/>
+        </scene>
+        <!--NavPost-->
+        <scene sceneID="Dkk-dU-Aqm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Post" referencedIdentifier="NavPost" id="ip8-61-RAW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="tab_post_a" id="car-l0-oiT">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tf8-qI-W9U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2218" y="152"/>
+        </scene>
+        <!--NavProfile-->
+        <scene sceneID="kaG-lB-v25">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="NavProfile" id="Ogh-lz-v2I" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="profile" id="DsW-6J-PS8"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BLh-SQ-y6e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2228" y="427"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tab_dash_a" width="30" height="25"/>
+        <image name="tab_post_a" width="21" height="27"/>
+    </resources>
+</document>

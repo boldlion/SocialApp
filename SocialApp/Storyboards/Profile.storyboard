@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ProfileVC-->
+        <scene sceneID="8Ij-bm-B6s">
+            <objects>
+                <viewController id="zQB-bo-uUg" customClass="ProfileVC" customModule="FirebaseDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yER-Nu-gGX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="wjb-NE-O6Q"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="V7Q-Do-xiK">
+                        <barButtonItem key="leftBarButtonItem" title="logout" id="hEt-Of-c3W">
+                            <connections>
+                                <action selector="logout:" destination="tyb-cg-SQi" id="9OO-EU-yZO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pwa-F3-PwH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="tyb-cg-SQi" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3046" y="556"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pDg-J6-tx6">
+            <objects>
+                <navigationController storyboardIdentifier="NavProfile" automaticallyAdjustsScrollViewInsets="NO" id="yBc-a0-osR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="tab_profile" id="zqY-Jl-lTV">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                        <color key="badgeColor" red="0.85447895529999995" green="0.45823931690000003" blue="0.32436162229999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2j2-xj-89x">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zQB-bo-uUg" kind="relationship" relationship="rootViewController" id="fei-Kh-0ub"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5fM-lp-rlX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2338" y="557"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="tab_profile" width="30" height="30"/>
+    </resources>
+</document>
