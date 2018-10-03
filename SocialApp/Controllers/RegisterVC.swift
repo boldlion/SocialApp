@@ -1,6 +1,6 @@
 //
 //  RegisterVC.swift
-//  FirebaseDemo
+//  SocialApp
 //
 //  Created by Bold Lion on 30.09.18.
 //  Copyright © 2018 Bold Lion. All rights reserved.

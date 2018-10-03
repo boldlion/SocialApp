@@ -12,7 +12,7 @@
         <!--PostVC-->
         <scene sceneID="L5J-Fr-w8f">
             <objects>
-                <viewController id="ARH-TI-fd3" customClass="PostVC" customModule="FirebaseDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ARH-TI-fd3" customClass="PostVC" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SxS-dZ-xtP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,17 +20,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWl-cO-nvF">
                                 <rect key="frame" x="0.0" y="64" width="375" height="110"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="UqY-Pk-Ci6">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="UqY-Pk-Ci6">
                                         <rect key="frame" x="10" y="10" width="90" height="90"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="90" id="Bfn-pr-hME"/>
                                             <constraint firstAttribute="height" constant="90" id="aIM-BI-6cC"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nCS-mD-Yjb">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCS-mD-Yjb">
                                         <rect key="frame" x="110" y="10" width="255" height="90"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -57,6 +56,9 @@
                                 <state key="normal" title="SHARE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="shareTapped:" destination="ARH-TI-fd3" eventType="touchUpInside" id="aaV-2G-iOL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -70,7 +72,19 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bu6-Vz-dHp"/>
                     </view>
-                    <navigationItem key="navigationItem" id="CAC-aQ-hwZ"/>
+                    <navigationItem key="navigationItem" id="CAC-aQ-hwZ">
+                        <barButtonItem key="rightBarButtonItem" title="clear" id="Ujl-Dl-6tN">
+                            <connections>
+                                <action selector="clearTapped:" destination="ARH-TI-fd3" id="ZeE-IV-9Xt"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="captionTextView" destination="nCS-mD-Yjb" id="gzi-3M-zdK"/>
+                        <outlet property="clearButton" destination="Ujl-Dl-6tN" id="NMi-4R-2ri"/>
+                        <outlet property="photoImageView" destination="UqY-Pk-Ci6" id="MXF-oM-zQj"/>
+                        <outlet property="shareButton" destination="Gwh-pR-vMM" id="WbU-Sw-z5R"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bZP-XG-ZX1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -99,7 +113,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="placeholder" width="250" height="250"/>
+        <image name="placeholder" width="252" height="252"/>
         <image name="tab_post_a" width="21" height="27"/>
     </resources>
 </document>

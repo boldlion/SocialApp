@@ -18,6 +18,12 @@
 		035325A121636F64006152DA /* AuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0353259E21636F64006152DA /* AuthApi.swift */; };
 		035325A221636F64006152DA /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0353259F21636F64006152DA /* Api.swift */; };
 		035325A321636F64006152DA /* UsersApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035325A021636F64006152DA /* UsersApi.swift */; };
+		035325A721637049006152DA /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035325A421637048006152DA /* ProfileVC.swift */; };
+		035325A821637049006152DA /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035325A521637049006152DA /* DashboardVC.swift */; };
+		035325A921637049006152DA /* PostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035325A621637049006152DA /* PostVC.swift */; };
+		035325AC21637085006152DA /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035325AB21637085006152DA /* UserModel.swift */; };
+		035325AE21637A3D006152DA /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035325AD21637A3D006152DA /* DatabaseService.swift */; };
+		035325B0216380C3006152DA /* Congif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035325AF216380C3006152DA /* Congif.swift */; };
 		03D0DC54216363C9009AA0E9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D0DC53216363C9009AA0E9 /* AppDelegate.swift */; };
 		03D0DC5B216363CB009AA0E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03D0DC5A216363CB009AA0E9 /* Assets.xcassets */; };
 		03D0DC5E216363CB009AA0E9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03D0DC5C216363CB009AA0E9 /* LaunchScreen.storyboard */; };
@@ -57,6 +63,12 @@
 		0353259E21636F64006152DA /* AuthApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthApi.swift; sourceTree = "<group>"; };
 		0353259F21636F64006152DA /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		035325A021636F64006152DA /* UsersApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersApi.swift; sourceTree = "<group>"; };
+		035325A421637048006152DA /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		035325A521637049006152DA /* DashboardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
+		035325A621637049006152DA /* PostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostVC.swift; sourceTree = "<group>"; };
+		035325AB21637085006152DA /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		035325AD21637A3D006152DA /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		035325AF216380C3006152DA /* Congif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Congif.swift; sourceTree = "<group>"; };
 		03D0DC50216363C9009AA0E9 /* SocialApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D0DC53216363C9009AA0E9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03D0DC5A216363CB009AA0E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -137,6 +149,9 @@
 			children = (
 				0353258F21636DDA006152DA /* LoginVC.swift */,
 				0353259021636DDA006152DA /* RegisterVC.swift */,
+				035325A521637049006152DA /* DashboardVC.swift */,
+				035325A621637049006152DA /* PostVC.swift */,
+				035325A421637048006152DA /* ProfileVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -147,8 +162,17 @@
 				0353259F21636F64006152DA /* Api.swift */,
 				0353259E21636F64006152DA /* AuthApi.swift */,
 				035325A021636F64006152DA /* UsersApi.swift */,
+				035325AD21637A3D006152DA /* DatabaseService.swift */,
 			);
 			path = Api;
+			sourceTree = "<group>";
+		};
+		035325AA21637074006152DA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				035325AB21637085006152DA /* UserModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		03D0DC47216363C9009AA0E9 = {
@@ -176,8 +200,10 @@
 		03D0DC52216363C9009AA0E9 /* SocialApp */ = {
 			isa = PBXGroup;
 			children = (
-				0353259D21636F57006152DA /* Api */,
+				035325AF216380C3006152DA /* Congif.swift */,
 				03D0DC53216363C9009AA0E9 /* AppDelegate.swift */,
+				0353259D21636F57006152DA /* Api */,
+				035325AA21637074006152DA /* Model */,
 				0353258E21636DB4006152DA /* Controllers */,
 				0353258B21636D77006152DA /* Storyboards */,
 				03D0DC5C216363CB009AA0E9 /* LaunchScreen.storyboard */,
@@ -523,10 +549,16 @@
 			files = (
 				035325A121636F64006152DA /* AuthApi.swift in Sources */,
 				035325A321636F64006152DA /* UsersApi.swift in Sources */,
+				035325A721637049006152DA /* ProfileVC.swift in Sources */,
 				0353259221636DDA006152DA /* RegisterVC.swift in Sources */,
 				0353259121636DDA006152DA /* LoginVC.swift in Sources */,
+				035325B0216380C3006152DA /* Congif.swift in Sources */,
+				035325A821637049006152DA /* DashboardVC.swift in Sources */,
+				035325A921637049006152DA /* PostVC.swift in Sources */,
 				035325A221636F64006152DA /* Api.swift in Sources */,
+				035325AC21637085006152DA /* UserModel.swift in Sources */,
 				03D0DC54216363C9009AA0E9 /* AppDelegate.swift in Sources */,
+				035325AE21637A3D006152DA /* DatabaseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
