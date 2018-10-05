@@ -10,7 +10,7 @@ import Foundation
 
 class UserModel {
     
-    var id : String?
+    var id: String?
     var displayName: String?
     var profileImageString: String?
 }

@@ -11,4 +11,5 @@ import Foundation
 struct Api {
     static var Users = UsersApi()
     static var Auth  = AuthApi()
+    static var Post = PostApi()
 }
