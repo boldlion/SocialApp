@@ -12,6 +12,7 @@ import SVProgressHUD
 class DashboardVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var posts = [Post]()
     var users = [UserModel]()
@@ -20,16 +21,19 @@ class DashboardVC: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         navigationItem.title = "Dashboard"
-        tableView.estimatedRowHeight = 428
+        tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         fetchPosts()
     }
     
     func fetchPosts() {
+        activityIndicator.startAnimating()
         Api.Post.observeAllPosts(completion: { post in
             guard let uid = post.uid else { return }
             self.fetchUserOfPost(with: uid, completion: {
                 self.posts.insert(post, at: 0)
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.hidesWhenStopped = true
                 self.tableView.reloadData()
             })
         }, onError: { error in
@@ -59,6 +63,24 @@ extension DashboardVC :  UITableViewDataSource {
         let user = users[indexPath.row]
         cell.post = post
         cell.user = user
+        cell.delegateShowComment = self
         return cell
     }
+}
+
+
+extension DashboardVC : ShowCommentProtocol {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DashboardToComment" {
+            let commentVC = segue.destination as! CommentVC
+            let postId = sender as! String
+            commentVC.postId = postId
+        }
+    } 
+    
+    func showCommentForPost(with id: String) {
+        performSegue(withIdentifier: "DashboardToComment", sender: id)
+    }
+
 }

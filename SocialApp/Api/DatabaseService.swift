@@ -11,6 +11,7 @@ import FirebaseAuth
 
 class DatabaseService {
     
+    // MARK: SEND POST DATA TO DATABASE
     static func sendPostDataToDatabase(photoImageUrlString: String, caption: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
         guard let userId = Api.Users.CURRENT_USER?.uid else { return }
         let postsRef = Database.database().reference().child(DatabaseLocation.posts)
@@ -24,6 +25,7 @@ class DatabaseService {
         newPostId.setValue(postDictionary, withCompletionBlock: { error, _ in
             if error != nil {
                 onError(error!.localizedDescription)
+                return
             }
             else {
                 onSuccess()
@@ -31,7 +33,7 @@ class DatabaseService {
         })
     }
     
-    
+    // MARK: SEND POST IMAGE TO STORAGE
     static func sendPostImageToStorage(with data: Data, onError: @escaping (String) -> Void, onSuccess: @escaping (String) -> Void) {
         let phototIdString = UUID().uuidString
         
@@ -41,6 +43,7 @@ class DatabaseService {
             
             if error != nil {
                 onError(error!.localizedDescription)
+                return
             }
             storagePostRef.downloadURL(completion: { url, urlError in
                 guard let downloadUrl = url else { return }
@@ -48,6 +51,38 @@ class DatabaseService {
                 let postImageUrl = downloadUrl.absoluteString
                 onSuccess(postImageUrl)
             })
+        })
+    }
+    
+    // MARK: SEND COMMENTS
+    static func sendComment(with text: String, postId: String, onError: @escaping (String) -> Void, onSuccess: @escaping () -> Void) {
+        let commentRef = Database.database().reference().child(DatabaseLocation.comments)
+        let commentId = commentRef.childByAutoId().key
+        let newCommentRef = commentRef.child(commentId)
+        
+        guard let userUid = Api.Users.CURRENT_USER?.uid else { return }
+        
+        let dict = [ "text" : text,
+                     "uid": userUid ]
+        
+        newCommentRef.setValue(dict, withCompletionBlock: { error, _ in
+            if error != nil {
+                onError(error!.localizedDescription)
+                return
+            }
+            else {
+                // post_comments > commentId : true
+                let postCommentRef = Database.database().reference().child("post_comments").child(postId).child(commentId)
+                postCommentRef.setValue(true, withCompletionBlock: { error, dbRef in
+                    if error != nil {
+                        onError(error!.localizedDescription)
+                        return
+                    }
+                    else {
+                        onSuccess()
+                    }
+                })
+            }
         })
     }
 }

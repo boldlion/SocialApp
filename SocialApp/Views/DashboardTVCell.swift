@@ -9,6 +9,10 @@
 import UIKit
 import SDWebImage
 
+protocol ShowCommentProtocol {
+    func showCommentForPost(with id: String)
+}
+
 class DashboardTVCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: UIImageView!
@@ -19,9 +23,12 @@ class DashboardTVCell: UITableViewCell {
     @IBOutlet weak var likeCountButton: UIButton!
     @IBOutlet weak var captionLabel: UILabel!
     
+    var delegateShowComment: ShowCommentProtocol?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         initialUI()
+        addTapGestures()
     }
     
     override func prepareForReuse() {
@@ -70,6 +77,18 @@ class DashboardTVCell: UITableViewCell {
         captionLabel.text = ""
         profileImageView.layer.cornerRadius = profileImageView.frame.width / 2
         profileImageView.clipsToBounds = true
+    }
+    
+    func addTapGestures() {
+        let tapComment = UITapGestureRecognizer(target: self, action: #selector(commentTapped))
+        commentImageView.addGestureRecognizer(tapComment)
+        commentImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc func commentTapped() {
+        if let id = post?.id {
+            delegateShowComment?.showCommentForPost(with: id)
+        }
     }
     
 }

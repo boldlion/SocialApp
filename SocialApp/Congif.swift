@@ -16,4 +16,10 @@ struct StorageLocation {
 
 struct DatabaseLocation {
     static let posts = "posts"
+    static let comments = "comments"
+    static let post_comments = "post_comments"
+}
+
+struct Colors {
+    static let tint = UIColor(red: 218/255, green: 117/255, blue: 83/255, alpha: 1.0)
 }
