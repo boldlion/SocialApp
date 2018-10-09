@@ -40,7 +40,7 @@ class CommentVC: UIViewController {
     func fetchComments() {
         activityIndicator.startAnimating()
         guard let id = postId else { return }
-        Api.Comment.observePostCommentsForPost(withId: id, completion: { commentId in
+        Api.Post_Comment.observePostCommentsForPost(withId: id, completion: { commentId in
             Api.Comment.observeCommentsForPost(withId: commentId, completion: { comment in
                 guard let userId = comment.uid else { return }
                 self.fetchUsers(withId: userId, completion: {

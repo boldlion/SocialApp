@@ -36,6 +36,7 @@
 		03D0DC69216363CB009AA0E9 /* SocialAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D0DC68216363CB009AA0E9 /* SocialAppTests.swift */; };
 		03D0DC74216363CB009AA0E9 /* SocialAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D0DC73216363CB009AA0E9 /* SocialAppUITests.swift */; };
 		03F487B2216A323000B3CD71 /* CommentApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F487B1216A323000B3CD71 /* CommentApi.swift */; };
+		03F487B4216C9AB900B3CD71 /* Post_CommentApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */; };
 		5884C7E6855E901A78031160 /* Pods_SocialAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5677B471A6953D67CD6016E0 /* Pods_SocialAppTests.framework */; };
 		B671D3D684E4C3655A90F5F2 /* Pods_SocialAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226839638A0947D3F2F43835 /* Pods_SocialAppUITests.framework */; };
 		E00C5951035FCD2C4565F0F3 /* Pods_SocialApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3805FCFE7644F497519B6615 /* Pods_SocialApp.framework */; };
@@ -94,6 +95,7 @@
 		03D0DC73216363CB009AA0E9 /* SocialAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAppUITests.swift; sourceTree = "<group>"; };
 		03D0DC75216363CB009AA0E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03F487B1216A323000B3CD71 /* CommentApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentApi.swift; sourceTree = "<group>"; };
+		03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post_CommentApi.swift; sourceTree = "<group>"; };
 		088C958B75E5003B6F09667E /* Pods-SocialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp.release.xcconfig"; sourceTree = "<group>"; };
 		0BCA86F40A5B70C2EC61971A /* Pods-SocialAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocialAppUITests/Pods-SocialAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		226839638A0947D3F2F43835 /* Pods_SocialAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,6 +181,7 @@
 				0370B23C2164CF43006D4A03 /* PostApi.swift */,
 				035325A021636F64006152DA /* UsersApi.swift */,
 				03F487B1216A323000B3CD71 /* CommentApi.swift */,
+				03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */,
 				035325AD21637A3D006152DA /* DatabaseService.swift */,
 			);
 			path = Api;
@@ -594,6 +597,7 @@
 				035325AC21637085006152DA /* UserModel.swift in Sources */,
 				03D0DC54216363C9009AA0E9 /* AppDelegate.swift in Sources */,
 				0371A2BC21676FEF000FDDA8 /* CommentTVCell.swift in Sources */,
+				03F487B4216C9AB900B3CD71 /* Post_CommentApi.swift in Sources */,
 				035325AE21637A3D006152DA /* DatabaseService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
