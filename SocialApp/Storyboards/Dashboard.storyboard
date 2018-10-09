@@ -152,7 +152,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2V7-DN-p1O">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2V7-DN-p1O">
                                 <rect key="frame" x="0.0" y="64" width="375" height="553"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -160,7 +160,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4P2-we-ISp" id="ETP-yN-7a1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="q8l-pD-Csz">
@@ -177,21 +177,31 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYO-PB-vPf">
-                                                    <rect key="frame" x="56" y="46.5" width="309" height="33"/>
+                                                    <rect key="frame" x="56" y="46.5" width="309" height="32.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8ar-2w-cc8" userLabel="Separator">
+                                                    <rect key="frame" x="56" y="99" width="319" height="1"/>
+                                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="Oht-Ah-TEZ"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="cYO-PB-vPf" firstAttribute="top" secondItem="yfL-bm-K0U" secondAttribute="bottom" constant="10" id="1pq-G3-Fx5"/>
+                                                <constraint firstAttribute="trailing" secondItem="8ar-2w-cc8" secondAttribute="trailing" id="CkE-Am-2Uq"/>
                                                 <constraint firstItem="q8l-pD-Csz" firstAttribute="leading" secondItem="ETP-yN-7a1" secondAttribute="leading" constant="10" id="QvA-Jq-QLU"/>
+                                                <constraint firstItem="8ar-2w-cc8" firstAttribute="leading" secondItem="ETP-yN-7a1" secondAttribute="leading" constant="56" id="TzZ-zN-oMz"/>
                                                 <constraint firstAttribute="trailing" secondItem="cYO-PB-vPf" secondAttribute="trailing" constant="10" id="bkJ-EW-yyV"/>
                                                 <constraint firstItem="yfL-bm-K0U" firstAttribute="leading" secondItem="q8l-pD-Csz" secondAttribute="trailing" constant="10" id="dLO-9L-SCn"/>
                                                 <constraint firstItem="cYO-PB-vPf" firstAttribute="leading" secondItem="yfL-bm-K0U" secondAttribute="leading" id="jIj-eU-dGK"/>
                                                 <constraint firstItem="yfL-bm-K0U" firstAttribute="centerY" secondItem="q8l-pD-Csz" secondAttribute="centerY" id="kHa-tR-QDf"/>
-                                                <constraint firstAttribute="bottom" secondItem="cYO-PB-vPf" secondAttribute="bottom" constant="20" id="kO3-at-xBn"/>
                                                 <constraint firstItem="q8l-pD-Csz" firstAttribute="top" secondItem="ETP-yN-7a1" secondAttribute="top" constant="10" id="oC1-xX-D50"/>
+                                                <constraint firstAttribute="bottom" secondItem="8ar-2w-cc8" secondAttribute="bottom" id="poe-oo-eTl"/>
+                                                <constraint firstItem="8ar-2w-cc8" firstAttribute="top" secondItem="cYO-PB-vPf" secondAttribute="bottom" constant="20" id="z5Z-Gw-YJU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

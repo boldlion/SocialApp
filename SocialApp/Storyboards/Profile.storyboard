@@ -12,7 +12,7 @@
         <!--ProfileVC-->
         <scene sceneID="8Ij-bm-B6s">
             <objects>
-                <viewController id="zQB-bo-uUg" customClass="ProfileVC" customModule="FirebaseDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zQB-bo-uUg" customClass="ProfileVC" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yER-Nu-gGX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,13 +22,12 @@
                     <navigationItem key="navigationItem" id="V7Q-Do-xiK">
                         <barButtonItem key="leftBarButtonItem" title="logout" id="hEt-Of-c3W">
                             <connections>
-                                <action selector="logout:" destination="tyb-cg-SQi" id="9OO-EU-yZO"/>
+                                <action selector="logoutTapped:" destination="zQB-bo-uUg" id="SYx-zq-lEv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pwa-F3-PwH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="tyb-cg-SQi" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3046" y="556"/>
         </scene>

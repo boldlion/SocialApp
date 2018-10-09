@@ -23,29 +23,41 @@ class AuthApi {
     }
     
     // MARK: - REGISTER NEW USER
-    static func registerWith(displayName: String, username: String, email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void)  {
+    static func registerWith(data: Data, displayName: String, username: String, email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void)  {
         Auth.auth().createUser(withEmail: email, password: password, completion: { user, error in
             if error != nil {
                 onError(error!.localizedDescription)
                 return
             }
             if let uid = Auth.auth().currentUser?.uid {
-                self.setUserInformation(displayName: displayName, username: username, email: email, uid: uid, onSuccess: onSuccess)
+                self.setUserInformation(data: data,
+                                        displayName: displayName,
+                                        username: username,
+                                        email: email,
+                                        uid: uid,
+                                        onSuccess: onSuccess,
+                                        onError: onError)
             }
         })
     }
     
     // MARK: - Set new user account data
-    static func setUserInformation(displayName: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void) {
+    static func setUserInformation(data: Data, displayName: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
+        
+        DatabaseService.sendProfileImageToStorage(with: data, onError: { errorMessage in
+            onError(errorMessage)
+            return
+        }, onSuccess: { profileImageUrlString in
+            Api.Users.REF_USERS.child(uid).setValue([
+                "displayName"     : displayName,
+                "username"        : username.lowercased(),
+                "email"           : email,
+                "profileImageUrl" : profileImageUrlString
+                ])
+            onSuccess()
+        })
+        
 
-        Api.Users.REF_USERS.child(uid).setValue([ "displayName"        : displayName,
-                                                  "username"          : username,
-                                                  "username_lowercase" : username.lowercased(), // lowercase for searching purposes only!
-            "email"             : email,
-            "headerImageUrl"    : " ",
-            "profileImageUrl"   : " "
-            ])
-        onSuccess()
     }
     
     

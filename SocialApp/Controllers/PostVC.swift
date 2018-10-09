@@ -38,7 +38,7 @@ class PostVC: UIViewController {
         view.endEditing(true)
         SVProgressHUD.show(withStatus: "Waiting...")
         if let postImage = selectedImage, let imageData = postImage.jpegData(compressionQuality: 0.1)  {
-            DatabaseService.sendPostImageToStorage(with: imageData, onError: { error in
+            DatabaseService.sendImageToStorage(with: imageData, onError: { error in
                 SVProgressHUD.showError(withStatus: error)
                 return
             }, onSuccess: { storagePostImageUrlString in

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class ProfileVC: UIViewController {
 
@@ -14,5 +15,14 @@ class ProfileVC: UIViewController {
         super.viewDidLoad()
         navigationItem.title = "Profile"
     }
-
+    
+    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
+        AuthApi.logout(onSuccess: {
+            let storyboard = UIStoryboard(name: "Auth", bundle: nil)
+            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+            self.present(loginVC, animated: true, completion: nil)
+        }, onError: { error in
+            SVProgressHUD.showError(withStatus: error)
+        })
+    }
 }

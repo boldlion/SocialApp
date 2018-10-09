@@ -66,7 +66,7 @@ class DashboardTVCell: UITableViewCell {
             nameLabel.text = name
         }
         
-        if let image = post?.photoUrl { // WRONG IMAGE! Fix it after we add profile Image photo
+        if let image = user?.profileImageString { // WRONG IMAGE! Fix it after we add profile Image photo
             let imageUrl = URL(string: image)
             profileImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "profile_placeholder"))
         }

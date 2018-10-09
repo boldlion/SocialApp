@@ -13,6 +13,7 @@ class UserModel {
     var id: String?
     var displayName: String?
     var profileImageString: String?
+    var username: String?
 }
 
 extension UserModel {
@@ -22,6 +23,7 @@ extension UserModel {
         user.id = key
         user.displayName = dictionary["displayName"] as? String
         user.profileImageString = dictionary["profileImageUrl"] as? String
+        user.username = dictionary["username"] as? String
         return user
     }
 }
