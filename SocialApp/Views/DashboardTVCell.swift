@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 import SDWebImage
 
 protocol ShowCommentProtocol {
@@ -59,6 +60,36 @@ class DashboardTVCell: UITableViewCell {
             let imageUrl = URL(string: image)
             postImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))
         }
+        guard let id = post?.id else {  return }
+
+        Api.Post.observePostSingleEvent(withId: id, completion: { post in
+            self.updateLike(post: post)
+        }, onError: { error in
+            SVProgressHUD.showError(withStatus: error)
+        })
+        
+        Api.Post.observePostForChanges(withId: id, completion: { count in
+            self.likeCountButton.setTitle("\(count) likes", for: .normal)
+        }, onError: { error in
+            SVProgressHUD.showError(withStatus: error)
+        })
+        
+    }
+    
+    func updateLike(post: Post) {
+        let imageName = post.likes == nil || !post.isLiked! ? "post_like" : "post_likeSelected"
+        likeImageView.image = UIImage(named: imageName)
+        
+        guard let count = post.likesCount else { return }
+        if count != 0 && count != 1 {
+            likeCountButton.setTitle("\(count) likes", for: .normal)
+        }
+        else if count == 1 {
+            likeCountButton.setTitle("\(count) like", for: .normal)
+        }
+        else {
+            likeCountButton.setTitle("Be the first to like this", for: .normal)
+        }
     }
     
     func updateUserInfo() {
@@ -72,6 +103,22 @@ class DashboardTVCell: UITableViewCell {
         }
     }
     
+    @objc func commentTapped() {
+        if let id = post?.id {
+            delegateShowComment?.showCommentForPost(with: id)
+        }
+    }
+    
+    @objc func likeTapped() {
+        guard let id = post?.id else { return }
+        Api.Post.incrementOrDecrementLikesOfPost(withId: id, completion: { post in
+            self.updateLike(post: post)
+        }, onError: { error in
+            SVProgressHUD.showError(withStatus: error)
+        })
+    }
+    
+    
     func initialUI() {
         nameLabel.text = ""
         captionLabel.text = ""
@@ -83,12 +130,12 @@ class DashboardTVCell: UITableViewCell {
         let tapComment = UITapGestureRecognizer(target: self, action: #selector(commentTapped))
         commentImageView.addGestureRecognizer(tapComment)
         commentImageView.isUserInteractionEnabled = true
+        
+        let tapLike = UITapGestureRecognizer(target: self, action: #selector(likeTapped))
+        likeImageView.addGestureRecognizer(tapLike)
+        likeImageView.isUserInteractionEnabled = true
     }
     
-    @objc func commentTapped() {
-        if let id = post?.id {
-            delegateShowComment?.showCommentForPost(with: id)
-        }
-    }
+
     
 }
