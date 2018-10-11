@@ -18,8 +18,8 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Profile"
         collectionView.dataSource = self
+        collectionView.delegate = self
         fetchUser()
         fetchUserPosts()
     }
@@ -27,6 +27,7 @@ class ProfileVC: UIViewController {
     func fetchUser() {
         Api.Users.observeCurrentUser(completion: { user in
             self.user = user
+            self.navigationItem.title = user.username
             self.collectionView.reloadData()
         }, onError: { error in
             SVProgressHUD.showError(withStatus: error)
@@ -80,15 +81,20 @@ extension ProfileVC: UICollectionViewDataSource {
 }
 
 extension ProfileVC : UICollectionViewDelegateFlowLayout {
-    override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 3 - 1, height: collectionView.frame.width / 3 - 1)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - 8) / 3
+        return CGSize(width: width, height: width)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+        return 2
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 5
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
     }
 }
