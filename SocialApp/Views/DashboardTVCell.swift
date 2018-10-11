@@ -80,7 +80,7 @@ class DashboardTVCell: UITableViewCell {
         let imageName = post.likes == nil || !post.isLiked! ? "post_like" : "post_likeSelected"
         likeImageView.image = UIImage(named: imageName)
         
-        guard let count = post.likesCount else { return }
+        guard let count = post.likesCount else { return } 
         if count != 0 && count != 1 {
             likeCountButton.setTitle("\(count) likes", for: .normal)
         }
@@ -97,8 +97,8 @@ class DashboardTVCell: UITableViewCell {
             nameLabel.text = name
         }
         
-        if let image = user?.profileImageString { // WRONG IMAGE! Fix it after we add profile Image photo
-            let imageUrl = URL(string: image)
+        if let imageString = user?.profileImageString {
+            let imageUrl = URL(string: imageString)
             profileImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "profile_placeholder"))
         }
     }

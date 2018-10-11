@@ -22,9 +22,22 @@ class UsersApi {
             }
         }, withCancel: { error in
             onError(error.localizedDescription)
+            return
         })
     }
     
+    func observeCurrentUser(completion: @escaping (UserModel) -> Void, onError: @escaping (String) -> Void) {
+        guard let currentUser = Auth.auth().currentUser else { return }
+        REF_USERS.child(currentUser.uid).observeSingleEvent(of: .value, with: { snapshot in
+            if let dict = snapshot.value as? [String: Any] {
+                let user = UserModel.transformDataToUser(dictionary: dict, key: snapshot.key)
+                completion(user)
+            }
+        }, withCancel: { error in
+            onError(error.localizedDescription)
+            return
+        })
+    }
     
     // MARK: - Get Current Logged User
     var CURRENT_USER: User? {

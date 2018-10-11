@@ -21,14 +21,22 @@ class DatabaseService {
         let postDictionary = [ "uid"      : userId,
                                "caption"  : caption,
                                "photoUrl" : photoImageUrlString] 
-        
+        // posts > postId > postdata
         newPostId.setValue(postDictionary, withCompletionBlock: { error, _ in
             if error != nil {
                 onError(error!.localizedDescription)
                 return
             }
             else {
-                onSuccess()
+                // user_posts > userId > postId
+                let refUserposts = Api.User_Posts.REF_USER_POSTS.child(userId).child(postId)
+                refUserposts.setValue(true, withCompletionBlock: { errorUserPosts, dbRef in
+                    if errorUserPosts != nil {
+                        onError(errorUserPosts!.localizedDescription)
+                        return
+                    }
+                     onSuccess()
+                })
             }
         })
     }

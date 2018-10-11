@@ -34,7 +34,7 @@ class PostApi {
             onError(error.localizedDescription)
             return
         })
-    }
+    }    
     
     func observePostForChanges(withId id: String, completion: @escaping (Int) -> Void, onError: @escaping (String) -> Void) {
         REF_POSTS.child(id).observe(.childChanged, with: { snapshot in
