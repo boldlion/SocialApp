@@ -22,12 +22,13 @@ class ProfileVC: UIViewController {
         collectionView.delegate = self
         fetchUser()
         fetchUserPosts()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItem.Style.plain, target: self, action: nil)
     }
     
     func fetchUser() {
         Api.Users.observeCurrentUser(completion: { user in
             self.user = user
-            self.navigationItem.title = user.username
+            self.navigationItem.title = user.displayName
             self.collectionView.reloadData()
         }, onError: { error in
             SVProgressHUD.showError(withStatus: error)

@@ -1,0 +1,89 @@
+//
+//  DiscoverTVCell.swift
+//  SocialApp
+//
+//  Created by Bold Lion on 12.10.18.
+//  Copyright © 2018 Bold Lion. All rights reserved.
+//
+
+import UIKit
+import SDWebImage
+import SVProgressHUD
+
+class DiscoverTVCell: UITableViewCell {
+
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var followButton: UIButton!
+
+    var user: UserModel? {
+        didSet {
+            updateView()
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        profileImage.image = UIImage(named: "placeholder")
+        usernameLabel.text = " "
+    }
+    
+    func updateView() {
+        if let imageString = user?.profileImageString {
+            let url = URL(string: imageString)
+            profileImage.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+        }
+        if let name = user?.displayName {
+            usernameLabel.text = name
+        }
+        if let isFollowing = user?.isFollowing {
+            isFollowing ? configureUnfollowButton() : configureFollowButton()
+        }
+    }
+    
+    @objc func followAction() {
+        guard let userId = user?.id else { return }
+        
+        if user!.isFollowing == false {
+            Api.Follow.followAction(withUser: userId, completion: {
+                self.configureUnfollowButton()
+                self.user!.isFollowing = true
+            }, onError: { error in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+    }
+    
+    @objc func unfollowAction() {
+        guard let userId = user?.id else { return }
+        
+        if user!.isFollowing! == true {
+            Api.Follow.unfollowAction(withUser: userId, completion: {
+                self.configureFollowButton()
+                self.user!.isFollowing = false
+            }, onError: { error in
+                SVProgressHUD.showError(withStatus: error)
+            })
+        }
+    }
+    
+    func configureFollowButton() {
+        followButton.setTitle("follow", for: .normal)
+        followButton.addTarget(self, action: #selector(followAction), for: .touchUpInside)
+        followButton.backgroundColor = Colors.tint
+        followButton.setTitleColor(.white, for: .normal)
+        followButton.layer.cornerRadius = 5
+        followButton.layer.borderColor = Colors.tint.cgColor
+    }
+    
+    func configureUnfollowButton() {
+        followButton.setTitle("following", for: .normal)
+        followButton.addTarget(self, action: #selector(unfollowAction), for: .touchUpInside)
+        followButton.backgroundColor = .clear
+        followButton.setTitleColor(.lightGray, for: .normal)
+        followButton.layer.borderColor = UIColor.lightGray.cgColor
+        followButton.layer.borderWidth = 1
+        followButton.layer.cornerRadius = 5
+    }
+    
+}

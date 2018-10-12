@@ -19,6 +19,9 @@ struct DatabaseLocation {
     static let comments = "comments"
     static let post_comments = "post_comments"
     static let user_posts = "user_posts"
+    static let followers = "followers"
+    static let following = "following"
+
 }
 
 struct Colors {
