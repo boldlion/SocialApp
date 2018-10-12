@@ -60,20 +60,7 @@ class DashboardTVCell: UITableViewCell {
             let imageUrl = URL(string: image)
             postImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))
         }
-        guard let id = post?.id else {  return }
-
-        Api.Post.observePostSingleEvent(withId: id, completion: { post in
-            self.updateLike(post: post)
-        }, onError: { error in
-            SVProgressHUD.showError(withStatus: error)
-        })
-        
-        Api.Post.observePostForChanges(withId: id, completion: { count in
-            self.likeCountButton.setTitle("\(count) likes", for: .normal)
-        }, onError: { error in
-            SVProgressHUD.showError(withStatus: error)
-        })
-        
+        self.updateLike(post: post!)
     }
     
     func updateLike(post: Post) {
@@ -112,12 +99,14 @@ class DashboardTVCell: UITableViewCell {
     @objc func likeTapped() {
         guard let id = post?.id else { return }
         Api.Post.incrementOrDecrementLikesOfPost(withId: id, completion: { post in
+            self.post?.likes = post.likes
+            self.post?.isLiked = post.isLiked
+            self.post?.likesCount = post.likesCount
             self.updateLike(post: post)
         }, onError: { error in
             SVProgressHUD.showError(withStatus: error)
         })
     }
-    
     
     func initialUI() {
         nameLabel.text = ""
@@ -135,7 +124,4 @@ class DashboardTVCell: UITableViewCell {
         likeImageView.addGestureRecognizer(tapLike)
         likeImageView.isUserInteractionEnabled = true
     }
-    
-
-    
 }
