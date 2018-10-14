@@ -22,13 +22,22 @@ class FollowApi {
                 onError(error!.localizedDescription)
                 return
             }
-            
             // following > currentUser > userId : true
             self.REF_FOLLOWING.child(currentUserUid).child(id).setValue(true, withCompletionBlock: { error, databaseRef in
                 if error != nil {
                     onError(error!.localizedDescription)
                     return
                 }
+                
+                // feed > currentUser >
+                Api.User_Posts.REF_USER_POSTS.child(id).observeSingleEvent(of: .value, with: { snapshot in
+                    if let dict = snapshot.value as? [String : Any] {
+                        for key in dict.keys {
+                            
+                            Api.Feed.REF_FEED.child(currentUserUid).child(key).setValue(true)
+                        }
+                    }
+                })
                 completion()
             })
         })
@@ -37,18 +46,27 @@ class FollowApi {
     func unfollowAction(withUser id: String, completion: @escaping () -> Void, onError: @escaping (String) -> Void) {
         guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
 
-        // followers> userId > currentUser : true
+        // followers> userId > currentUser : true (remove)
         REF_FOLLOWERS.child(id).child(currentUserUid).removeValue(completionBlock: { error, databaseRef in
             if error != nil {
                 print(error!.localizedDescription)
                 return
             }
-            // following> currentUser > userId : true
+            // following> currentUser > userId : true (remove)
             self.REF_FOLLOWING.child(currentUserUid).child(id).removeValue(completionBlock: { error, databaseRef in
                 if error != nil {
                     print(error!.localizedDescription)
                     return
                 }
+                // feed > currentUser > postId (remove)
+                Api.User_Posts.REF_USER_POSTS.child(id).observeSingleEvent(of: .value, with: { snapshot in
+                    if let dict = snapshot.value as? [String : Any] {
+                        for key in dict.keys {
+                            Api.Feed.REF_FEED.child(currentUserUid).child(key).removeValue()
+                        }
+                    }
+                })
+                
                 completion()
             })
         })

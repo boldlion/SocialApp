@@ -35,6 +35,8 @@ class DatabaseService {
                         onError(errorUserPosts!.localizedDescription)
                         return
                     }
+                    // Feed > currentUserId > postId
+                    Api.Feed.REF_FEED.child(userId).child(postId).setValue(true)
                      onSuccess()
                 })
             }

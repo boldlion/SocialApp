@@ -28,14 +28,24 @@ class DashboardVC: UIViewController {
     
     func fetchPosts() {
         activityIndicator.startAnimating()
-        Api.Post.observeAllPosts(completion: { post in
+        
+        Api.Feed.observeFeedPosts(completion: { post in
             guard let uid = post.uid else { return }
             self.fetchUserOfPost(with: uid, completion: {
-                self.posts.insert(post, at: 0)
+                self.posts.append(post)
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.hidesWhenStopped = true
                 self.tableView.reloadData()
             })
+        }, onError: { error in
+             SVProgressHUD.showError(withStatus: error)
+        })
+        
+        
+        Api.Feed.observeFeedRemoved(completion: { post in
+            self.posts = self.posts.filter({ $0.id != post.id })
+            self.users = self.users.filter({ $0.id != post.uid })
+            self.tableView.reloadData()
         }, onError: { error in
             SVProgressHUD.showError(withStatus: error)
         })
@@ -43,7 +53,7 @@ class DashboardVC: UIViewController {
     
     func fetchUserOfPost(with uid: String, completion: @escaping () -> Void) {
         Api.Users.fetchUser(withId: uid, completion: { user in
-            self.users.insert(user, at: 0)
+            self.users.append(user)
             completion()
         }, onError: { error in
             SVProgressHUD.showError(withStatus: error)
