@@ -22,6 +22,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="W1p-iS-UvW" kind="relationship" relationship="viewControllers" id="Gqa-Ef-fqc"/>
+                        <segue destination="uV8-8b-AD2" kind="relationship" relationship="viewControllers" id="0Bk-YV-S9K"/>
                         <segue destination="ip8-61-RAW" kind="relationship" relationship="viewControllers" id="RZQ-g8-XtT"/>
                         <segue destination="Ogh-lz-v2I" kind="relationship" relationship="viewControllers" id="89Y-AW-nXq"/>
                     </connections>
@@ -64,9 +65,22 @@
             </objects>
             <point key="canvasLocation" x="2228" y="427"/>
         </scene>
+        <!--NavExplore-->
+        <scene sceneID="trw-rw-dCZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Explore" referencedIdentifier="NavExplore" id="uV8-8b-AD2" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="tab_explore" id="dPv-fN-rDb">
+                        <inset key="imageInsets" minX="0.0" minY="5" maxX="0.0" maxY="-5"/>
+                    </tabBarItem>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vbq-rb-yeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2214" y="15"/>
+        </scene>
     </scenes>
     <resources>
         <image name="tab_dash_a" width="30" height="25"/>
+        <image name="tab_explore" width="35" height="35"/>
         <image name="tab_post_a" width="21" height="27"/>
     </resources>
 </document>

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0348809E2173404B00662460 /* FeedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0348809D2173404B00662460 /* FeedApi.swift */; };
+		034880A0217363DF00662460 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0348809F217363DF00662460 /* Explore.storyboard */; };
+		034880A2217368D600662460 /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034880A1217368D600662460 /* ExploreVC.swift */; };
+		034880A42173695000662460 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034880A32173695000662460 /* SearchVC.swift */; };
 		0353258D21636D97006152DA /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0353258C21636D97006152DA /* Auth.storyboard */; };
 		0353259121636DDA006152DA /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0353258F21636DDA006152DA /* LoginVC.swift */; };
 		0353259221636DDA006152DA /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0353259021636DDA006152DA /* RegisterVC.swift */; };
@@ -68,6 +71,9 @@
 
 /* Begin PBXFileReference section */
 		0348809D2173404B00662460 /* FeedApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedApi.swift; sourceTree = "<group>"; };
+		0348809F217363DF00662460 /* Explore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
+		034880A1217368D600662460 /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
+		034880A32173695000662460 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		0353258C21636D97006152DA /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		0353258F21636DDA006152DA /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0353259021636DDA006152DA /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
@@ -167,6 +173,7 @@
 			children = (
 				0353258C21636D97006152DA /* Auth.storyboard */,
 				0353259421636EDB006152DA /* Tabbar.storyboard */,
+				0348809F217363DF00662460 /* Explore.storyboard */,
 				0353259621636EDB006152DA /* Dashboard.storyboard */,
 				0353259521636EDB006152DA /* Post.storyboard */,
 				0353259321636EDA006152DA /* Profile.storyboard */,
@@ -184,6 +191,8 @@
 				035325A621637049006152DA /* PostVC.swift */,
 				035325A421637048006152DA /* ProfileVC.swift */,
 				03CBC9112170AE5B0042305F /* DiscoverVC.swift */,
+				034880A1217368D600662460 /* ExploreVC.swift */,
+				034880A32173695000662460 /* SearchVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -412,6 +421,7 @@
 				0353259C21636F24006152DA /* GoogleService-Info.plist in Resources */,
 				0353258D21636D97006152DA /* Auth.storyboard in Resources */,
 				03D0DC5E216363CB009AA0E9 /* LaunchScreen.storyboard in Resources */,
+				034880A0217363DF00662460 /* Explore.storyboard in Resources */,
 				0353259721636EDB006152DA /* Profile.storyboard in Resources */,
 				0353259921636EDB006152DA /* Post.storyboard in Resources */,
 				0353259A21636EDB006152DA /* Dashboard.storyboard in Resources */,
@@ -610,6 +620,8 @@
 				03CBC9142170AE940042305F /* DiscoverTVCell.swift in Sources */,
 				035325A721637049006152DA /* ProfileVC.swift in Sources */,
 				0353259221636DDA006152DA /* RegisterVC.swift in Sources */,
+				034880A42173695000662460 /* SearchVC.swift in Sources */,
+				034880A2217368D600662460 /* ExploreVC.swift in Sources */,
 				0371A2BA21676F8C000FDDA8 /* CommentVC.swift in Sources */,
 				0371A2BE216788BD000FDDA8 /* Comment.swift in Sources */,
 				03F487B2216A323000B3CD71 /* CommentApi.swift in Sources */,

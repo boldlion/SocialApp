@@ -18,7 +18,9 @@ class UsersApi {
         REF_USERS.observe(.childAdded, with: { snapshot in
             if let dict = snapshot.value as? [String: Any] {
                 let user = UserModel.transformDataToUser(dictionary: dict, key: snapshot.key)
-                completion(user)
+                if user.id! != Api.Users.CURRENT_USER?.uid {
+                    completion(user)
+                }
             }
         }, withCancel: { error in
             onError(error.localizedDescription)
@@ -47,6 +49,21 @@ class UsersApi {
             }
         }, withCancel: { error in
             onError(error.localizedDescription)
+            return
+        })
+    }
+    
+    func queryUsers(withtext text: String, onError: @escaping (String) -> Void, completion: @escaping (UserModel) -> Void) {
+        REF_USERS.queryOrdered(byChild: "username_lowercase").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { snapshot in
+            snapshot.children.forEach({ snap in
+                let child = snap as! DataSnapshot
+                if let dict = child.value as? [String: Any] {
+                    let user = UserModel.transformDataToUser(dictionary: dict, key: snapshot.key)
+                    completion(user)
+                }
+            })
+        }, withCancel: { err in
+            onError(err.localizedDescription)
             return
         })
     }

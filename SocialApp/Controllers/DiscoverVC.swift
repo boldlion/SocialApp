@@ -24,16 +24,14 @@ class DiscoverVC: UIViewController {
     
     func fetchUsers() {
         Api.Users.fetchAllUsers(completion: { user in
-            guard let currentUserId = Api.Users.CURRENT_USER?.uid else { return }
             guard let uid = user.id else { return }
             
-            if currentUserId != user.id {
-                self.isFollowing(userId: uid, completion: { isFollowing in
-                    user.isFollowing = isFollowing
-                    self.users.append(user)
-                    self.tableView.reloadData()
-                })
-            }
+            self.isFollowing(userId: uid, completion: { isFollowing in
+                user.isFollowing = isFollowing
+                self.users.append(user)
+                self.tableView.reloadData()
+            })
+
         }, onError: { error in
             SVProgressHUD.showError(withStatus: error)
         })
