@@ -48,6 +48,20 @@ class PostApi {
         })
     }
     
+    func observeTopPosts(completion: @escaping (Post) -> Void, onError: @escaping (String) -> Void) {
+        REF_POSTS.queryOrdered(byChild: "likesCount").observeSingleEvent(of: .value, with: { snapshot in
+            let arraySnapshot = (snapshot.children.allObjects as! [DataSnapshot]).reversed()
+            arraySnapshot.forEach({ child in
+                if let dict = child.value as? [String: Any] {
+                    let post = Post.transformDataToPost(dictionary: dict, key: snapshot.key)
+                    completion(post)
+                }
+            })
+        }, withCancel: { error in
+            onError(error.localizedDescription)
+        })
+    }
+    
     func incrementOrDecrementLikesOfPost(withId id: String, completion: @escaping (Post) -> Void, onError: @escaping (String) -> Void) {
         let ref = REF_POSTS.child(id)
         

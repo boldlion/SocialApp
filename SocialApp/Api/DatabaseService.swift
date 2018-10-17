@@ -20,7 +20,8 @@ class DatabaseService {
 
         let postDictionary = [ "uid"      : userId,
                                "caption"  : caption,
-                               "photoUrl" : photoImageUrlString] 
+                               "photoUrl" : photoImageUrlString,
+                               "likesCount": 0] as [String : Any] 
         // posts > postId > postdata
         newPostId.setValue(postDictionary, withCompletionBlock: { error, _ in
             if error != nil {
@@ -50,7 +51,6 @@ class DatabaseService {
         let storagePostRef = Storage.storage().reference().child(StorageLocation.Profile_Photos).child(phototIdString)
         
         storagePostRef.putData(data, metadata: nil, completion: { metadata, error in
-            
             if error != nil {
                 onError(error!.localizedDescription)
                 return

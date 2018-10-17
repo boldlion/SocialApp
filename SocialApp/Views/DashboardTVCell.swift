@@ -36,6 +36,7 @@ class DashboardTVCell: UITableViewCell {
         super.prepareForReuse()
         profileImageView.image = UIImage(named: "placeholder")
         postImageView.image = UIImage(named: "profile_placeholder")
+        likeCountButton.setTitle("", for: .normal)
         initialUI()
     }
     

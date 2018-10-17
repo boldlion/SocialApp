@@ -49,10 +49,11 @@ class AuthApi {
             return
         }, onSuccess: { profileImageUrlString in
             Api.Users.REF_USERS.child(uid).setValue([
-                "displayName"     : displayName,
-                "username"        : username.lowercased(),
-                "email"           : email,
-                "profileImageUrl" : profileImageUrlString
+                "displayName"        : displayName,
+                "username"           : username,
+                "username_lowercase" : username.lowercased(),
+                "email"              : email,
+                "profileImageUrl"    : profileImageUrlString
                 ])
             onSuccess()
         })

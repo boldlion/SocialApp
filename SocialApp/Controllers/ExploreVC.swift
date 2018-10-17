@@ -7,24 +7,79 @@
 //
 
 import UIKit
-
+import SVProgressHUD
 class ExploreVC: UIViewController {
 
+    @IBOutlet weak var collectionView: UICollectionView!
+    var refresh: UIRefreshControl!
+    var posts = [Post]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        fetchTopPosts()
+        setRefreshControl()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func refresh(_ sender: UIBarButtonItem) {
+        fetchTopPosts()
     }
-    */
+    
+    func fetchTopPosts() {
+        self.posts.removeAll()
+        Api.Post.observeTopPosts(completion: { post in
+            self.posts.append(post)
+            self.collectionView.reloadData()
+        }, onError: { error in
+            SVProgressHUD.showError(withStatus: error)
+        })
+    }
+    
+    func setRefreshControl() {
+        refresh = UIRefreshControl()
+        collectionView.alwaysBounceVertical = true
+        refresh.tintColor = Colors.tint
+        refresh.addTarget(self, action: #selector(refreshPosts), for: .valueChanged)
+        collectionView.addSubview(refresh)
+    }
+    
+    @objc func refreshPosts() {
+        fetchTopPosts()
+        self.refresh.endRefreshing()
+    }
+}
 
+
+extension ExploreVC: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return posts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExploreCVCell", for: indexPath) as! PhotoCVCell
+        let post = posts[indexPath.row]
+        cell.post = post
+        return cell
+    }
+}
+
+extension ExploreVC : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - 8) / 3
+        return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+    }
 }

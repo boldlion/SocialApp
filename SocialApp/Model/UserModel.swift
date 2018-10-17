@@ -14,6 +14,7 @@ class UserModel {
     var displayName: String?
     var profileImageString: String?
     var username: String?
+    var username_lowercase: String?
     var isFollowing: Bool?
 }
 
@@ -25,7 +26,7 @@ extension UserModel {
         user.displayName = dictionary["displayName"] as? String
         user.profileImageString = dictionary["profileImageUrl"] as? String
         user.username = dictionary["username"] as? String
-
+        user.username_lowercase = dictionary["username_lowercase"] as? String 
         return user
     }
 }
