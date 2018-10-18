@@ -10,8 +10,10 @@ import UIKit
 import SVProgressHUD
 import SDWebImage
 
-protocol ShowCommentProtocol {
+protocol DashboardTVCellDelegate {
     func showCommentForPost(with id: String)
+    func goToProfile()
+    func goToProfileUser(with id: String)
 }
 
 class DashboardTVCell: UITableViewCell {
@@ -24,7 +26,7 @@ class DashboardTVCell: UITableViewCell {
     @IBOutlet weak var likeCountButton: UIButton!
     @IBOutlet weak var captionLabel: UILabel!
     
-    var delegateShowComment: ShowCommentProtocol?
+    var delegate: DashboardTVCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -93,7 +95,7 @@ class DashboardTVCell: UITableViewCell {
     
     @objc func commentTapped() {
         if let id = post?.id {
-            delegateShowComment?.showCommentForPost(with: id)
+            delegate?.showCommentForPost(with: id)
         }
     }
     
@@ -124,5 +126,38 @@ class DashboardTVCell: UITableViewCell {
         let tapLike = UITapGestureRecognizer(target: self, action: #selector(likeTapped))
         likeImageView.addGestureRecognizer(tapLike)
         likeImageView.isUserInteractionEnabled = true
+        
+        let tapUsername = UITapGestureRecognizer(target: self, action: #selector(usernameTapped))
+        nameLabel.addGestureRecognizer(tapUsername)
+        nameLabel.isUserInteractionEnabled = true
+        
+        let tapProfileImage = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        profileImageView.addGestureRecognizer(tapProfileImage)
+        profileImageView.isUserInteractionEnabled = true
     }
+    
+    @objc func usernameTapped() {
+        guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
+        if let id = user?.id {
+            if id == currentUserUid {
+                delegate?.goToProfile()
+            }
+            else {
+                delegate?.goToProfileUser(with: id)
+            }
+        }
+    }
+    
+    @objc func profileImageTapped() {
+        guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
+        if let id = user?.id {
+            if id == currentUserUid {
+                delegate?.goToProfile()
+            }
+            else {
+                delegate?.goToProfileUser(with: id)
+            }
+        }
+    }
+    
 }

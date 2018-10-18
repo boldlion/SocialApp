@@ -10,16 +10,27 @@ import UIKit
 import SDWebImage
 import SVProgressHUD
 
+protocol DiscoverTVCellDelegate {
+    func goToUserProfile(withId id: String)
+}
+
 class DiscoverTVCell: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
+    
+    var delegateShowUserProfile: DiscoverTVCellDelegate?
 
     var user: UserModel? {
         didSet {
             updateView()
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        addTapGestures()
     }
     
     override func prepareForReuse() {
@@ -86,4 +97,26 @@ class DiscoverTVCell: UITableViewCell {
         followButton.layer.cornerRadius = 5
     }
     
+    func addTapGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(usernameTapped))
+        usernameLabel.isUserInteractionEnabled = true
+        usernameLabel.addGestureRecognizer(tap)
+        
+        let imageTap = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        profileImage.isUserInteractionEnabled = true
+        profileImage.addGestureRecognizer(imageTap)
+        
+    }
+    
+    @objc func usernameTapped() {
+        if let uid = user?.id {
+                delegateShowUserProfile?.goToUserProfile(withId: uid)
+        }
+    }
+    
+    @objc func profileImageTapped() {
+        if let uid = user?.id {
+           delegateShowUserProfile?.goToUserProfile(withId: uid)
+        }
+    }
 }

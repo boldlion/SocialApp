@@ -13,6 +13,7 @@
 		034880A42173695000662460 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034880A32173695000662460 /* SearchVC.swift */; };
 		034880A62175E01700662460 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034880A52175E01700662460 /* DetailVC.swift */; };
 		034880A82175EDE200662460 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034880A72175EDE200662460 /* GoogleService-Info.plist */; };
+		034880E421777FA200662460 /* ProfileUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034880E321777FA200662460 /* ProfileUserVC.swift */; };
 		0353258D21636D97006152DA /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0353258C21636D97006152DA /* Auth.storyboard */; };
 		0353259121636DDA006152DA /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0353258F21636DDA006152DA /* LoginVC.swift */; };
 		0353259221636DDA006152DA /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0353259021636DDA006152DA /* RegisterVC.swift */; };
@@ -78,6 +79,7 @@
 		034880A32173695000662460 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		034880A52175E01700662460 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		034880A72175EDE200662460 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		034880E321777FA200662460 /* ProfileUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUserVC.swift; sourceTree = "<group>"; };
 		0353258C21636D97006152DA /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
 		0353258F21636DDA006152DA /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0353259021636DDA006152DA /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				0371A2B921676F8C000FDDA8 /* CommentVC.swift */,
 				035325A621637049006152DA /* PostVC.swift */,
 				035325A421637048006152DA /* ProfileVC.swift */,
+				034880E321777FA200662460 /* ProfileUserVC.swift */,
 				03CBC9112170AE5B0042305F /* DiscoverVC.swift */,
 				034880A1217368D600662460 /* ExploreVC.swift */,
 				034880A32173695000662460 /* SearchVC.swift */,
@@ -643,6 +646,7 @@
 				035325A221636F64006152DA /* Api.swift in Sources */,
 				035325AC21637085006152DA /* UserModel.swift in Sources */,
 				03D0DC54216363C9009AA0E9 /* AppDelegate.swift in Sources */,
+				034880E421777FA200662460 /* ProfileUserVC.swift in Sources */,
 				0371A2BC21676FEF000FDDA8 /* CommentTVCell.swift in Sources */,
 				03F7837B216F8EE800C8411A /* PhotoCVCell.swift in Sources */,
 				03F487B4216C9AB900B3CD71 /* Post_CommentApi.swift in Sources */,

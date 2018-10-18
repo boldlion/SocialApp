@@ -40,10 +40,9 @@ class SearchVC: UIViewController {
                 SVProgressHUD.showError(withStatus: error)
             }, completion: { user in
                 guard let uid = user.id else { return }
-            
+           
                 self.isFollowing(userId: uid, completion: { isFollowing in
                     user.isFollowing = isFollowing
-                    print(isFollowing)
                     self.users.append(user)
                     self.tableView.reloadData()
                 })
@@ -79,6 +78,37 @@ extension SearchVC : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DiscoverTVCell", for: indexPath) as! DiscoverTVCell
         let user = users[indexPath.row]
         cell.user = user
+        cell.delegateShowUserProfile = self
         return cell
     }
+}
+
+extension SearchVC: DiscoverTVCellDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "SearchToProfileUser" {
+            let profileUserVC = segue.destination as! ProfileUserVC
+            let userId = sender as! String
+            profileUserVC.userId = userId
+            profileUserVC.delegate = self
+        }
+    }
+    
+    func goToUserProfile(withId id: String) {
+        performSegue(withIdentifier: "SearchToProfileUser", sender: id)
+    }
+    
+}
+
+extension SearchVC: HeaderProfileCollectionReusableViewDelegate {
+    func updateFollowButton(forUser user: UserModel) {
+        for u in users {
+            if u.id == user.id {
+                u.isFollowing = user.isFollowing
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    
 }

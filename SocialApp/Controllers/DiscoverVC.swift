@@ -53,7 +53,36 @@ extension DiscoverVC : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DiscoverTVCell", for: indexPath) as! DiscoverTVCell
         let user = users[indexPath.row]
+        cell.delegateShowUserProfile = self
         cell.user = user
         return cell
+    }
+}
+
+extension DiscoverVC: DiscoverTVCellDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileOtherUserSegue" {
+            let profileUserVC = segue.destination as! ProfileUserVC
+            let userId = sender as! String
+            profileUserVC.userId = userId
+            profileUserVC.delegate = self
+        }
+    }
+    
+    func goToUserProfile(withId id: String) {
+        performSegue(withIdentifier: "ProfileOtherUserSegue", sender: id)
+    }
+    
+}
+
+extension DiscoverVC: HeaderProfileCollectionReusableViewDelegate {
+    func updateFollowButton(forUser user: UserModel) {
+        for u in users {
+            if u.id == user.id {
+                u.isFollowing = user.isFollowing
+                tableView.reloadData()
+            }
+        }
     }
 }

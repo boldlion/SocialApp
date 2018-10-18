@@ -61,7 +61,7 @@ class DashboardVC: UIViewController {
     }
 }
 
-extension DashboardVC :  UITableViewDataSource {
+extension DashboardVC :  UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
@@ -73,24 +73,39 @@ extension DashboardVC :  UITableViewDataSource {
         let user = users[indexPath.row]
         cell.post = post
         cell.user = user
-        cell.delegateShowComment = self
+        cell.delegate = self
         return cell
     }
+
 }
 
 
-extension DashboardVC : ShowCommentProtocol {
-    
+extension DashboardVC : DashboardTVCellDelegate {
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "DashboardToComment" {
             let commentVC = segue.destination as! CommentVC
             let postId = sender as! String
             commentVC.postId = postId
         }
+        
+        if segue.identifier == "DashboardToProfileUser" {
+            let profileUserVC = segue.destination as! ProfileUserVC
+            let userId = sender as! String
+            profileUserVC.userId = userId
+        }
     } 
     
     func showCommentForPost(with id: String) {
         performSegue(withIdentifier: "DashboardToComment", sender: id)
     }
-
+    
+    func goToProfile() {
+        performSegue(withIdentifier: "DashboardToProfile", sender: nil)
+    }
+    
+    func goToProfileUser(with id: String) {
+        performSegue(withIdentifier: "DashboardToProfileUser", sender: id)
+    }
+    
 }

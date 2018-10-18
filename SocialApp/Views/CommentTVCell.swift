@@ -9,11 +9,18 @@
 import UIKit
 import SDWebImage
 
+protocol CommentTVCellDelegate {
+    func goToProfileUser(with id: String)
+    func goToProfile()
+}
+
 class CommentTVCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
+    
+    var delegateCommentTVCell: CommentTVCellDelegate?
 
     var comment: Comment? {
         didSet {
@@ -54,12 +61,49 @@ class CommentTVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        addTapGestures()
+        initialUI()
+    }
+    
+    func addTapGestures() {
+        let tapUsername = UITapGestureRecognizer(target: self, action: #selector(usernameTapped))
+        nameLabel.addGestureRecognizer(tapUsername)
+        nameLabel.isUserInteractionEnabled = true
+        
+        let tapProfileImage = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        profileImageView.addGestureRecognizer(tapProfileImage)
+        profileImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc func usernameTapped() {
+        guard let currentUserId = Api.Users.CURRENT_USER?.uid else { return }
+        if let id = user?.id {
+            if id == currentUserId {
+                delegateCommentTVCell?.goToProfile()
+            }
+            else {
+                delegateCommentTVCell?.goToProfileUser(with: id)
+            }
+        }
+    }
+    
+    @objc func profileImageTapped() {
+        guard let currentUserId = Api.Users.CURRENT_USER?.uid else { return }
+        if let id = user?.id {
+            if id == currentUserId {
+                delegateCommentTVCell?.goToProfile()
+            }
+            else {
+                delegateCommentTVCell?.goToProfileUser(with: id)
+            }
+        }
+    }
+
+    func initialUI() {
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         profileImageView.clipsToBounds = true
         profileImageView.image = UIImage(named: "profile_placeholder")
         nameLabel.text = ""
         commentLabel.text = ""
     }
-
-    
 }

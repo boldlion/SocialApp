@@ -41,8 +41,8 @@ class UsersApi {
     }
     
     func observeCurrentUser(completion: @escaping (UserModel) -> Void, onError: @escaping (String) -> Void) {
-        guard let currentUser = Auth.auth().currentUser else { return }
-        REF_USERS.child(currentUser.uid).observeSingleEvent(of: .value, with: { snapshot in
+        guard let currentUserId = Api.Users.CURRENT_USER?.uid else { return }
+        REF_USERS.child(currentUserId).observeSingleEvent(of: .value, with: { snapshot in
             if let dict = snapshot.value as? [String: Any] {
                 let user = UserModel.transformDataToUser(dictionary: dict, key: snapshot.key)
                 completion(user)
@@ -54,12 +54,15 @@ class UsersApi {
     }
     
     func queryUsers(withtext text: String, onError: @escaping (String) -> Void, completion: @escaping (UserModel) -> Void) {
+        guard let currentUserId = Api.Users.CURRENT_USER?.uid else { return }
         REF_USERS.queryOrdered(byChild: "username_lowercase").queryStarting(atValue: text).queryEnding(atValue: text+"\u{f8ff}").queryLimited(toFirst: 10).observeSingleEvent(of: .value, with: { snapshot in
             snapshot.children.forEach({ snap in
                 let child = snap as! DataSnapshot
                 if let dict = child.value as? [String: Any] {
-                    let user = UserModel.transformDataToUser(dictionary: dict, key: snapshot.key)
-                    completion(user)
+                    let user = UserModel.transformDataToUser(dictionary: dict, key: child.key)
+                    if user.id != currentUserId {
+                        completion(user)
+                    }
                 }
             })
         }, withCancel: { err in

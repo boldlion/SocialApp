@@ -149,9 +149,29 @@ extension CommentVC : UITableViewDataSource {
         let comment = comments[indexPath.row]
         let user = users[indexPath.row]
         cell.comment = comment
+        cell.delegateCommentTVCell = self
         cell.user = user
         return cell
     }
+}
+
+extension CommentVC : CommentTVCellDelegate {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CommentToProfileUserSegue" {
+            let profileUserVC = segue.destination as! ProfileUserVC
+            let userId = sender as! String
+            profileUserVC.userId = userId
+        }
+    }
+    
+    func goToProfileUser(with id: String) {
+        performSegue(withIdentifier: "CommentToProfileUserSegue", sender: id)
+    }
+    
+    func goToProfile() {
+        performSegue(withIdentifier: "CommentToProfileSegue", sender: nil)
+    }
+    
 }
 
 

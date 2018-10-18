@@ -1,20 +1,22 @@
 //
-//  ProfileVC.swift
+//  ProfileUserVC.swift
 //  SocialApp
 //
-//  Created by Bold Lion on 30.09.18.
+//  Created by Bold Lion on 17.10.18.
 //  Copyright © 2018 Bold Lion. All rights reserved.
 //
 
 import UIKit
 import SVProgressHUD
 
-class ProfileVC: UIViewController {
+class ProfileUserVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
     var user: UserModel!
     var posts = [Post]()
+    var userId = ""
+    var delegate: HeaderProfileCollectionReusableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,17 +28,28 @@ class ProfileVC: UIViewController {
     }
     
     func fetchUser() {
-        Api.Users.observeCurrentUser(completion: { user in
+        Api.Users.fetchUser(withId: userId, completion: { user in
+            guard let uid = user.id else { return }
             self.user = user
-            self.navigationItem.title = user.displayName
-            self.collectionView.reloadData()
+            self.isFollowing(userId: uid, completion: { isFollowing in
+                user.isFollowing = isFollowing
+                self.navigationItem.title = user.displayName
+                self.collectionView.reloadData()
+            })
         }, onError: { error in
+            SVProgressHUD.showError(withStatus: error)
+        })
+    }
+
+    
+    func isFollowing(userId: String, completion: @escaping (Bool) -> Void) {
+        Api.Follow.isFollowing(userId: userId, completion: completion, onError: { error in
             SVProgressHUD.showError(withStatus: error)
         })
     }
     
     func fetchUserPosts() {
-        Api.User_Posts.observeCurrentUserPosts(completion: { postId in
+        Api.User_Posts.observeUserPosts(withUserId: userId, completion: { postId in
             Api.Post.observePostSingleEvent(withId: postId, completion: { post in
                 self.posts.append(post)
                 self.collectionView.reloadData()
@@ -47,19 +60,10 @@ class ProfileVC: UIViewController {
             SVProgressHUD.showError(withStatus: error)
         })
     }
-    
-    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
-        AuthApi.logout(onSuccess: {
-            let storyboard = UIStoryboard(name: "Auth", bundle: nil)
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-            self.present(loginVC, animated: true, completion: nil)
-        }, onError: { error in
-            SVProgressHUD.showError(withStatus: error)
-        })
-    }
 }
 
-extension ProfileVC: UICollectionViewDataSource {
+
+extension ProfileUserVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
@@ -76,12 +80,13 @@ extension ProfileVC: UICollectionViewDataSource {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as! HeaderProfileCollectionReusableView
         if let currentUser = user {
             header.user = currentUser
+            header.delegate = self.delegate
         }
         return header
     }
 }
 
-extension ProfileVC : UICollectionViewDelegateFlowLayout {
+extension ProfileUserVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.frame.width - 8) / 3
         return CGSize(width: width, height: width)
@@ -90,7 +95,7 @@ extension ProfileVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2
     }

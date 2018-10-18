@@ -138,6 +138,8 @@
                         <outlet property="activityIndicator" destination="dza-Y3-yjf" id="glp-rN-2Hu"/>
                         <outlet property="tableView" destination="qPP-5l-Xfb" id="Ab5-MJ-0dg"/>
                         <segue destination="hOu-un-S1Y" kind="show" identifier="DashboardToComment" id="uSQ-G5-yDH"/>
+                        <segue destination="Of4-yn-qEk" kind="show" identifier="DashboardToProfileUser" id="mjM-xx-CFQ"/>
+                        <segue destination="gt0-8U-g2a" kind="show" identifier="DashboardToProfile" id="D12-of-g4H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EmD-KT-RZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -273,6 +275,8 @@
                         <outlet property="constraintToBottom" destination="hNU-J4-9tg" id="QM0-ja-hL5"/>
                         <outlet property="sendButton" destination="AcI-LZ-pGD" id="2dR-vg-g86"/>
                         <outlet property="tableView" destination="2V7-DN-p1O" id="Wn1-ER-jUH"/>
+                        <segue destination="Of4-yn-qEk" kind="show" identifier="CommentToProfileUserSegue" id="gyI-JY-npl"/>
+                        <segue destination="gt0-8U-g2a" kind="show" identifier="CommentToProfileSegue" id="FXf-RA-o1H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BuW-cO-mwI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -301,6 +305,22 @@
             </objects>
             <point key="canvasLocation" x="2254" y="551"/>
         </scene>
+        <!--ProfileVC-->
+        <scene sceneID="sfq-s6-suV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileVC" id="gt0-8U-g2a" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kAB-jR-zYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3241" y="1042"/>
+        </scene>
+        <!--ProfileUserVC-->
+        <scene sceneID="7pI-bC-phG">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileUserVC" id="Of4-yn-qEk" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aXg-G4-7DQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3455" y="1042"/>
+        </scene>
     </scenes>
     <resources>
         <image name="post_comment" width="43" height="41"/>
@@ -308,4 +328,8 @@
         <image name="profile_placeholder" width="600" height="600"/>
         <image name="tab_dash_a" width="30" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="mjM-xx-CFQ"/>
+        <segue reference="D12-of-g4H"/>
+    </inferredMetricsTieBreakers>
 </document>
