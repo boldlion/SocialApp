@@ -81,6 +81,7 @@ extension ProfileUserVC: UICollectionViewDataSource {
         if let currentUser = user {
             header.user = currentUser
             header.delegate = self.delegate
+            header.delegateSettings = self
         }
         return header
     }
@@ -102,5 +103,11 @@ extension ProfileUserVC : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+    }
+}
+
+extension ProfileUserVC : HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC {
+    func goToSettingVC() {
+        performSegue(withIdentifier: "ProfileUserToSettingsSegue", sender: nil)
     }
 }

@@ -46,7 +46,7 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func lostPassTapped(_ sender: UIButton) {
-        
+ 
     }
     
     @IBAction func registerTapped(_ sender: UIButton) {

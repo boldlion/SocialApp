@@ -47,16 +47,6 @@ class ProfileVC: UIViewController {
             SVProgressHUD.showError(withStatus: error)
         })
     }
-    
-    @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
-        AuthApi.logout(onSuccess: {
-            let storyboard = UIStoryboard(name: "Auth", bundle: nil)
-            let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
-            self.present(loginVC, animated: true, completion: nil)
-        }, onError: { error in
-            SVProgressHUD.showError(withStatus: error)
-        })
-    }
 }
 
 extension ProfileVC: UICollectionViewDataSource {
@@ -76,6 +66,7 @@ extension ProfileVC: UICollectionViewDataSource {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as! HeaderProfileCollectionReusableView
         if let currentUser = user {
             header.user = currentUser
+            header.delegateSettings = self
         }
         return header
     }
@@ -97,5 +88,27 @@ extension ProfileVC : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+    }
+}
+
+
+extension ProfileVC : HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC {
+    
+    func goToSettingVC() {
+        performSegue(withIdentifier: "ProfileToSettingsSegue", sender: nil)
+    }
+}
+
+extension ProfileVC : SettingsTVCDelegate {
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileToSettingsSegue" {
+            let settingsVC = segue.destination as! SettingTVC
+            settingsVC.delegate = self
+        }
+    }
+    
+    func updateUserInfo() {
+        fetchUser()
     }
 }

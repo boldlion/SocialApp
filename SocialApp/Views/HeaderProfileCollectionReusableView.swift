@@ -14,6 +14,10 @@ protocol HeaderProfileCollectionReusableViewDelegate {
     func updateFollowButton(forUser user: UserModel)
 }
 
+protocol HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC {
+    func goToSettingVC()
+}
+
 class HeaderProfileCollectionReusableView: UICollectionReusableView {
     
     @IBOutlet weak var profileImage: UIImageView!
@@ -25,6 +29,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var editProfileButton: UIButton!
     
     var delegate: HeaderProfileCollectionReusableViewDelegate?
+    var delegateSettings: HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC?
     
     var user: UserModel? {
         didSet {
@@ -33,20 +38,39 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     }
     
     func updateView() {
+        guard let userId = user?.id else { return }
+        
         if let name = user?.displayName {
             nameLabel.text = name
         }
-        if let imageString = user?.profileImageString { // WRONG IMAGE! Fix it after we add profile Image photo
+        if let imageString = user?.profileImageString {
             let imageUrl = URL(string: imageString)
             self.profileImage.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "profile_placeholder"))
         }
         
+        Api.User_Posts.fetchUserPostsCount(forUserId: userId, completion: { count in
+            self.myPostCountLabel.text = String(count)
+        })
+        
+        Api.Follow.fetchFollowersCount(forUserId: userId, completion: { count in
+            self.followersCountLabel.text = String(count)
+        })
+        
+        Api.Follow.fetchFollowingCount(forUserId: userId, completion: { count in
+            self.follwingCountLabel.text = String(count)
+        })
+        
         if user?.id == Api.Users.CURRENT_USER?.uid {
             editProfileButton.setTitle("Edit Profile", for: .normal)
+            editProfileButton.addTarget(self, action: #selector(goToSettingTVC), for: .touchUpInside)
         }
         else {
             updateFollowButtonState()
         }
+    }
+    
+    @objc func goToSettingTVC() {
+        delegateSettings?.goToSettingVC()
     }
     
     func updateFollowButtonState() {

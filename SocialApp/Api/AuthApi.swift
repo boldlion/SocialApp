@@ -22,7 +22,7 @@ class AuthApi {
         })
     }
     
-    // MARK: - REGISTER NEW USER
+    // MARK:- REGISTER NEW USER
     static func registerWith(data: Data, displayName: String, username: String, email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void)  {
         Auth.auth().createUser(withEmail: email, password: password, completion: { user, error in
             if error != nil {
@@ -62,7 +62,7 @@ class AuthApi {
     }
     
     
-    // MARK: Reset User Password
+    // MARK:- Reset User Password
     static func resetPassword(withEmail: String, onSuccess: @escaping () -> Void,  onError: @escaping (_ errorMessage: String?) -> Void) {
         Auth.auth().sendPasswordReset(withEmail: withEmail) {
             error in
@@ -75,60 +75,50 @@ class AuthApi {
     }
     
     // MARK: Update User Info
+    static func updateUserInformation(email: String, displayName: String, imageData: Data, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
+        guard let uid = Api.Users.CURRENT_USER?.uid else { return }
+        
+        Api.Users.CURRENT_USER?.updateEmail(to: email, completion: { error in
+            if error != nil {
+                onError(error!.localizedDescription)
+                return
+            }
+            else {
+                let storageRef = Storage.storage().reference().child("profile_photos").child(uid)
+                
+                storageRef.putData(imageData, metadata: nil, completion: { metadata, error in
+                    if error != nil {
+                        onError(error!.localizedDescription)
+                        return
+                    }
+                    storageRef.downloadURL(completion: { url, error in
+                        guard let downloadUrl = url else { return }
+                        let profileImageUrlString = downloadUrl.absoluteString
+                        self.updateDatabase(profileImageULR: profileImageUrlString, email: email, displayName: displayName, onSuccess: onSuccess, onError:onError )
+                    })
+                })
+            }
+        })
+    }
     
-    //    static func updateUserInformation(username: String, email: String, imageData: Data, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void)
-    //    {
-    //
-    //        // TODO: It throws and error, it requires to re-authenticate the user, so it doesnt change the auth email, it saves the data and all, but doesn't update the auth email
-    //        // Step 1. If Users email has been changed, we need to change the authentication email!
-    //        Api.User.CURRENT_USER?.updateEmail(to: email, completion: { (error) in
-    //            if error != nil
-    //            {
-    //                onError(error?.localizedDescription)
-    //                return
-    //            }
-    //            else
-    //            {
-    //                // Step 2. Upload image to storage, get the downloaded image URL and set the new updated values (ONLY) to database
-    //                let uid = Api.User.CURRENT_USER?.uid
-    //                let storageRef = Storage.storage().reference(forURL: Config.STORAGE_ROOF_REF).child("profile_image").child(uid!)
-    //
-    //                storageRef.putData(imageData, metadata: nil, completion:
-    //                    { (metadata, error) in
-    //                        if error != nil
-    //                        {
-    //                            onError(error?.localizedDescription)
-    //                            return
-    //                        }
-    //                        let profileImageURL = metadata?.downloadURL()?.absoluteString
-    //
-    //                        self.updateDatabase(profileImageULR: profileImageURL!, username: username, email: email, onSuccess: onSuccess, onError:onError )
-    //                })
-    //            }
-    //        })
-    //    }
+    static func updateDatabase(profileImageULR: String, email: String, displayName: String, onSuccess: @escaping () -> Void,onError: @escaping (_ errorMessage: String?) -> Void) {
+        let dictionary = [ "profileImageUrl": profileImageULR,
+                           "displayName": displayName,
+                           "email" : email ]
+
+        Api.Users.REF_CURRENT_USER?.updateChildValues(dictionary, withCompletionBlock: { (error, ref) in
+            if error != nil {
+                onError(error!.localizedDescription)
+                return
+            }
+            else {
+                onSuccess()
+            }
+        })
+    }
     
-    //    static func updateDatabase(profileImageULR: String, username: String, email: String, onSuccess: @escaping () -> Void,onError: @escaping (_ errorMessage: String?) -> Void)
-    //    {
-    //        let dictionary = [ "profileImageURL": profileImageULR,
-    //                           "username" : username,
-    //                           "username_lowercase" : username.lowercased(), // lowercase for searching purposes only!
-    //            "email"    : email
-    //        ]
-    //        Api.User.REF_CURRENT_USER?.updateChildValues(dictionary, withCompletionBlock: { (error, ref) in
-    //            if error != nil
-    //            {
-    //                onError(error!.localizedDescription)
-    //
-    //            }
-    //            else
-    //            {
-    //                onSuccess()
-    //            }
-    //        })
-    //    }
     
-    // MARK: Log out
+    // MARK: Logout
     static func logout(onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
         do {
             try Auth.auth().signOut()
@@ -139,5 +129,6 @@ class AuthApi {
             return
         }
     }
+    
 }
 

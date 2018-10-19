@@ -12,6 +12,13 @@ class UserPostsApi {
     
     let REF_USER_POSTS = Database.database().reference().child(DatabaseLocation.user_posts)
     
+    func fetchUserPostsCount(forUserId id: String, completion: @escaping (Int) -> Void) {
+        REF_USER_POSTS.child(id).observe(.value, with: { snapshot in
+            let count = Int(snapshot.childrenCount)
+            completion(count)
+        })
+    }
+    
     func observeUserPosts(withUserId id: String, completion: @escaping (String) -> Void, onError: @escaping (String) -> Void) {
         REF_USER_POSTS.child(id).observe(.childAdded, with: { snapshot in
             completion(snapshot.key)
