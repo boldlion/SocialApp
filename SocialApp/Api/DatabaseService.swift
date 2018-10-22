@@ -12,15 +12,16 @@ import FirebaseAuth
 class DatabaseService {
     
     // MARK: SEND POST DATA TO DATABASE
-    static func sendPostDataToDatabase(photoImageUrlString: String, caption: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
+    static func sendPostDataToDatabase(photoImageUrlString: String, ratio: CGFloat, caption: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
         guard let userId = Api.Users.CURRENT_USER?.uid else { return }
         let postsRef = Database.database().reference().child(DatabaseLocation.posts)
         let postId = postsRef.childByAutoId().key
         let newPostId = postsRef.child(postId)
 
-        let postDictionary = [ "uid"      : userId,
-                               "caption"  : caption,
-                               "photoUrl" : photoImageUrlString,
+        let postDictionary = [ "uid"       : userId,
+                               "caption"   : caption,
+                               "photoUrl"  : photoImageUrlString,
+                               "photoRatio": ratio,
                                "likesCount": 0] as [String : Any] 
         // posts > postId > postdata
         newPostId.setValue(postDictionary, withCompletionBlock: { error, _ in
@@ -66,7 +67,7 @@ class DatabaseService {
     
     
     // MARK: SEND POST IMAGE TO STORAGE
-    static func sendImageToStorage(with data: Data, onError: @escaping (String) -> Void, onSuccess: @escaping (String) -> Void) {
+    static func sendImageToStorage(with data: Data, ratio: CGFloat, onError: @escaping (String) -> Void, onSuccess: @escaping (String) -> Void) {
         let phototIdString = UUID().uuidString
         
         let storagePostRef = Storage.storage().reference().child(StorageLocation.Posts).child(phototIdString)

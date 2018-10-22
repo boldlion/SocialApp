@@ -44,7 +44,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cra-am-tOl">
                                                     <rect key="frame" x="0.0" y="56" width="375" height="286"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="286" id="Mv5-bZ-47i"/>
+                                                        <constraint firstAttribute="height" priority="750" constant="286" id="Mv5-bZ-47i"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="post_like" translatesAutoresizingMaskIntoConstraints="NO" id="ocE-Fo-pSH">
@@ -109,6 +109,7 @@
                                             <outlet property="likeCountButton" destination="ngL-dR-FFS" id="3KQ-4D-8Jf"/>
                                             <outlet property="likeImageView" destination="ocE-Fo-pSH" id="d4L-pc-kTe"/>
                                             <outlet property="nameLabel" destination="nGC-hC-OgA" id="eRJ-jt-Kju"/>
+                                            <outlet property="photoHeightConstraint" destination="Mv5-bZ-47i" id="2wF-br-Bl2"/>
                                             <outlet property="postImageView" destination="Cra-am-tOl" id="tV0-f5-lJD"/>
                                             <outlet property="profileImageView" destination="2Lg-NW-9n2" id="6J1-V8-0lN"/>
                                         </connections>

@@ -38,11 +38,12 @@ class PostVC: UIViewController {
         view.endEditing(true)
         SVProgressHUD.show(withStatus: "Waiting...")
         if let postImage = selectedImage, let imageData = postImage.jpegData(compressionQuality: 0.1)  {
-            DatabaseService.sendImageToStorage(with: imageData, onError: { error in
+            let photoRatio = postImage.size.width / postImage.size.height
+            DatabaseService.sendImageToStorage(with: imageData, ratio: photoRatio, onError: { error in
                 SVProgressHUD.showError(withStatus: error)
                 return
             }, onSuccess: { storagePostImageUrlString in
-                self.sendPostDataToDatabase(photoUrlString: storagePostImageUrlString)
+                self.sendPostDataToDatabase(photoUrlString: storagePostImageUrlString, ratio: photoRatio)
             })
         }
         else {
@@ -56,9 +57,9 @@ class PostVC: UIViewController {
         present(pickerController, animated: true, completion: nil)
     }
     
-    func sendPostDataToDatabase(photoUrlString: String) {
+    func sendPostDataToDatabase(photoUrlString: String, ratio: CGFloat) {
         guard let caption = captionTextView.text else { return }
-        DatabaseService.sendPostDataToDatabase(photoImageUrlString: photoUrlString, caption: caption, onSuccess: {
+        DatabaseService.sendPostDataToDatabase(photoImageUrlString: photoUrlString, ratio: ratio, caption: caption, onSuccess: {
             SVProgressHUD.dismiss()
             self.clear()
             self.tabBarController?.selectedIndex = 0

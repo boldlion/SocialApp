@@ -18,6 +18,7 @@ protocol DashboardTVCellDelegate {
 
 class DashboardTVCell: UITableViewCell {
 
+    @IBOutlet weak var photoHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
@@ -58,7 +59,11 @@ class DashboardTVCell: UITableViewCell {
         if let caption = post?.caption {
             captionLabel.text = caption
         }
-
+        
+        if let ratio = post?.ratio {
+            photoHeightConstraint.constant = UIScreen.main.bounds.width / ratio
+        }
+        
         if let image = post?.photoUrl {
             let imageUrl = URL(string: image)
             postImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))

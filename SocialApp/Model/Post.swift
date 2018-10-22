@@ -5,6 +5,7 @@
 //  Created by Bold Lion on 3.10.18.
 //  Copyright © 2018 Bold Lion. All rights reserved.
 //
+import UIKit
 
 class Post {
     var id: String?
@@ -14,6 +15,7 @@ class Post {
     var likesCount: Int?
     var likes: Dictionary<String, Any>?
     var isLiked: Bool?
+    var ratio: CGFloat?
 }
 
 extension Post {
@@ -24,6 +26,7 @@ extension Post {
         post.uid = dictionary["uid"] as? String
         post.photoUrl = dictionary["photoUrl"] as? String
         post.caption = dictionary["caption"] as? String
+        post.ratio = dictionary["photoRatio"] as? CGFloat
         post.likesCount = dictionary["likesCount"] as? Int
         post.likes = dictionary["likes"] as? Dictionary<String, Any>
         

@@ -181,8 +181,8 @@
 			children = (
 				0353258C21636D97006152DA /* Auth.storyboard */,
 				0353259421636EDB006152DA /* Tabbar.storyboard */,
-				0348809F217363DF00662460 /* Explore.storyboard */,
 				0353259621636EDB006152DA /* Dashboard.storyboard */,
+				0348809F217363DF00662460 /* Explore.storyboard */,
 				0353259521636EDB006152DA /* Post.storyboard */,
 				0353259321636EDA006152DA /* Profile.storyboard */,
 			);
