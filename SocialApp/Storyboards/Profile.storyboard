@@ -201,6 +201,7 @@
                     <connections>
                         <outlet property="collectionView" destination="Kn3-Xs-l7J" id="Soo-bJ-m8V"/>
                         <segue destination="NbW-qB-MvX" kind="show" identifier="ProfileToSettingsSegue" id="nTD-EW-R0f"/>
+                        <segue destination="x3Q-on-g8w" kind="show" identifier="ProfileToDetailVC" id="epp-fM-qsC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pwa-F3-PwH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -503,6 +504,7 @@
                     <connections>
                         <outlet property="collectionView" destination="ASD-8d-URH" id="3EX-2k-gyv"/>
                         <segue destination="NbW-qB-MvX" kind="show" identifier="ProfileUserToSettingsSegue" id="Yb3-iJ-8r7"/>
+                        <segue destination="x3Q-on-g8w" kind="show" identifier="ProfileUserToDetailVC" id="5wf-U8-37f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="it8-Zf-8ES" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -708,7 +710,15 @@
                     <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                 </tableViewCell>
             </objects>
-            <point key="canvasLocation" x="3740" y="1330.8845577211396"/>
+            <point key="canvasLocation" x="3730" y="1509"/>
+        </scene>
+        <!--DetailVC-->
+        <scene sceneID="fyJ-bL-w5l">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Explore" referencedIdentifier="DetailVC" id="x3Q-on-g8w" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="C61-xs-UPl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3750" y="990"/>
         </scene>
     </scenes>
     <resources>
@@ -717,6 +727,7 @@
         <image name="tab_profile" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="epp-fM-qsC"/>
         <segue reference="nTD-EW-R0f"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -24,7 +24,6 @@ class ProfileUserVC: UIViewController {
         collectionView.delegate = self
         fetchUser()
         fetchUserPosts()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: UIBarButtonItem.Style.plain, target: self, action: nil)
     }
     
     func fetchUser() {
@@ -60,6 +59,14 @@ class ProfileUserVC: UIViewController {
             SVProgressHUD.showError(withStatus: error)
         })
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileUserToDetailVC" {
+            let detailVC = segue.destination as! DetailVC
+            let postId = sender as! String
+            detailVC.postId = postId
+        }
+    }
 }
 
 
@@ -72,6 +79,7 @@ extension ProfileUserVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCVCell", for: indexPath) as! PhotoCVCell
         let post = posts[indexPath.row]
+        cell.delegate = self
         cell.post = post
         return cell
     }
@@ -109,5 +117,11 @@ extension ProfileUserVC : UICollectionViewDelegateFlowLayout {
 extension ProfileUserVC : HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC {
     func goToSettingVC() {
         performSegue(withIdentifier: "ProfileUserToSettingsSegue", sender: nil)
+    }
+}
+
+extension ProfileUserVC : PhotoCVCellDelegate {
+    func goToDetailVC(withId id: String) {
+        performSegue(withIdentifier: "ProfileUserToDetailVC", sender: id)
     }
 }

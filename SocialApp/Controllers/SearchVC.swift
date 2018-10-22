@@ -109,6 +109,4 @@ extension SearchVC: HeaderProfileCollectionReusableViewDelegate {
             }
         }
     }
-    
-    
 }

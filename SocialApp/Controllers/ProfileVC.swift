@@ -47,6 +47,19 @@ class ProfileVC: UIViewController {
             SVProgressHUD.showError(withStatus: error)
         })
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProfileToSettingsSegue" {
+            let settingsVC = segue.destination as! SettingTVC
+            settingsVC.delegate = self
+        }
+        
+        if segue.identifier == "ProfileToDetailVC" {
+            let detailVC = segue.destination as! DetailVC
+            let postId = sender as! String
+            detailVC.postId = postId
+        }
+    }
 }
 
 extension ProfileVC: UICollectionViewDataSource {
@@ -59,6 +72,7 @@ extension ProfileVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCVCell", for: indexPath) as! PhotoCVCell
         let post = posts[indexPath.row]
         cell.post = post
+        cell.delegate = self
         return cell
     }
     
@@ -93,22 +107,20 @@ extension ProfileVC : UICollectionViewDelegateFlowLayout {
 
 
 extension ProfileVC : HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC {
-    
     func goToSettingVC() {
         performSegue(withIdentifier: "ProfileToSettingsSegue", sender: nil)
     }
 }
 
 extension ProfileVC : SettingsTVCDelegate {
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ProfileToSettingsSegue" {
-            let settingsVC = segue.destination as! SettingTVC
-            settingsVC.delegate = self
-        }
-    }
-    
     func updateUserInfo() {
         fetchUser()
     }
 }
+
+extension ProfileVC : PhotoCVCellDelegate {
+    func goToDetailVC(withId id: String) {
+        performSegue(withIdentifier: "ProfileToDetailVC", sender: id)
+    }
+}
+

@@ -27,8 +27,11 @@ class ExploreVC: UIViewController {
     }
     
     func fetchTopPosts() {
-        self.posts.removeAll()
+        SVProgressHUD.showProgress(5, status: "Loading...")
+        posts.removeAll()
+        collectionView.reloadData()
         Api.Post.observeTopPosts(completion: { post in
+            SVProgressHUD.dismiss()
             self.posts.append(post)
             self.collectionView.reloadData()
         }, onError: { error in
@@ -50,7 +53,6 @@ class ExploreVC: UIViewController {
     }
 }
 
-
 extension ExploreVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -60,6 +62,7 @@ extension ExploreVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExploreCVCell", for: indexPath) as! PhotoCVCell
         let post = posts[indexPath.row]
+        cell.delegate = self
         cell.post = post
         return cell
     }
@@ -82,4 +85,19 @@ extension ExploreVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
     }
+}
+
+extension ExploreVC: PhotoCVCellDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ExploreToDetailVCSegue" {
+            let detailVC = segue.destination as! DetailVC
+            let postId = sender as! String
+            detailVC.postId = postId
+        }
+    }
+    
+    func goToDetailVC(withId id: String) {
+        performSegue(withIdentifier: "ExploreToDetailVCSegue", sender: id)
+    }   
 }

@@ -9,9 +9,15 @@
 import UIKit
 import SDWebImage
 
+protocol PhotoCVCellDelegate {
+    func goToDetailVC(withId id: String)
+}
+
 class PhotoCVCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
+    
+    var delegate: PhotoCVCellDelegate?
     
     var post: Post? {
         didSet {
@@ -19,10 +25,27 @@ class PhotoCVCell: UICollectionViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        addTapGestures()
+    }
+    
     func updateView() {
         if let imageString = post?.photoUrl {
             let url = URL(string: imageString)
             photoImageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+        }
+    }
+    
+    func addTapGestures() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(photoTapped))
+        photoImageView.addGestureRecognizer(tap)
+        photoImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc func photoTapped() {
+        if let id = post?.id {
+            delegate?.goToDetailVC(withId: id)
         }
     }
 }

@@ -76,6 +76,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="l1H-V6-2hI" id="8Vz-EA-sb6"/>
+                        <segue destination="PiB-sy-cRH" kind="show" identifier="ExploreToDetailVCSegue" id="MR5-5o-7nq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNX-RH-IsX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -88,7 +89,7 @@
                 <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileUserVC" id="YGR-zm-cbo" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G8N-UG-iqe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1804" y="580"/>
+            <point key="canvasLocation" x="1854" y="699"/>
         </scene>
         <!--SearchVC-->
         <scene sceneID="ISy-ee-uUC">
@@ -175,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWz-YF-xFL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1804" y="130"/>
+            <point key="canvasLocation" x="1073" y="867"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="88Q-oc-yFR">
@@ -201,13 +202,13 @@
         <!--DetailVC-->
         <scene sceneID="DuO-BK-r8B">
             <objects>
-                <viewController id="PiB-sy-cRH" customClass="DetailVC" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailVC" id="PiB-sy-cRH" customClass="DetailVC" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ofn-CZ-gmH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qQs-KA-fh0">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="PostCell" rowHeight="428" id="qXB-Ie-QzG" customClass="DashboardTVCell" customModule="SocialApp" customModuleProvider="target">
@@ -314,10 +315,32 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fx5-po-JNr"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="qQs-KA-fh0" id="isx-Aq-kSG"/>
+                        <segue destination="YGR-zm-cbo" kind="show" identifier="DetailToProfileUser" id="EOP-cL-VMd"/>
+                        <segue destination="0n8-pS-9e8" kind="show" identifier="DetailToComment" id="iuE-43-EKz"/>
+                        <segue destination="EuC-NL-2V7" kind="show" identifier="DetailToProfile" id="vWu-X5-McJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NQb-vg-01M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2543" y="130"/>
+            <point key="canvasLocation" x="1854" y="130"/>
+        </scene>
+        <!--CommentVC-->
+        <scene sceneID="jmL-hM-Vjr">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Dashboard" referencedIdentifier="CommentVC" id="0n8-pS-9e8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YOz-GC-Pnu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2286" y="587"/>
+        </scene>
+        <!--ProfileVC-->
+        <scene sceneID="jop-T1-uqW">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileVC" id="EuC-NL-2V7" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULc-C6-f5R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2114" y="650"/>
         </scene>
     </scenes>
     <resources>
@@ -326,4 +349,7 @@
         <image name="profile_placeholder" width="600" height="600"/>
         <image name="tab_explore" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="EOP-cL-VMd"/>
+    </inferredMetricsTieBreakers>
 </document>
