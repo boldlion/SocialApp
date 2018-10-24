@@ -234,7 +234,7 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5dj-Rw-uTD">
                                                     <rect key="frame" x="0.0" y="56" width="375" height="286"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="286" id="Z5b-Ke-xM8"/>
+                                                        <constraint firstAttribute="height" priority="999" constant="286" id="Z5b-Ke-xM8"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="post_like" translatesAutoresizingMaskIntoConstraints="NO" id="dmy-tn-Hts">
@@ -267,6 +267,34 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gC3-3g-6cU">
+                                                    <rect key="frame" x="15" y="303" width="24" height="24"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vLB-5X-LS4">
+                                                            <rect key="frame" x="6" y="6" width="12" height="12"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="12" id="Vpj-yz-lSo"/>
+                                                                <constraint firstAttribute="width" constant="12" id="WZo-WM-BsG"/>
+                                                            </constraints>
+                                                            <state key="normal" image="icon_mute"/>
+                                                            <connections>
+                                                                <action selector="volumeTapped:" destination="qXB-Ie-QzG" eventType="touchUpInside" id="F1b-L6-fEL"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="vLB-5X-LS4" firstAttribute="centerX" secondItem="gC3-3g-6cU" secondAttribute="centerX" id="625-8d-0CI"/>
+                                                        <constraint firstAttribute="width" constant="24" id="CHs-pk-L05"/>
+                                                        <constraint firstItem="vLB-5X-LS4" firstAttribute="centerY" secondItem="gC3-3g-6cU" secondAttribute="centerY" id="Gy4-4h-2x3"/>
+                                                        <constraint firstAttribute="height" constant="24" id="dOe-mE-ZnP"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="cMl-r1-8T7" firstAttribute="centerY" secondItem="dmy-tn-Hts" secondAttribute="centerY" id="4E6-Jd-ZqB"/>
@@ -275,6 +303,7 @@
                                                 <constraint firstItem="XFs-qD-gyp" firstAttribute="centerY" secondItem="c2G-xN-MQc" secondAttribute="centerY" id="CYJ-TZ-5VL"/>
                                                 <constraint firstItem="c2G-xN-MQc" firstAttribute="top" secondItem="nih-v2-tzb" secondAttribute="top" constant="10" id="HuC-0m-KSb"/>
                                                 <constraint firstItem="dmy-tn-Hts" firstAttribute="top" secondItem="5dj-Rw-uTD" secondAttribute="bottom" constant="10" id="Ivd-8b-0Pf"/>
+                                                <constraint firstItem="gC3-3g-6cU" firstAttribute="bottom" secondItem="5dj-Rw-uTD" secondAttribute="bottom" constant="-15" id="JjF-iJ-WzZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="1G3-Em-8U4" secondAttribute="bottom" constant="10" id="Ljd-UQ-jFg"/>
                                                 <constraint firstAttribute="trailing" secondItem="ApW-iG-rsY" secondAttribute="trailing" id="PLD-Q5-VXL"/>
                                                 <constraint firstItem="cMl-r1-8T7" firstAttribute="height" secondItem="dmy-tn-Hts" secondAttribute="height" id="QgP-Ic-P0H"/>
@@ -285,6 +314,7 @@
                                                 <constraint firstItem="c2G-xN-MQc" firstAttribute="leading" secondItem="nih-v2-tzb" secondAttribute="leading" constant="10" id="cjH-zP-FI9"/>
                                                 <constraint firstItem="ApW-iG-rsY" firstAttribute="leading" secondItem="nih-v2-tzb" secondAttribute="leading" constant="10" id="gOI-fH-i2J"/>
                                                 <constraint firstAttribute="trailing" secondItem="5dj-Rw-uTD" secondAttribute="trailing" id="gVl-1w-Q7J"/>
+                                                <constraint firstItem="gC3-3g-6cU" firstAttribute="leading" secondItem="5dj-Rw-uTD" secondAttribute="leading" constant="15" id="gYW-Dm-haq"/>
                                                 <constraint firstItem="dmy-tn-Hts" firstAttribute="leading" secondItem="cMl-r1-8T7" secondAttribute="trailing" constant="15" id="mHq-Sd-dBo"/>
                                                 <constraint firstItem="EoE-IJ-liC" firstAttribute="centerY" secondItem="cMl-r1-8T7" secondAttribute="centerY" id="oHn-CB-ggp"/>
                                                 <constraint firstItem="1G3-Em-8U4" firstAttribute="top" secondItem="ApW-iG-rsY" secondAttribute="bottom" constant="10" id="qLL-nC-udn"/>
@@ -299,8 +329,11 @@
                                             <outlet property="likeCountButton" destination="EoE-IJ-liC" id="3i9-Of-1sq"/>
                                             <outlet property="likeImageView" destination="dmy-tn-Hts" id="rbI-SY-nwv"/>
                                             <outlet property="nameLabel" destination="XFs-qD-gyp" id="w9U-tU-tQd"/>
+                                            <outlet property="photoHeightConstraint" destination="Z5b-Ke-xM8" id="uGF-wU-hrv"/>
                                             <outlet property="postImageView" destination="5dj-Rw-uTD" id="mOc-Sf-hNG"/>
                                             <outlet property="profileImageView" destination="c2G-xN-MQc" id="qNb-eD-iAV"/>
+                                            <outlet property="volumeButton" destination="vLB-5X-LS4" id="qMu-UA-f9F"/>
+                                            <outlet property="volumeView" destination="gC3-3g-6cU" id="9Gt-44-JJv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -344,6 +377,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_mute" width="25" height="25"/>
         <image name="post_comment" width="43" height="41"/>
         <image name="post_like" width="46" height="41"/>
         <image name="profile_placeholder" width="600" height="600"/>

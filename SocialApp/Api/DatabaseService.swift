@@ -11,67 +11,34 @@ import FirebaseAuth
 
 class DatabaseService {
     
-    // MARK: SEND POST DATA TO DATABASE
-    static func sendPostDataToDatabase(photoImageUrlString: String, ratio: CGFloat, caption: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
-        guard let userId = Api.Users.CURRENT_USER?.uid else { return }
-        let postsRef = Database.database().reference().child(DatabaseLocation.posts)
-        let postId = postsRef.childByAutoId().key
-        let newPostId = postsRef.child(postId)
+    // MARK: - Upload Data To Server
+    static func uploadDataToServer(data: Data, videoUrl: URL? = nil, ratio: CGFloat, caption: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
+        
+        //***************** VIDEO SHARING CASE ******************//
+        if let videoUrl = videoUrl {
+            // 1. Upload Video To Firebase Storage
+            uploadVideoToFirebaseStorate(videoUrl: videoUrl, onSuccess: { videoUrlString in
+                // 2. Upload Video Thumbnail To Firebase Storage
+                uploadImageToStorage(with: data, onSuccess: { videoThumbnail in
+                    // 3. Send Post Data to Firebase Database
+                    sendPostDataToDatabase(photoImageUrlString: videoThumbnail, videoUrl: videoUrlString, ratio: ratio,  caption: caption, onSuccess: onSuccess, onError: onError)
+                }, onError: onError)
+            }, onError: onError)
+        }
+        //***************** PHOTO SHARING CASE ******************//
+        else {
+            // 1. Upload Photo to Firebase Storage
+            uploadImageToStorage(with: data, onSuccess: { photoUrlString in
+                // 2. Send Post Data to Firebase Database
+                sendPostDataToDatabase(photoImageUrlString: photoUrlString, ratio: ratio, caption: caption, onSuccess: onSuccess, onError: onError)
+            }, onError: onError)
+        }
+    }
 
-        let postDictionary = [ "uid"       : userId,
-                               "caption"   : caption,
-                               "photoUrl"  : photoImageUrlString,
-                               "photoRatio": ratio,
-                               "likesCount": 0] as [String : Any] 
-        // posts > postId > postdata
-        newPostId.setValue(postDictionary, withCompletionBlock: { error, _ in
-            if error != nil {
-                onError(error!.localizedDescription)
-                return
-            }
-            else {
-                // user_posts > userId > postId
-                let refUserposts = Api.User_Posts.REF_USER_POSTS.child(userId).child(postId)
-                refUserposts.setValue(true, withCompletionBlock: { errorUserPosts, dbRef in
-                    if errorUserPosts != nil {
-                        onError(errorUserPosts!.localizedDescription)
-                        return
-                    }
-                    // Feed > currentUserId > postId
-                    Api.Feed.REF_FEED.child(userId).child(postId).setValue(true)
-                     onSuccess()
-                })
-            }
-        })
-    }
-    
-    // MARK: SEND PROFILE IMAGE TO STORAGE
-    static func sendProfileImageToStorage(with data: Data, onError: @escaping (String) -> Void, onSuccess: @escaping (_ profileImageString: String) -> Void) {
+    // MARK: - SEND POST IMAGE TO FIREBASE STORAGE
+    static func uploadImageToStorage(with data: Data, onSuccess: @escaping (String) -> Void, onError: @escaping (String) -> Void) {
         let phototIdString = UUID().uuidString
-        
-        let storagePostRef = Storage.storage().reference().child(StorageLocation.Profile_Photos).child(phototIdString)
-        
-        storagePostRef.putData(data, metadata: nil, completion: { metadata, error in
-            if error != nil {
-                onError(error!.localizedDescription)
-                return
-            }
-            storagePostRef.downloadURL(completion: { url, urlError in
-                guard let downloadUrl = url else { return }
-                
-                let postImageUrl = downloadUrl.absoluteString
-                onSuccess(postImageUrl)
-            })
-        })
-    }
-    
-    
-    // MARK: SEND POST IMAGE TO STORAGE
-    static func sendImageToStorage(with data: Data, ratio: CGFloat, onError: @escaping (String) -> Void, onSuccess: @escaping (String) -> Void) {
-        let phototIdString = UUID().uuidString
-        
         let storagePostRef = Storage.storage().reference().child(StorageLocation.Posts).child(phototIdString)
-        
         storagePostRef.putData(data, metadata: nil, completion: { metadata, error in
             
             if error != nil {
@@ -87,7 +54,65 @@ class DatabaseService {
         })
     }
     
-    // MARK: SEND COMMENTS
+    // MARK: - UPLOAD VIDEO TO FIREBASE STORAGE
+    static func uploadVideoToFirebaseStorate(videoUrl: URL, onSuccess: @escaping (String) -> Void, onError: @escaping (String) -> Void) {
+        let videoIdString = UUID().uuidString
+        let storagePostRef = Storage.storage().reference().child(StorageLocation.Posts).child(videoIdString)
+        storagePostRef.putFile(from: videoUrl, metadata: nil, completion: { metadata, error in
+            if error != nil {
+                onError(error!.localizedDescription)
+                return
+            }
+            storagePostRef.downloadURL(completion: { url, urlError in
+                guard let downloadUrl = url else { return }
+                
+                let videoUrlString = downloadUrl.absoluteString
+                onSuccess(videoUrlString)
+            })
+        })
+    }
+    
+    // MARK: - SEND POST DATA TO DATABASE
+    static func sendPostDataToDatabase(photoImageUrlString: String, videoUrl: String? = nil, ratio: CGFloat, caption: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
+        guard let userId = Api.Users.CURRENT_USER?.uid else { return }
+        let postsRef = Database.database().reference().child(DatabaseLocation.posts)
+        let postId = postsRef.childByAutoId().key
+        let newPostId = postsRef.child(postId)
+        
+        var postDictionary = [ "uid"       : userId,
+                               "caption"   : caption,
+                               "photoUrl"  : photoImageUrlString,
+                               "photoRatio": ratio,
+                               "likesCount": 0] as [String : Any]
+        
+        if let videoUrl = videoUrl {
+            postDictionary["videoUrl"] = videoUrl
+        }
+        
+        // posts > postId > postdata
+        newPostId.setValue(postDictionary, withCompletionBlock: { error, _ in
+            if error != nil {
+                onError(error!.localizedDescription)
+                return
+            }
+            else {
+                // user_posts > userId > postId
+                let refUserposts = Api.User_Posts.REF_USER_POSTS.child(userId).child(postId)
+                refUserposts.setValue(true, withCompletionBlock: { errorUserPosts, dbRef in
+                    if errorUserPosts != nil {
+                        onError(errorUserPosts!.localizedDescription)
+                        return
+                    }
+                    // feed > currentUserId > postId
+                    Api.Feed.REF_FEED.child(userId).child(postId).setValue(true)
+                    onSuccess()
+                })
+            }
+        })
+    }
+    
+    
+    // MARK: - SEND COMMENTS
     static func sendComment(with text: String, postId: String, onError: @escaping (String) -> Void, onSuccess: @escaping () -> Void) {
         let commentRef = Database.database().reference().child(DatabaseLocation.comments)
         let commentId = commentRef.childByAutoId().key
@@ -118,4 +143,25 @@ class DatabaseService {
             }
         })
     }
+    
+    // MARK: - SEND PROFILE IMAGE TO STORAGE
+    static func sendProfileImageToStorage(with data: Data, onError: @escaping (String) -> Void, onSuccess: @escaping (_ profileImageString: String) -> Void) {
+        let phototIdString = UUID().uuidString
+        
+        let storagePostRef = Storage.storage().reference().child(StorageLocation.Profile_Photos).child(phototIdString)
+        
+        storagePostRef.putData(data, metadata: nil, completion: { metadata, error in
+            if error != nil {
+                onError(error!.localizedDescription)
+                return
+            }
+            storagePostRef.downloadURL(completion: { url, urlError in
+                guard let downloadUrl = url else { return }
+                
+                let postImageUrl = downloadUrl.absoluteString
+                onSuccess(postImageUrl)
+            })
+        })
+    }
+    
 }

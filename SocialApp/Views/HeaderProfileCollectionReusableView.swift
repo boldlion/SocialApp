@@ -37,6 +37,11 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        clear()
+    }
+    
     func updateView() {
         guard let userId = user?.id else { return }
         
@@ -124,5 +129,11 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
                 SVProgressHUD.showError(withStatus: error)
             })
         }
+    }
+    
+    func clear() {
+        myPostCountLabel.text = ""
+        followersCountLabel.text = ""
+        follwingCountLabel.text = ""
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import AVFoundation
 
 class PostVC: UIViewController {
 
@@ -17,6 +18,7 @@ class PostVC: UIViewController {
     @IBOutlet weak var clearButton: UIBarButtonItem!
     
     var selectedImage: UIImage?
+    var videoUrl: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,34 +41,26 @@ class PostVC: UIViewController {
         SVProgressHUD.show(withStatus: "Waiting...")
         if let postImage = selectedImage, let imageData = postImage.jpegData(compressionQuality: 0.1)  {
             let photoRatio = postImage.size.width / postImage.size.height
-            DatabaseService.sendImageToStorage(with: imageData, ratio: photoRatio, onError: { error in
+            
+            DatabaseService.uploadDataToServer(data: imageData, videoUrl: videoUrl, ratio: photoRatio, caption: captionTextView.text!, onSuccess: {
+                SVProgressHUD.dismiss()
+                self.clear()
+                self.tabBarController?.selectedIndex = 0
+            }, onError: { error in
                 SVProgressHUD.showError(withStatus: error)
-                return
-            }, onSuccess: { storagePostImageUrlString in
-                self.sendPostDataToDatabase(photoUrlString: storagePostImageUrlString, ratio: photoRatio)
             })
         }
         else {
             SVProgressHUD.showError(withStatus: "Image is mandatory, please, select one.")
+            return
         }
     }
     
     @objc func handleSelectPhoto() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
+        pickerController.mediaTypes = ["public.image", "public.movie"]
         present(pickerController, animated: true, completion: nil)
-    }
-    
-    func sendPostDataToDatabase(photoUrlString: String, ratio: CGFloat) {
-        guard let caption = captionTextView.text else { return }
-        DatabaseService.sendPostDataToDatabase(photoImageUrlString: photoUrlString, ratio: ratio, caption: caption, onSuccess: {
-            SVProgressHUD.dismiss()
-            self.clear()
-            self.tabBarController?.selectedIndex = 0
-         }, onError: { error in
-            SVProgressHUD.showError(withStatus: error)
-            return
-        })
     }
     
     func handlePost() {
@@ -104,6 +98,13 @@ class PostVC: UIViewController {
 extension PostVC : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let videoUrl = info[UIImagePickerController.InfoKey.mediaURL] as? URL {
+            if let thumbnail = self.generateThumbnailForImage(videoUrl) {
+                self.videoUrl = videoUrl
+                self.photoImageView.image = thumbnail
+                self.selectedImage = thumbnail
+            }
+        }
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImage = image
             photoImageView.image = image
@@ -111,4 +112,20 @@ extension PostVC : UIImagePickerControllerDelegate, UINavigationControllerDelega
         }
         dismiss(animated: true, completion: nil)
     }
+    
+    func generateThumbnailForImage(_ fileUrl: URL) -> UIImage? {
+        let asset = AVAsset(url: fileUrl)
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        do {
+            let thumbnailCGImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 10), actualTime: nil) // 1 sec
+            return UIImage(cgImage: thumbnailCGImage)
+            
+        } catch let err {
+            SVProgressHUD.showError(withStatus: err.localizedDescription)
+        }
+        return nil
+    }
+
+
 }

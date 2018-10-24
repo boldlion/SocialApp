@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 import SDWebImage
-
+import AVFoundation
 protocol DashboardTVCellDelegate {
     func showCommentForPost(with id: String)
     func goToProfile()
@@ -26,11 +26,16 @@ class DashboardTVCell: UITableViewCell {
     @IBOutlet weak var commentImageView: UIImageView!
     @IBOutlet weak var likeCountButton: UIButton!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var volumeView: UIView!
+    @IBOutlet weak var volumeButton: UIButton!
     
     var delegate: DashboardTVCellDelegate?
+    var player: AVPlayer?
+    var playerLayer: AVPlayerLayer?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        volumeView.isHidden = true
         initialUI()
         addTapGestures()
     }
@@ -41,6 +46,11 @@ class DashboardTVCell: UITableViewCell {
         postImageView.image = UIImage(named: "profile_placeholder")
         likeCountButton.setTitle("", for: .normal)
         initialUI()
+        volumeView.isHidden = true
+        if let p = player, let pLayer = playerLayer {
+            p.pause()
+            pLayer.removeFromSuperlayer()
+        }
     }
     
     var post: Post? {
@@ -54,6 +64,7 @@ class DashboardTVCell: UITableViewCell {
             updateUserInfo()
         }
     }
+    var videoIsMuted = true
     
     func updateView() {
         if let caption = post?.caption {
@@ -62,13 +73,43 @@ class DashboardTVCell: UITableViewCell {
         
         if let ratio = post?.ratio {
             photoHeightConstraint.constant = UIScreen.main.bounds.width / ratio
+            layoutIfNeeded()
         }
         
         if let image = post?.photoUrl {
             let imageUrl = URL(string: image)
             postImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))
         }
+        
+        if let videoUrlString = post?.videoUrl, let videoUrl = URL(string: videoUrlString) {
+            volumeView.isHidden = false
+            player = AVPlayer(url: videoUrl)
+            playerLayer = AVPlayerLayer(player: player)
+            
+            if let pLayer = playerLayer, let vidPlayer = player {
+                pLayer.frame = postImageView.frame
+                pLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                contentView.layer.addSublayer(pLayer)
+                self.volumeView.layer.zPosition = 1
+                vidPlayer.play()
+                vidPlayer.isMuted = videoIsMuted
+                layoutIfNeeded()
+
+            }
+        }
         self.updateLike(post: post!)
+    }
+    
+    @IBAction func volumeTapped(_ sender: UIButton) {
+        if videoIsMuted {
+            videoIsMuted = !videoIsMuted
+            volumeButton.setImage(UIImage(named: "icon_volume"), for: .normal)
+        }
+        else {
+            videoIsMuted = !videoIsMuted
+            volumeButton.setImage(UIImage(named: "icon_mute"), for: .normal)
+        }
+        player?.isMuted = videoIsMuted
     }
     
     func updateLike(post: Post) {

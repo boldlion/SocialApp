@@ -77,6 +77,34 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eul-c4-OT7">
+                                                    <rect key="frame" x="15" y="303" width="24" height="24"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LoP-2N-IgN">
+                                                            <rect key="frame" x="6" y="6" width="12" height="12"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="12" id="u7d-19-8J3"/>
+                                                                <constraint firstAttribute="height" constant="12" id="zOm-5M-6mF"/>
+                                                            </constraints>
+                                                            <state key="normal" image="icon_mute"/>
+                                                            <connections>
+                                                                <action selector="volumeTapped:" destination="X0n-vv-Y5O" eventType="touchUpInside" id="Qtr-5y-QqL"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="LoP-2N-IgN" firstAttribute="centerX" secondItem="eul-c4-OT7" secondAttribute="centerX" id="0td-1L-HRW"/>
+                                                        <constraint firstAttribute="width" constant="24" id="JlL-Ch-Jwg"/>
+                                                        <constraint firstAttribute="height" constant="24" id="ZUA-Bc-7mX"/>
+                                                        <constraint firstItem="LoP-2N-IgN" firstAttribute="centerY" secondItem="eul-c4-OT7" secondAttribute="centerY" id="lUZ-WL-84F"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="A5S-RG-bYs" secondAttribute="trailing" constant="15" id="4Ct-DG-3Uu"/>
@@ -88,10 +116,12 @@
                                                 <constraint firstItem="FIn-up-ObO" firstAttribute="leading" secondItem="oJ0-hN-ZbQ" secondAttribute="leading" constant="10" id="QAH-OI-0h6"/>
                                                 <constraint firstItem="89c-sX-IXx" firstAttribute="height" secondItem="ocE-Fo-pSH" secondAttribute="height" id="SPL-Eg-c7P"/>
                                                 <constraint firstItem="nGC-hC-OgA" firstAttribute="leading" secondItem="2Lg-NW-9n2" secondAttribute="trailing" constant="10" id="TTe-Ch-ihK"/>
+                                                <constraint firstItem="eul-c4-OT7" firstAttribute="bottom" secondItem="Cra-am-tOl" secondAttribute="bottom" constant="-15" id="Td6-9n-wBN"/>
                                                 <constraint firstItem="89c-sX-IXx" firstAttribute="width" secondItem="ocE-Fo-pSH" secondAttribute="width" id="ZfL-1K-y0D"/>
                                                 <constraint firstItem="2Lg-NW-9n2" firstAttribute="leading" secondItem="oJ0-hN-ZbQ" secondAttribute="leading" constant="10" id="a2r-Ji-p2s"/>
                                                 <constraint firstAttribute="trailing" secondItem="Cra-am-tOl" secondAttribute="trailing" id="aPW-yE-cm3"/>
                                                 <constraint firstAttribute="bottom" secondItem="A5S-RG-bYs" secondAttribute="bottom" constant="10" id="alM-bl-tSV"/>
+                                                <constraint firstItem="eul-c4-OT7" firstAttribute="leading" secondItem="Cra-am-tOl" secondAttribute="leading" constant="15" id="fMz-aR-Bvs"/>
                                                 <constraint firstItem="89c-sX-IXx" firstAttribute="centerY" secondItem="ocE-Fo-pSH" secondAttribute="centerY" id="hne-AH-5tw"/>
                                                 <constraint firstItem="Cra-am-tOl" firstAttribute="top" secondItem="2Lg-NW-9n2" secondAttribute="bottom" constant="10" id="hng-hX-Exi"/>
                                                 <constraint firstItem="2Lg-NW-9n2" firstAttribute="top" secondItem="oJ0-hN-ZbQ" secondAttribute="top" constant="10" id="kh4-mD-OUy"/>
@@ -112,6 +142,8 @@
                                             <outlet property="photoHeightConstraint" destination="Mv5-bZ-47i" id="2wF-br-Bl2"/>
                                             <outlet property="postImageView" destination="Cra-am-tOl" id="tV0-f5-lJD"/>
                                             <outlet property="profileImageView" destination="2Lg-NW-9n2" id="6J1-V8-0lN"/>
+                                            <outlet property="volumeButton" destination="LoP-2N-IgN" id="Awk-u3-bvl"/>
+                                            <outlet property="volumeView" destination="eul-c4-OT7" id="Okb-uT-m2a"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -324,6 +356,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_mute" width="25" height="25"/>
         <image name="post_comment" width="43" height="41"/>
         <image name="post_like" width="46" height="41"/>
         <image name="profile_placeholder" width="600" height="600"/>
