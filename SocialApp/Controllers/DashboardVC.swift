@@ -21,7 +21,7 @@ class DashboardVC: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         navigationItem.title = "Dashboard"
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 428
         tableView.rowHeight = UITableView.automaticDimension
         fetchPosts()
     }
@@ -76,9 +76,7 @@ extension DashboardVC :  UITableViewDataSource, UITableViewDelegate {
         cell.delegate = self
         return cell
     }
-
 }
-
 
 extension DashboardVC : DashboardTVCellDelegate {
 

@@ -94,7 +94,6 @@ class DashboardTVCell: UITableViewCell {
                 vidPlayer.play()
                 vidPlayer.isMuted = videoIsMuted
                 layoutIfNeeded()
-
             }
         }
         self.updateLike(post: post!)

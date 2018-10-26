@@ -16,6 +16,7 @@ class PostVC: UIViewController {
     @IBOutlet weak var captionTextView: UITextView!
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var clearButton: UIBarButtonItem!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     
     var selectedImage: UIImage?
     var videoUrl: URL?
@@ -34,6 +35,10 @@ class PostVC: UIViewController {
     @IBAction func clearTapped(_ sender: UIBarButtonItem) {
         clear()
         handlePost()
+    }
+    
+    @IBAction func filtersTapped(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "PostVCToFilterVC", sender: self.selectedImage)
     }
     
     @IBAction func shareTapped(_ sender: UIButton) {
@@ -66,13 +71,19 @@ class PostVC: UIViewController {
     func handlePost() {
         if selectedImage != nil {
             clearButton.isEnabled = true
+            clearButton.tintColor = Colors.tint
+            filterButton.isEnabled = true
+            filterButton.tintColor = Colors.tint
             shareButton.isEnabled = true
-            shareButton.backgroundColor = UIColor(red: 218/255, green: 117/255, blue: 83/255, alpha: 1.0)
+            shareButton.backgroundColor = Colors.tint
             shareButton.setTitleColor(.white, for: .normal)
         }
         else {
-            shareButton.isEnabled = false
             clearButton.isEnabled = false
+            clearButton.tintColor = .darkGray
+            filterButton.isEnabled = false
+            filterButton.tintColor = .darkGray
+            shareButton.isEnabled = false
             shareButton.backgroundColor = .darkGray
             shareButton.setTitleColor(.lightGray, for: .normal)
         }
@@ -93,6 +104,16 @@ class PostVC: UIViewController {
         self.selectedImage = nil
         self.photoImageView.image = UIImage(named: "placeholder")
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PostVCToFilterVC" {
+            let filterVC = segue.destination as! FilterVC
+            filterVC.delegate = self
+            if let chosenImage = selectedImage {
+                filterVC.selectedPhoto = chosenImage
+            }
+        }
+    }
 }
 
 extension PostVC : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -108,9 +129,9 @@ extension PostVC : UIImagePickerControllerDelegate, UINavigationControllerDelega
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             selectedImage = image
             photoImageView.image = image
-            shareButton.isEnabled = true
         }
         dismiss(animated: true, completion: nil)
+        handlePost()
     }
     
     func generateThumbnailForImage(_ fileUrl: URL) -> UIImage? {
@@ -126,6 +147,12 @@ extension PostVC : UIImagePickerControllerDelegate, UINavigationControllerDelega
         }
         return nil
     }
+}
 
-
+extension PostVC: FilterVCDelegate {
+    
+    func updatePhoto(image: UIImage) {
+        photoImageView.image = image
+        selectedImage = image
+    }
 }
