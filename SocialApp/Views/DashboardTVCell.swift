@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 import SDWebImage
+import KILabel
 import AVFoundation
 protocol DashboardTVCellDelegate {
     func showCommentForPost(with id: String)
@@ -25,7 +26,7 @@ class DashboardTVCell: UITableViewCell {
     @IBOutlet weak var likeImageView: UIImageView!
     @IBOutlet weak var commentImageView: UIImageView!
     @IBOutlet weak var likeCountButton: UIButton!
-    @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var captionLabel: KILabel!
     @IBOutlet weak var volumeView: UIView!
     @IBOutlet weak var volumeButton: UIButton!
     

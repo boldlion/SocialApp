@@ -79,6 +79,17 @@ class DatabaseService {
         let postId = postsRef.childByAutoId().key
         let newPostId = postsRef.child(postId)
         
+        // **** HASHTAG FEATURE **** //
+        
+        let words = caption.components(separatedBy: CharacterSet.whitespacesAndNewlines)
+        for var word in words {
+            if word.hasPrefix("#") {
+                word = word.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+                let newHastTagRef = Api.Hashtag.REF_HASHTAG.child(word.lowercased())
+                newHastTagRef.updateChildValues([postId: true])
+            }
+        }
+        
         var postDictionary = [ "uid"       : userId,
                                "caption"   : caption,
                                "photoUrl"  : photoImageUrlString,
@@ -137,6 +148,16 @@ class DatabaseService {
                         return
                     }
                     else {
+                        
+                        // **** COMMENTS HASHTAGS **** //
+                        let words = text.components(separatedBy: CharacterSet.whitespacesAndNewlines)
+                        for var word in words {
+                            if word.hasPrefix("#") {
+                                word = word.trimmingCharacters(in: CharacterSet.punctuationCharacters)
+                                let newHastTagRef = Api.Hashtag.REF_HASHTAG.child(word.lowercased())
+                                newHastTagRef.updateChildValues([postId: true])
+                            }
+                        }
                         onSuccess()
                     }
                 })

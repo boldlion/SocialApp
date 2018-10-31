@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import KILabel
 
 protocol CommentTVCellDelegate {
     func goToProfileUser(with id: String)
@@ -18,7 +19,7 @@ class CommentTVCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var commentLabel: UILabel!
+    @IBOutlet weak var commentLabel: KILabel!
     
     var delegateCommentTVCell: CommentTVCellDelegate?
 

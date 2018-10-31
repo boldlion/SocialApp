@@ -51,6 +51,7 @@
 		03F487B2216A323000B3CD71 /* CommentApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F487B1216A323000B3CD71 /* CommentApi.swift */; };
 		03F487B4216C9AB900B3CD71 /* Post_CommentApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */; };
 		03F487B6216E54B900B3CD71 /* HeaderProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F487B5216E54B900B3CD71 /* HeaderProfileCollectionReusableView.swift */; };
+		03F70192218869A20096E7AA /* HashtagApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F70191218869A20096E7AA /* HashtagApi.swift */; };
 		03F78379216F733900C8411A /* UserPostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F78378216F733900C8411A /* UserPostsApi.swift */; };
 		03F7837B216F8EE800C8411A /* PhotoCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F7837A216F8EE800C8411A /* PhotoCVCell.swift */; };
 		5884C7E6855E901A78031160 /* Pods_SocialAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5677B471A6953D67CD6016E0 /* Pods_SocialAppTests.framework */; };
@@ -126,6 +127,7 @@
 		03F487B1216A323000B3CD71 /* CommentApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentApi.swift; sourceTree = "<group>"; };
 		03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post_CommentApi.swift; sourceTree = "<group>"; };
 		03F487B5216E54B900B3CD71 /* HeaderProfileCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCollectionReusableView.swift; sourceTree = "<group>"; };
+		03F70191218869A20096E7AA /* HashtagApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagApi.swift; sourceTree = "<group>"; };
 		03F78378216F733900C8411A /* UserPostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsApi.swift; sourceTree = "<group>"; };
 		03F7837A216F8EE800C8411A /* PhotoCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCVCell.swift; sourceTree = "<group>"; };
 		088C958B75E5003B6F09667E /* Pods-SocialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				03F487B1216A323000B3CD71 /* CommentApi.swift */,
 				03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */,
 				03CBC9152170BC990042305F /* FollowApi.swift */,
+				03F70191218869A20096E7AA /* HashtagApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/KILabel/KILabel.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -549,6 +553,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KILabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -636,6 +641,7 @@
 				03F487B6216E54B900B3CD71 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				034880A62175E01700662460 /* DetailVC.swift in Sources */,
 				0370B23D2164CF43006D4A03 /* PostApi.swift in Sources */,
+				03F70192218869A20096E7AA /* HashtagApi.swift in Sources */,
 				03F78379216F733900C8411A /* UserPostsApi.swift in Sources */,
 				0379D9C52183573800929642 /* FilterCVCell.swift in Sources */,
 				03CBC9142170AE940042305F /* DiscoverTVCell.swift in Sources */,
@@ -833,10 +839,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -852,10 +855,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -872,11 +872,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -894,11 +890,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -915,11 +907,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -936,11 +924,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

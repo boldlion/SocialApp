@@ -64,14 +64,14 @@
                                                         <constraint firstAttribute="height" constant="1" id="d1k-Fh-57q"/>
                                                     </constraints>
                                                 </view>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngL-dR-FFS">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngL-dR-FFS" customClass="KILabe">
                                                     <rect key="frame" x="10" y="348.5" width="135" height="33"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                                     <state key="normal" title="Be the first to like this ">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5S-RG-bYs">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5S-RG-bYs" customClass="KILabel">
                                                     <rect key="frame" x="10" y="402.5" width="350" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -134,7 +134,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="captionLabel" destination="A5S-RG-bYs" id="MFV-xk-Xlz"/>
+                                            <outlet property="captionLabel" destination="A5S-RG-bYs" id="ssr-NR-klx"/>
                                             <outlet property="commentImageView" destination="89c-sX-IXx" id="fEs-rv-gvM"/>
                                             <outlet property="likeCountButton" destination="ngL-dR-FFS" id="3KQ-4D-8Jf"/>
                                             <outlet property="likeImageView" destination="ocE-Fo-pSH" id="d4L-pc-kTe"/>
@@ -211,7 +211,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYO-PB-vPf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYO-PB-vPf" customClass="KILabel">
                                                     <rect key="frame" x="56" y="46.5" width="309" height="32.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -240,7 +240,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="commentLabel" destination="cYO-PB-vPf" id="tH9-k9-cEr"/>
+                                            <outlet property="commentLabel" destination="cYO-PB-vPf" id="d61-rD-a0W"/>
                                             <outlet property="nameLabel" destination="yfL-bm-K0U" id="qob-HT-XLb"/>
                                             <outlet property="profileImageView" destination="q8l-pD-Csz" id="GG0-e5-6XN"/>
                                         </connections>
@@ -363,7 +363,7 @@
         <image name="tab_dash_a" width="30" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mjM-xx-CFQ"/>
-        <segue reference="D12-of-g4H"/>
+        <segue reference="gyI-JY-npl"/>
+        <segue reference="FXf-RA-o1H"/>
     </inferredMetricsTieBreakers>
 </document>
