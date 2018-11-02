@@ -80,6 +80,12 @@ extension DetailVC : DashboardTVCellDelegate {
             let userId = sender as! String
             profileUserVC.userId = userId
         }
+        
+        if segue.identifier == "DetailToHashtag" {
+            let hashtagVC = segue.destination as! HashtagVC
+            let tag = sender as! String
+            hashtagVC.tag = tag
+        }
     }
     
     func showCommentForPost(with id: String) {
@@ -92,6 +98,10 @@ extension DetailVC : DashboardTVCellDelegate {
     
     func goToProfileUser(with id: String) {
         performSegue(withIdentifier: "DetailToProfileUser", sender: id)
+    }
+    
+    func goToHashtag(tag: String) {
+        performSegue(withIdentifier: "DetailToHashtag", sender: tag)
     }
     
 }

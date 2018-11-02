@@ -14,6 +14,17 @@ class UsersApi {
     
     let REF_USERS = Database.database().reference().child("users")
     
+    func observeUserByUsername(username: String, completion: @escaping (UserModel) -> Void, onError: @escaping (String) -> Void) {
+        REF_USERS.queryOrdered(byChild: "username_lowercase").queryEqual(toValue: username).observeSingleEvent(of: .childAdded, with: { snapshot in
+            if let dict = snapshot.value as? [String : Any] {
+                let user = UserModel.transformDataToUser(dictionary: dict, key: snapshot.key)
+                completion(user)
+            }
+        }, withCancel: { error in
+            onError(error.localizedDescription)
+        })
+    }
+    
     func fetchAllUsers(completion: @escaping (UserModel) -> Void, onError: @escaping (String) -> Void) {
         REF_USERS.observe(.childAdded, with: { snapshot in
             if let dict = snapshot.value as? [String: Any] {

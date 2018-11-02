@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import KILabel
+import SVProgressHUD
 
 protocol CommentTVCellDelegate {
     func goToProfileUser(with id: String)
@@ -37,6 +38,22 @@ class CommentTVCell: UITableViewCell {
     
     func updateView() {
         if let commentText = comment?.text {
+            commentLabel.userHandleLinkTapHandler = { label, string, range in
+                let mention = String(string.dropFirst())
+                Api.Users.observeUserByUsername(username: mention.lowercased(), completion: { user in
+                    guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
+                    if let id = user.id {
+                        if id == currentUserUid {
+                            self.delegateCommentTVCell?.goToProfile()
+                        }
+                        else {
+                            self.delegateCommentTVCell?.goToProfileUser(with: id)
+                        }
+                    }
+                }, onError: { error in
+                    SVProgressHUD.showError(withStatus: error)
+                })
+            }
             commentLabel.text = commentText
         }
     }

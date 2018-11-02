@@ -81,18 +81,23 @@ extension DashboardVC :  UITableViewDataSource, UITableViewDelegate {
 extension DashboardVC : DashboardTVCellDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "DashboardToComment" {
             let commentVC = segue.destination as! CommentVC
             let postId = sender as! String
             commentVC.postId = postId
         }
-        
         if segue.identifier == "DashboardToProfileUser" {
             let profileUserVC = segue.destination as! ProfileUserVC
             let userId = sender as! String
             profileUserVC.userId = userId
         }
-    } 
+        if segue.identifier == "DashboardToHashtag" {
+            let hashtagVC = segue.destination as! HashtagVC
+            let tag = sender as! String
+            hashtagVC.tag = tag
+        }
+    }
     
     func showCommentForPost(with id: String) {
         performSegue(withIdentifier: "DashboardToComment", sender: id)
@@ -104,6 +109,10 @@ extension DashboardVC : DashboardTVCellDelegate {
     
     func goToProfileUser(with id: String) {
         performSegue(withIdentifier: "DashboardToProfileUser", sender: id)
+    }
+    
+    func goToHashtag(tag: String) {
+        performSegue(withIdentifier: "DashboardToHashtag", sender: tag)
     }
     
 }

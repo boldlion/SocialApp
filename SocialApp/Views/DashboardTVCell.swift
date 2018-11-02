@@ -15,6 +15,7 @@ protocol DashboardTVCellDelegate {
     func showCommentForPost(with id: String)
     func goToProfile()
     func goToProfileUser(with id: String)
+    func goToHashtag(tag: String)
 }
 
 class DashboardTVCell: UITableViewCell {
@@ -69,6 +70,26 @@ class DashboardTVCell: UITableViewCell {
     
     func updateView() {
         if let caption = post?.caption {
+            captionLabel.hashtagLinkTapHandler = { label, string, range in
+                let tag = String(string.dropFirst())
+                self.delegate?.goToHashtag(tag: tag)
+            }
+            captionLabel.userHandleLinkTapHandler = { label, string, range in
+                let mention = String(string.dropFirst())
+                Api.Users.observeUserByUsername(username: mention.lowercased(), completion: { user in
+                    guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
+                    if let id = user.id {
+                        if id == currentUserUid {
+                            self.delegate?.goToProfile()
+                        }
+                        else {
+                            self.delegate?.goToProfileUser(with: id)
+                        }
+                    }
+                }, onError: { error in
+                    SVProgressHUD.showError(withStatus: error)
+                })
+            }
             captionLabel.text = caption
         }
         

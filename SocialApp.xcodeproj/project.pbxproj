@@ -52,6 +52,7 @@
 		03F487B4216C9AB900B3CD71 /* Post_CommentApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */; };
 		03F487B6216E54B900B3CD71 /* HeaderProfileCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F487B5216E54B900B3CD71 /* HeaderProfileCollectionReusableView.swift */; };
 		03F70192218869A20096E7AA /* HashtagApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F70191218869A20096E7AA /* HashtagApi.swift */; };
+		03F701942189D2A80096E7AA /* HashtagVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F701932189D2A80096E7AA /* HashtagVC.swift */; };
 		03F78379216F733900C8411A /* UserPostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F78378216F733900C8411A /* UserPostsApi.swift */; };
 		03F7837B216F8EE800C8411A /* PhotoCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F7837A216F8EE800C8411A /* PhotoCVCell.swift */; };
 		5884C7E6855E901A78031160 /* Pods_SocialAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5677B471A6953D67CD6016E0 /* Pods_SocialAppTests.framework */; };
@@ -128,6 +129,7 @@
 		03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post_CommentApi.swift; sourceTree = "<group>"; };
 		03F487B5216E54B900B3CD71 /* HeaderProfileCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderProfileCollectionReusableView.swift; sourceTree = "<group>"; };
 		03F70191218869A20096E7AA /* HashtagApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagApi.swift; sourceTree = "<group>"; };
+		03F701932189D2A80096E7AA /* HashtagVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagVC.swift; sourceTree = "<group>"; };
 		03F78378216F733900C8411A /* UserPostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostsApi.swift; sourceTree = "<group>"; };
 		03F7837A216F8EE800C8411A /* PhotoCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCVCell.swift; sourceTree = "<group>"; };
 		088C958B75E5003B6F09667E /* Pods-SocialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialApp/Pods-SocialApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				034880A52175E01700662460 /* DetailVC.swift */,
 				036BA4F12178FD7A00D89F2F /* SettingTVC.swift */,
 				036BA4F321807BCE00D89F2F /* FilterVC.swift */,
+				03F701932189D2A80096E7AA /* HashtagVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -669,6 +672,7 @@
 				03F7837B216F8EE800C8411A /* PhotoCVCell.swift in Sources */,
 				03F487B4216C9AB900B3CD71 /* Post_CommentApi.swift in Sources */,
 				035325AE21637A3D006152DA /* DatabaseService.swift in Sources */,
+				03F701942189D2A80096E7AA /* HashtagVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,7 +843,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -855,7 +862,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -872,7 +882,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -890,7 +904,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -907,7 +925,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -924,7 +946,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = C7Z3QND73W;
 				INFOPLIST_FILE = SocialAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SocialAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

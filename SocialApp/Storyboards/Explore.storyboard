@@ -261,7 +261,7 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1G3-Em-8U4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1G3-Em-8U4" customClass="KILabel">
                                                     <rect key="frame" x="10" y="402.5" width="350" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <nil key="textColor"/>
@@ -353,6 +353,7 @@
                         <segue destination="YGR-zm-cbo" kind="show" identifier="DetailToProfileUser" id="EOP-cL-VMd"/>
                         <segue destination="0n8-pS-9e8" kind="show" identifier="DetailToComment" id="iuE-43-EKz"/>
                         <segue destination="EuC-NL-2V7" kind="show" identifier="DetailToProfile" id="vWu-X5-McJ"/>
+                        <segue destination="daC-8r-lwY" kind="show" identifier="DetailToHashtag" id="a3z-vP-0Bk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NQb-vg-01M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -374,6 +375,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ULc-C6-f5R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2114" y="650"/>
+        </scene>
+        <!--HashtagVC-->
+        <scene sceneID="YCg-X2-1pI">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Dashboard" referencedIdentifier="HashtagVC" id="daC-8r-lwY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5DH-3r-lfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2457" y="507"/>
         </scene>
     </scenes>
     <resources>
