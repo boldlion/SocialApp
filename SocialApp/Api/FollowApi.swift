@@ -102,4 +102,25 @@ class FollowApi {
             completion(count)
         })
     }
+    
+    func fetchFollowers(forUserId id: String, completion: @escaping (String) -> Void) {
+        REF_FOLLOWERS.child(id).observeSingleEvent(of: .value, with: { snapshot in
+            if let dict = snapshot.value as? [String : Any] {
+                for (userId, _) in dict {
+                    completion(userId)
+                }
+            }
+        })
+    }
+    
+    
+    func fetchFollowing(forUserId id: String, completion: @escaping (String) -> Void) {
+        REF_FOLLOWERS.child(id).observeSingleEvent(of: .value, with: { snapshot in
+            if let dict = snapshot.value as? [String : Any] {
+                for (userId, _) in dict {
+                    completion(userId)
+                }
+            }
+        })
+    }
 }

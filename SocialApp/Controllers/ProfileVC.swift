@@ -53,12 +53,22 @@ class ProfileVC: UIViewController {
             let settingsVC = segue.destination as! SettingTVC
             settingsVC.delegate = self
         }
-        
         if segue.identifier == "ProfileToDetailVC" {
             let detailVC = segue.destination as! DetailVC
             let postId = sender as! String
             detailVC.postId = postId
         }
+        if segue.identifier == "ProfileVCToFollowersVC" {
+            let followersVC = segue.destination as! FollowersVC
+            let userId = sender as! String
+            followersVC.userId = userId
+        }
+        if segue.identifier == "ProfileVCToFollowingVC" {
+            let followingVC = segue.destination as! FollowingVC
+            let userId = sender as! String
+            followingVC.userId = userId
+        }
+        
     }
 }
 
@@ -81,6 +91,7 @@ extension ProfileVC: UICollectionViewDataSource {
         if let currentUser = user {
             header.user = currentUser
             header.delegateSettings = self
+            header.delegateShowFollowersAndFollowing = self
         }
         return header
     }
@@ -109,6 +120,16 @@ extension ProfileVC : UICollectionViewDelegateFlowLayout {
 extension ProfileVC : HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC {
     func goToSettingVC() {
         performSegue(withIdentifier: "ProfileToSettingsSegue", sender: nil)
+    }
+}
+
+extension ProfileVC: HeaderProfileShowFollowersAndFollowingDelegate {
+    func showFollowingForUser(withId id: String) {
+        performSegue(withIdentifier: "ProfileVCToFollowingVC", sender: id)
+    }
+    
+    func showFollowersForUser(withId id: String) {
+        performSegue(withIdentifier: "ProfileVCToFollowersVC", sender: id)
     }
 }
 

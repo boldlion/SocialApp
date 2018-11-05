@@ -77,6 +77,7 @@ extension DiscoverVC: DiscoverTVCellDelegate {
 }
 
 extension DiscoverVC: HeaderProfileCollectionReusableViewDelegate {
+
     func updateFollowButton(forUser user: UserModel) {
         for u in users {
             if u.id == user.id {

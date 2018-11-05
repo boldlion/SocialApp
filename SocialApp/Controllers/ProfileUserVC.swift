@@ -66,6 +66,17 @@ class ProfileUserVC: UIViewController {
             let postId = sender as! String
             detailVC.postId = postId
         }
+        if segue.identifier == "ProfileUserToFollowersVC" {
+            let followersVC = segue.destination as! FollowersVC
+            let userId = sender as! String
+            followersVC.userId = userId
+        }
+        
+        if segue.identifier == "ProfileUserToFollowingVC" {
+            let followingVC = segue.destination as! FollowingVC
+            let userId = sender as! String
+            followingVC.userId = userId
+        }
     }
 }
 
@@ -90,6 +101,7 @@ extension ProfileUserVC: UICollectionViewDataSource {
             header.user = currentUser
             header.delegate = self.delegate
             header.delegateSettings = self
+            header.delegateShowFollowersAndFollowing = self
         }
         return header
     }
@@ -124,4 +136,22 @@ extension ProfileUserVC : PhotoCVCellDelegate {
     func goToDetailVC(withId id: String) {
         performSegue(withIdentifier: "ProfileUserToDetailVC", sender: id)
     }
+}
+
+extension ProfileUserVC: HeaderProfileShowFollowersAndFollowingDelegate {
+    func showFollowersForUser(withId id: String) {
+        performSegue(withIdentifier: "ProfileUserToFollowersVC", sender: id)
+    }
+    
+    func showFollowingForUser(withId id: String) {
+        performSegue(withIdentifier: "ProfileUserToFollowingVC", sender: id)
+    }
+    
+//    func showFollowingForUser(withId id: String) {
+//        performSegue(withIdentifier: "ProfileVCToFollowingVC", sender: id)
+//    }
+//
+//    func showFollowersForUser(withId id: String) {
+//        performSegue(withIdentifier: "ProfileVCToFollowersVC", sender: id)
+//    }
 }

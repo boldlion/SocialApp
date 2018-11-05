@@ -54,9 +54,10 @@ class DiscoverTVCell: UITableViewCell {
     
     @objc func followAction() {
         guard let userId = user?.id else { return }
-        
         if user!.isFollowing == false {
+
             Api.Follow.followAction(withUser: userId, completion: {
+                self.followButton.isHidden = false
                 self.configureUnfollowButton()
                 self.user!.isFollowing = true
             }, onError: { error in
@@ -70,6 +71,7 @@ class DiscoverTVCell: UITableViewCell {
         
         if user!.isFollowing! == true {
             Api.Follow.unfollowAction(withUser: userId, completion: {
+                self.followButton.isHidden = false
                 self.configureFollowButton()
                 self.user!.isFollowing = false
             }, onError: { error in
@@ -79,12 +81,19 @@ class DiscoverTVCell: UITableViewCell {
     }
     
     func configureFollowButton() {
-        followButton.setTitle("follow", for: .normal)
-        followButton.addTarget(self, action: #selector(followAction), for: .touchUpInside)
-        followButton.backgroundColor = Colors.tint
-        followButton.setTitleColor(.white, for: .normal)
-        followButton.layer.cornerRadius = 5
-        followButton.layer.borderColor = Colors.tint.cgColor
+        guard let currentUserID = Api.Users.CURRENT_USER?.uid else { return }
+        guard let userId = user?.id else { return }
+        if currentUserID == userId {
+            followButton.isHidden = true
+        }
+        else {
+            followButton.setTitle("follow", for: .normal)
+            followButton.addTarget(self, action: #selector(followAction), for: .touchUpInside)
+            followButton.backgroundColor = Colors.tint
+            followButton.setTitleColor(.white, for: .normal)
+            followButton.layer.cornerRadius = 5
+            followButton.layer.borderColor = Colors.tint.cgColor
+        }
     }
     
     func configureUnfollowButton() {
@@ -105,12 +114,11 @@ class DiscoverTVCell: UITableViewCell {
         let imageTap = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
         profileImage.isUserInteractionEnabled = true
         profileImage.addGestureRecognizer(imageTap)
-        
     }
     
     @objc func usernameTapped() {
         if let uid = user?.id {
-                delegateShowUserProfile?.goToUserProfile(withId: uid)
+            delegateShowUserProfile?.goToUserProfile(withId: uid)
         }
     }
     

@@ -14,6 +14,11 @@ protocol HeaderProfileCollectionReusableViewDelegate {
     func updateFollowButton(forUser user: UserModel)
 }
 
+protocol HeaderProfileShowFollowersAndFollowingDelegate {
+    func showFollowersForUser(withId id: String)
+    func showFollowingForUser(withId id: String)
+}
+
 protocol HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC {
     func goToSettingVC()
 }
@@ -25,11 +30,14 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var myPostCountLabel: UILabel!
     @IBOutlet weak var follwingCountLabel: UILabel!
     @IBOutlet weak var followersCountLabel: UILabel!
+    @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var followingLabel: UILabel!
     
     @IBOutlet weak var editProfileButton: UIButton!
     
     var delegate: HeaderProfileCollectionReusableViewDelegate?
     var delegateSettings: HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC?
+    var delegateShowFollowersAndFollowing: HeaderProfileShowFollowersAndFollowingDelegate?
     
     var user: UserModel? {
         didSet {
@@ -40,6 +48,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         clear()
+        addTapGestures()
     }
     
     func updateView() {
@@ -128,6 +137,36 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
             }, onError: { error in
                 SVProgressHUD.showError(withStatus: error)
             })
+        }
+    }
+    
+    func addTapGestures() {
+        let followersCountTap = UITapGestureRecognizer(target: self, action: #selector(followersTapped))
+        followersCountLabel.isUserInteractionEnabled = true
+        followersCountLabel.addGestureRecognizer(followersCountTap)
+        
+        let followersLabelTapepd = UITapGestureRecognizer(target: self, action: #selector(followersTapped))
+        followersLabel.isUserInteractionEnabled = true
+        followersLabel.addGestureRecognizer(followersLabelTapepd)
+        
+        let followingLabelTapepd = UITapGestureRecognizer(target: self, action: #selector(followingTapped))
+        followingLabel.isUserInteractionEnabled = true
+        followingLabel.addGestureRecognizer(followingLabelTapepd)
+        
+        let followersCountTapepd = UITapGestureRecognizer(target: self, action: #selector(followingTapped))
+        follwingCountLabel.isUserInteractionEnabled = true
+        follwingCountLabel.addGestureRecognizer(followersCountTapepd)
+    }
+    
+    @objc func followersTapped() {
+        if let id = user?.id {
+            delegateShowFollowersAndFollowing?.showFollowersForUser(withId: id)
+        }
+    }
+    
+    @objc func followingTapped() {
+        if let id = user?.id {
+            delegateShowFollowersAndFollowing?.showFollowingForUser(withId: id)
         }
     }
     
