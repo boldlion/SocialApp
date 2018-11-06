@@ -14,6 +14,7 @@ import SVProgressHUD
 protocol CommentTVCellDelegate {
     func goToProfileUser(with id: String)
     func goToProfile()
+    func goToHashtag(tag: String)
 }
 
 class CommentTVCell: UITableViewCell {
@@ -53,6 +54,11 @@ class CommentTVCell: UITableViewCell {
                 }, onError: { error in
                     SVProgressHUD.showError(withStatus: error)
                 })
+            }
+            
+            commentLabel.hashtagLinkTapHandler = { label, string, range in
+                let tag = String(string.dropFirst())
+                self.delegateCommentTVCell?.goToHashtag(tag: tag)
             }
             commentLabel.text = commentText
         }

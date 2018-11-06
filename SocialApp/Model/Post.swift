@@ -17,6 +17,7 @@ class Post {
     var isLiked: Bool?
     var ratio: CGFloat?
     var videoUrl: String?
+    var timestamp: Int?
 }
 
 extension Post {
@@ -29,6 +30,7 @@ extension Post {
         post.videoUrl = dictionary["videoUrl"] as? String
         post.caption = dictionary["caption"] as? String
         post.ratio = dictionary["photoRatio"] as? CGFloat
+        post.timestamp = dictionary["timestamp"] as? Int
         post.likesCount = dictionary["likesCount"] as? Int
         post.likes = dictionary["likes"] as? Dictionary<String, Any>
         

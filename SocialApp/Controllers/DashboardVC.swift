@@ -32,7 +32,7 @@ class DashboardVC: UIViewController {
         Api.Feed.observeFeedPosts(completion: { post in
             guard let uid = post.uid else { return }
             self.fetchUserOfPost(with: uid, completion: {
-                self.posts.append(post)
+                self.posts.insert(post, at: 0)
                 self.activityIndicator.stopAnimating()
                 self.activityIndicator.hidesWhenStopped = true
                 self.tableView.reloadData()
@@ -53,7 +53,7 @@ class DashboardVC: UIViewController {
     
     func fetchUserOfPost(with uid: String, completion: @escaping () -> Void) {
         Api.Users.fetchUser(withId: uid, completion: { user in
-            self.users.append(user)
+            self.users.insert(user, at: 0)
             completion()
         }, onError: { error in
             SVProgressHUD.showError(withStatus: error)

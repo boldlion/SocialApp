@@ -31,6 +31,7 @@ class DashboardTVCell: UITableViewCell {
     @IBOutlet weak var captionLabel: KILabel!
     @IBOutlet weak var volumeView: UIView!
     @IBOutlet weak var volumeButton: UIButton!
+    @IBOutlet weak var timestampLabel: UILabel!
     
     var delegate: DashboardTVCellDelegate?
     var player: AVPlayer?
@@ -54,6 +55,7 @@ class DashboardTVCell: UITableViewCell {
             p.pause()
             pLayer.removeFromSuperlayer()
         }
+        timestampLabel.text = ""
     }
     
     var post: Post? {
@@ -103,7 +105,7 @@ class DashboardTVCell: UITableViewCell {
             let imageUrl = URL(string: image)
             postImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))
         }
-        
+         
         if let videoUrlString = post?.videoUrl, let videoUrl = URL(string: videoUrlString) {
             volumeView.isHidden = false
             player = AVPlayer(url: videoUrl)
@@ -119,6 +121,36 @@ class DashboardTVCell: UITableViewCell {
                 layoutIfNeeded()
             }
         }
+        
+        if let timestamp = post?.timestamp {
+            let timestampDate = Date(timeIntervalSince1970: Double(timestamp))
+            let now = Date()
+            let components = Set<Calendar.Component>([.second, .minute, .hour, .day, .weekOfMonth])
+            let difference = Calendar.current.dateComponents(components, from: timestampDate, to: now)
+            
+            var timestampText = ""
+            if difference.second! <= 0 {
+                timestampText = "just now"
+            }
+            else if difference.second! > 0 && difference.minute! == 0 {
+                timestampText = difference.second! == 1 ? "\(difference.second!) second ago" : "\(difference.second!) seconds ago"
+            }
+            else if difference.minute! > 0 && difference.hour! == 0 {
+                timestampText = difference.minute! == 1 ? "\(difference.minute!) minute ago" : "\(difference.minute!) minutes ago"
+            }
+            else if difference.hour! > 0 && difference.day! == 0 {
+                timestampText = difference.hour! == 1 ? "\(difference.hour!) hour ago" : "\(difference.hour!) hours ago"
+            }
+            else if difference.day! > 0 && difference.weekOfMonth! == 0 {
+                timestampText = difference.day! == 1 ? "\(difference.day!) day ago" : "\(difference.day!) days ago"
+            }
+            else if difference.weekOfMonth! > 0 {
+                timestampText = difference.weekOfMonth! == 1 ? "\(difference.weekOfMonth!) week ago" : "\(difference.weekOfMonth!) weeks ago"
+            }
+            
+            timestampLabel.text = timestampText
+        }
+        
         self.updateLike(post: post!)
     }
     

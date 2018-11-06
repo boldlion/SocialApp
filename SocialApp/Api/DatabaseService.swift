@@ -89,12 +89,14 @@ class DatabaseService {
                 newHastTagRef.updateChildValues([postId: true])
             }
         }
+        let timestamp = Int(Date.timeIntervalSinceReferenceDate)
         
         var postDictionary = [ "uid"       : userId,
                                "caption"   : caption,
                                "photoUrl"  : photoImageUrlString,
                                "photoRatio": ratio,
-                               "likesCount": 0] as [String : Any]
+                               "likesCount": 0,
+                               "timestamp" : timestamp ] as [String : Any]
         
         if let videoUrl = videoUrl {
             postDictionary["videoUrl"] = videoUrl

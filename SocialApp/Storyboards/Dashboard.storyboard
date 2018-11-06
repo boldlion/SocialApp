@@ -58,21 +58,21 @@
                                                     <rect key="frame" x="293" y="352" width="26" height="26"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIn-up-ObO">
-                                                    <rect key="frame" x="10" y="391.5" width="365" height="1"/>
+                                                    <rect key="frame" x="10" y="391" width="365" height="1"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="d1k-Fh-57q"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngL-dR-FFS" customClass="KILabe">
-                                                    <rect key="frame" x="10" y="348.5" width="135" height="33"/>
+                                                    <rect key="frame" x="10" y="349" width="135" height="32"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                                     <state key="normal" title="Be the first to like this ">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5S-RG-bYs" customClass="KILabel">
-                                                    <rect key="frame" x="10" y="402.5" width="350" height="15.5"/>
+                                                    <rect key="frame" x="10" y="402" width="350" height="16"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -105,10 +105,17 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5h" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSa-kL-xrX">
+                                                    <rect key="frame" x="344.5" y="19.5" width="15.5" height="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="A5S-RG-bYs" secondAttribute="trailing" constant="15" id="4Ct-DG-3Uu"/>
                                                 <constraint firstAttribute="trailing" secondItem="FIn-up-ObO" secondAttribute="trailing" id="4Qy-A0-5oX"/>
+                                                <constraint firstItem="VSa-kL-xrX" firstAttribute="centerY" secondItem="nGC-hC-OgA" secondAttribute="centerY" id="9VM-QX-nZB"/>
                                                 <constraint firstItem="ocE-Fo-pSH" firstAttribute="leading" secondItem="89c-sX-IXx" secondAttribute="trailing" constant="15" id="IaX-Th-dyr"/>
                                                 <constraint firstItem="A5S-RG-bYs" firstAttribute="top" secondItem="FIn-up-ObO" secondAttribute="bottom" constant="10" id="Ils-EN-lEH"/>
                                                 <constraint firstItem="ngL-dR-FFS" firstAttribute="centerY" secondItem="89c-sX-IXx" secondAttribute="centerY" id="MNJ-Eq-9l8"/>
@@ -129,6 +136,7 @@
                                                 <constraint firstItem="ocE-Fo-pSH" firstAttribute="trailing" secondItem="oJ0-hN-ZbQ" secondAttribute="trailingMargin" id="oeR-g3-bh3"/>
                                                 <constraint firstItem="FIn-up-ObO" firstAttribute="top" secondItem="ngL-dR-FFS" secondAttribute="bottom" constant="10" id="pqG-8E-Bhs"/>
                                                 <constraint firstItem="Cra-am-tOl" firstAttribute="leading" secondItem="oJ0-hN-ZbQ" secondAttribute="leading" id="qfr-ZK-KdC"/>
+                                                <constraint firstAttribute="trailing" secondItem="VSa-kL-xrX" secondAttribute="trailing" constant="15" id="t0L-y3-VqA"/>
                                                 <constraint firstItem="nGC-hC-OgA" firstAttribute="centerY" secondItem="2Lg-NW-9n2" secondAttribute="centerY" id="uLr-Cf-WSX"/>
                                                 <constraint firstItem="A5S-RG-bYs" firstAttribute="leading" secondItem="oJ0-hN-ZbQ" secondAttribute="leading" constant="10" id="v1H-JP-hOT"/>
                                             </constraints>
@@ -142,6 +150,7 @@
                                             <outlet property="photoHeightConstraint" destination="Mv5-bZ-47i" id="2wF-br-Bl2"/>
                                             <outlet property="postImageView" destination="Cra-am-tOl" id="tV0-f5-lJD"/>
                                             <outlet property="profileImageView" destination="2Lg-NW-9n2" id="6J1-V8-0lN"/>
+                                            <outlet property="timestampLabel" destination="VSa-kL-xrX" id="n2F-jf-T5W"/>
                                             <outlet property="volumeButton" destination="LoP-2N-IgN" id="Awk-u3-bvl"/>
                                             <outlet property="volumeView" destination="eul-c4-OT7" id="Okb-uT-m2a"/>
                                         </connections>
@@ -311,6 +320,7 @@
                         <outlet property="tableView" destination="2V7-DN-p1O" id="Wn1-ER-jUH"/>
                         <segue destination="Of4-yn-qEk" kind="show" identifier="CommentToProfileUserSegue" id="gyI-JY-npl"/>
                         <segue destination="gt0-8U-g2a" kind="show" identifier="CommentToProfileSegue" id="FXf-RA-o1H"/>
+                        <segue destination="XYe-dY-vWQ" kind="show" identifier="CommentToHashtag" id="cDc-iQ-DT8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BuW-cO-mwI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -419,8 +429,8 @@
         <!--DetailVC-->
         <scene sceneID="KPR-7A-uCt">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oVp-EM-IIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Explore" referencedIdentifier="DetailVC" id="IXW-SV-YQG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oVp-EM-IIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3654" y="1383"/>
         </scene>
@@ -435,5 +445,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="mjM-xx-CFQ"/>
         <segue reference="D12-of-g4H"/>
+        <segue reference="UUp-wI-Y5f"/>
     </inferredMetricsTieBreakers>
 </document>

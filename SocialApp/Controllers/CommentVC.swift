@@ -156,12 +156,22 @@ extension CommentVC : UITableViewDataSource {
 }
 
 extension CommentVC : CommentTVCellDelegate {
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CommentToProfileUserSegue" {
             let profileUserVC = segue.destination as! ProfileUserVC
             let userId = sender as! String
             profileUserVC.userId = userId
         }
+        if segue.identifier == "CommentToHashtag" {
+            let hashtagVC = segue.destination as! HashtagVC
+            let tag = sender as! String
+            hashtagVC.tag = tag
+        }
+    }
+    
+    func goToHashtag(tag: String) {
+        performSegue(withIdentifier: "CommentToHashtag", sender: tag)
     }
     
     func goToProfileUser(with id: String) {
