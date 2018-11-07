@@ -132,19 +132,19 @@ class DashboardTVCell: UITableViewCell {
             if difference.second! <= 0 {
                 timestampText = "just now"
             }
-            else if difference.second! > 0 && difference.minute! == 0 {
+            if difference.second! > 0 && difference.minute! == 0 {
                 timestampText = difference.second! == 1 ? "\(difference.second!) second ago" : "\(difference.second!) seconds ago"
             }
-            else if difference.minute! > 0 && difference.hour! == 0 {
+            if difference.minute! > 0 && difference.hour! == 0 {
                 timestampText = difference.minute! == 1 ? "\(difference.minute!) minute ago" : "\(difference.minute!) minutes ago"
             }
-            else if difference.hour! > 0 && difference.day! == 0 {
+            if difference.hour! > 0 && difference.day! == 0 {
                 timestampText = difference.hour! == 1 ? "\(difference.hour!) hour ago" : "\(difference.hour!) hours ago"
             }
-            else if difference.day! > 0 && difference.weekOfMonth! == 0 {
+            if difference.day! > 0 && difference.weekOfMonth! == 0 {
                 timestampText = difference.day! == 1 ? "\(difference.day!) day ago" : "\(difference.day!) days ago"
             }
-            else if difference.weekOfMonth! > 0 {
+            if difference.weekOfMonth! > 0 {
                 timestampText = difference.weekOfMonth! == 1 ? "\(difference.weekOfMonth!) week ago" : "\(difference.weekOfMonth!) weeks ago"
             }
             

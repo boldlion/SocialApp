@@ -41,6 +41,11 @@
 		0371A2BE216788BD000FDDA8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0371A2BD216788BD000FDDA8 /* Comment.swift */; };
 		0379D9C52183573800929642 /* FilterCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0379D9C42183573800929642 /* FilterCVCell.swift */; };
 		03B5899D219052E40064B3EC /* FollowingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B5899C219052E40064B3EC /* FollowingVC.swift */; };
+		03B5899F2191A05D0064B3EC /* Activity.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03B5899E2191A05D0064B3EC /* Activity.storyboard */; };
+		03B589A12191A5040064B3EC /* ActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B589A02191A5040064B3EC /* ActivityVC.swift */; };
+		03B589A32191A53A0064B3EC /* ActivityTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B589A22191A53A0064B3EC /* ActivityTVCell.swift */; };
+		03B589A52191DE270064B3EC /* NotificationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B589A42191DE270064B3EC /* NotificationApi.swift */; };
+		03B589A72191E1CF0064B3EC /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B589A62191E1CF0064B3EC /* Notification.swift */; };
 		03C314CD218F320A000C452B /* FollowersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C314CC218F320A000C452B /* FollowersVC.swift */; };
 		03CBC9122170AE5B0042305F /* DiscoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CBC9112170AE5B0042305F /* DiscoverVC.swift */; };
 		03CBC9142170AE940042305F /* DiscoverTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CBC9132170AE940042305F /* DiscoverTVCell.swift */; };
@@ -114,6 +119,11 @@
 		0371A2BD216788BD000FDDA8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		0379D9C42183573800929642 /* FilterCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCVCell.swift; sourceTree = "<group>"; };
 		03B5899C219052E40064B3EC /* FollowingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingVC.swift; sourceTree = "<group>"; };
+		03B5899E2191A05D0064B3EC /* Activity.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activity.storyboard; sourceTree = "<group>"; };
+		03B589A02191A5040064B3EC /* ActivityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityVC.swift; sourceTree = "<group>"; };
+		03B589A22191A53A0064B3EC /* ActivityTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTVCell.swift; sourceTree = "<group>"; };
+		03B589A42191DE270064B3EC /* NotificationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationApi.swift; sourceTree = "<group>"; };
+		03B589A62191E1CF0064B3EC /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		03C314CC218F320A000C452B /* FollowersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersVC.swift; sourceTree = "<group>"; };
 		03CBC9112170AE5B0042305F /* DiscoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverVC.swift; sourceTree = "<group>"; };
 		03CBC9132170AE940042305F /* DiscoverTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverTVCell.swift; sourceTree = "<group>"; };
@@ -196,6 +206,7 @@
 				0353259621636EDB006152DA /* Dashboard.storyboard */,
 				0348809F217363DF00662460 /* Explore.storyboard */,
 				0353259521636EDB006152DA /* Post.storyboard */,
+				03B5899E2191A05D0064B3EC /* Activity.storyboard */,
 				0353259321636EDA006152DA /* Profile.storyboard */,
 			);
 			path = Storyboards;
@@ -220,6 +231,7 @@
 				03F701932189D2A80096E7AA /* HashtagVC.swift */,
 				03C314CC218F320A000C452B /* FollowersVC.swift */,
 				03B5899C219052E40064B3EC /* FollowingVC.swift */,
+				03B589A02191A5040064B3EC /* ActivityVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -238,6 +250,7 @@
 				03F487B3216C9AB900B3CD71 /* Post_CommentApi.swift */,
 				03CBC9152170BC990042305F /* FollowApi.swift */,
 				03F70191218869A20096E7AA /* HashtagApi.swift */,
+				03B589A42191DE270064B3EC /* NotificationApi.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -248,6 +261,7 @@
 				035325AB21637085006152DA /* UserModel.swift */,
 				0371A2BD216788BD000FDDA8 /* Comment.swift */,
 				0370B23A2164CB69006D4A03 /* Post.swift */,
+				03B589A62191E1CF0064B3EC /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,6 +275,7 @@
 				03F7837A216F8EE800C8411A /* PhotoCVCell.swift */,
 				03CBC9132170AE940042305F /* DiscoverTVCell.swift */,
 				0379D9C42183573800929642 /* FilterCVCell.swift */,
+				03B589A22191A53A0064B3EC /* ActivityTVCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -450,6 +465,7 @@
 				0353259821636EDB006152DA /* Tabbar.storyboard in Resources */,
 				0353259C21636F24006152DA /* _GoogleService-Info.plist in Resources */,
 				0353258D21636D97006152DA /* Auth.storyboard in Resources */,
+				03B5899F2191A05D0064B3EC /* Activity.storyboard in Resources */,
 				03D0DC5E216363CB009AA0E9 /* LaunchScreen.storyboard in Resources */,
 				034880A0217363DF00662460 /* Explore.storyboard in Resources */,
 				0353259721636EDB006152DA /* Profile.storyboard in Resources */,
@@ -649,12 +665,15 @@
 				0371A2B821652E71000FDDA8 /* DashboardTVCell.swift in Sources */,
 				03F487B6216E54B900B3CD71 /* HeaderProfileCollectionReusableView.swift in Sources */,
 				034880A62175E01700662460 /* DetailVC.swift in Sources */,
+				03B589A32191A53A0064B3EC /* ActivityTVCell.swift in Sources */,
 				0370B23D2164CF43006D4A03 /* PostApi.swift in Sources */,
 				03F70192218869A20096E7AA /* HashtagApi.swift in Sources */,
 				03F78379216F733900C8411A /* UserPostsApi.swift in Sources */,
+				03B589A12191A5040064B3EC /* ActivityVC.swift in Sources */,
 				0379D9C52183573800929642 /* FilterCVCell.swift in Sources */,
 				03CBC9142170AE940042305F /* DiscoverTVCell.swift in Sources */,
 				036BA4F421807BCE00D89F2F /* FilterVC.swift in Sources */,
+				03B589A52191DE270064B3EC /* NotificationApi.swift in Sources */,
 				035325A721637049006152DA /* ProfileVC.swift in Sources */,
 				0353259221636DDA006152DA /* RegisterVC.swift in Sources */,
 				034880A42173695000662460 /* SearchVC.swift in Sources */,
@@ -678,6 +697,7 @@
 				034880E421777FA200662460 /* ProfileUserVC.swift in Sources */,
 				0371A2BC21676FEF000FDDA8 /* CommentTVCell.swift in Sources */,
 				03F7837B216F8EE800C8411A /* PhotoCVCell.swift in Sources */,
+				03B589A72191E1CF0064B3EC /* Notification.swift in Sources */,
 				03F487B4216C9AB900B3CD71 /* Post_CommentApi.swift in Sources */,
 				035325AE21637A3D006152DA /* DatabaseService.swift in Sources */,
 				03F701942189D2A80096E7AA /* HashtagVC.swift in Sources */,

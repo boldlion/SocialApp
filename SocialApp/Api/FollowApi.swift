@@ -33,8 +33,12 @@ class FollowApi {
                 Api.User_Posts.REF_USER_POSTS.child(id).observeSingleEvent(of: .value, with: { snapshot in
                     if let dict = snapshot.value as? [String : Any] {
                         for key in dict.keys {
-                            
-                            Api.Feed.REF_FEED.child(currentUserUid).child(key).setValue(true)
+                            if let value = dict[key] as? [String : Any] {
+                                if let timestampPost = value["timestamp"] as? Int {
+                                    Api.Feed.REF_FEED.child(currentUserUid).child(key).setValue(["timestamp": timestampPost])
+
+                                }
+                            }
                         }
                     }
                 })
@@ -100,7 +104,7 @@ class FollowApi {
         REF_FOLLOWING.child(id).observe(.value, with: { snapshot in
             let count = Int(snapshot.childrenCount)
             completion(count)
-        })
+        }) 
     }
     
     func fetchFollowers(forUserId id: String, completion: @escaping (String) -> Void) {

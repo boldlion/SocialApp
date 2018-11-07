@@ -12,7 +12,6 @@ import SVProgressHUD
 class DashboardVC: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var posts = [Post]()
     var users = [UserModel]()
@@ -27,20 +26,18 @@ class DashboardVC: UIViewController {
     }
     
     func fetchPosts() {
-        activityIndicator.startAnimating()
-        
+        SVProgressHUD.setStatus("Loading... Please wait!")
         Api.Feed.observeFeedPosts(completion: { post in
             guard let uid = post.uid else { return }
             self.fetchUserOfPost(with: uid, completion: {
+                SVProgressHUD.dismiss()
                 self.posts.insert(post, at: 0)
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.hidesWhenStopped = true
                 self.tableView.reloadData()
             })
         }, onError: { error in
+             SVProgressHUD.dismiss()
              SVProgressHUD.showError(withStatus: error)
         })
-        
         
         Api.Feed.observeFeedRemoved(completion: { post in
             self.posts = self.posts.filter({ $0.id != post.id })

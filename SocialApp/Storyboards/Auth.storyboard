@@ -48,12 +48,6 @@
                                     <constraint firstItem="LQ4-gX-rs7" firstAttribute="height" secondItem="CCi-gP-1mm" secondAttribute="height" id="ryB-SM-hFj"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihc-te-f7r">
-                                <rect key="frame" x="118.5" y="139" width="177" height="20.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SmB-41-fam">
                                 <rect key="frame" x="319" y="810" width="65" height="32"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
@@ -75,19 +69,33 @@
                                     <action selector="lostPassTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gto-vM-Jh4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t18-g2-nMU">
+                                <rect key="frame" x="141" y="80" width="132" height="68.5"/>
+                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="50"/>
+                                <color key="textColor" red="0.96913152930000002" green="0.96985191110000002" blue="0.97264271970000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ihc-te-f7r">
+                                <rect key="frame" x="119" y="189" width="177" height="20.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.85447895529999995" green="0.45823931690000003" blue="0.32436162229999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="SmB-41-fam" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bpe-nm-gqT" secondAttribute="trailing" constant="8" symbolic="YES" id="4mo-z4-G1i"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SmB-41-fam" secondAttribute="trailing" constant="30" id="5Nx-Aa-WpF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="V1s-jp-BlZ" secondAttribute="trailing" constant="30" id="9dU-zf-PwU"/>
+                            <constraint firstItem="t18-g2-nMU" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="WbH-dC-uc2"/>
                             <constraint firstItem="Ihc-te-f7r" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ZMa-zn-Lbo"/>
                             <constraint firstItem="Bpe-nm-gqT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="dvi-ow-htB"/>
                             <constraint firstItem="V1s-jp-BlZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gbz-lT-Gb6"/>
+                            <constraint firstItem="Ihc-te-f7r" firstAttribute="top" secondItem="t18-g2-nMU" secondAttribute="bottom" constant="40.5" id="hAl-d8-7LD"/>
                             <constraint firstItem="V1s-jp-BlZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="jd5-ea-xc8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="SmB-41-fam" secondAttribute="bottom" constant="20" id="pC2-Yo-56t"/>
+                            <constraint firstItem="t18-g2-nMU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="36" id="tC0-cX-6XA"/>
                             <constraint firstItem="V1s-jp-BlZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="umt-iB-t8Q"/>
-                            <constraint firstItem="Ihc-te-f7r" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="95" id="vOZ-6Y-5cB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Bpe-nm-gqT" secondAttribute="bottom" constant="20" id="yfI-id-3VP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -229,6 +237,6 @@
         <image name="profile_placeholder" width="600" height="600"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wA2-0a-3Rq"/>
+        <segue reference="mru-k5-b4w"/>
     </inferredMetricsTieBreakers>
 </document>

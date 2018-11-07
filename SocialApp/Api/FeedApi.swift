@@ -13,7 +13,7 @@ class FeedApi {
     
     func observeFeedPosts(completion: @escaping (Post) -> Void, onError: @escaping (String) -> Void) {
         guard let id = Api.Users.CURRENT_USER?.uid else { return }
-        REF_FEED.child(id).observe(.childAdded, with: { snapshot in
+        REF_FEED.child(id).queryOrdered(byChild: "timestamp").observe(.childAdded, with: { snapshot in
             let key = snapshot.key
             Api.Post.observePostSingleEvent(withId: key, completion: { post in
                 completion(post)

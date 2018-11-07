@@ -58,21 +58,21 @@
                                                     <rect key="frame" x="293" y="352" width="26" height="26"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIn-up-ObO">
-                                                    <rect key="frame" x="10" y="391" width="365" height="1"/>
+                                                    <rect key="frame" x="10" y="391.5" width="365" height="1"/>
                                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="d1k-Fh-57q"/>
                                                     </constraints>
                                                 </view>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ngL-dR-FFS" customClass="KILabe">
-                                                    <rect key="frame" x="10" y="349" width="135" height="32"/>
+                                                    <rect key="frame" x="10" y="348.5" width="135" height="33"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="13"/>
                                                     <state key="normal" title="Be the first to like this ">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5S-RG-bYs" customClass="KILabel">
-                                                    <rect key="frame" x="10" y="402" width="350" height="16"/>
+                                                    <rect key="frame" x="10" y="402.5" width="350" height="15.5"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -157,18 +157,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dza-Y3-yjf">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
-                                <color key="color" red="0.85490196080000003" green="0.45823931690000003" blue="0.32436162229999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qPP-5l-Xfb" firstAttribute="top" secondItem="l6p-2c-NVw" secondAttribute="top" id="8lz-oC-TSx"/>
-                            <constraint firstItem="dza-Y3-yjf" firstAttribute="centerX" secondItem="x3G-LE-qIB" secondAttribute="centerX" id="B0Q-rw-aGn"/>
                             <constraint firstItem="l6p-2c-NVw" firstAttribute="trailing" secondItem="qPP-5l-Xfb" secondAttribute="trailing" id="MsE-Je-3bR"/>
                             <constraint firstItem="qPP-5l-Xfb" firstAttribute="leading" secondItem="l6p-2c-NVw" secondAttribute="leading" id="b6D-C1-f2K"/>
-                            <constraint firstItem="dza-Y3-yjf" firstAttribute="centerY" secondItem="x3G-LE-qIB" secondAttribute="centerY" id="kv1-UG-WUG"/>
                             <constraint firstItem="l6p-2c-NVw" firstAttribute="bottom" secondItem="qPP-5l-Xfb" secondAttribute="bottom" id="tET-aN-gJn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="l6p-2c-NVw"/>
@@ -177,7 +171,6 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="i2V-m1-iIl"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="activityIndicator" destination="dza-Y3-yjf" id="glp-rN-2Hu"/>
                         <outlet property="tableView" destination="qPP-5l-Xfb" id="Ab5-MJ-0dg"/>
                         <segue destination="hOu-un-S1Y" kind="show" identifier="DashboardToComment" id="uSQ-G5-yDH"/>
                         <segue destination="Of4-yn-qEk" kind="show" identifier="DashboardToProfileUser" id="mjM-xx-CFQ"/>
@@ -387,7 +380,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ab8-pe-jlx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3030" y="1513"/>
+            <point key="canvasLocation" x="4535" y="-138"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jFV-PA-lKW">
@@ -416,7 +409,7 @@
                 <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileVC" id="gt0-8U-g2a" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kAB-jR-zYc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3241" y="1042"/>
+            <point key="canvasLocation" x="3066" y="1042"/>
         </scene>
         <!--ProfileUserVC-->
         <scene sceneID="7pI-bC-phG">
@@ -424,7 +417,7 @@
                 <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileUserVC" id="Of4-yn-qEk" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXg-G4-7DQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3455" y="1042"/>
+            <point key="canvasLocation" x="3686" y="1042"/>
         </scene>
         <!--DetailVC-->
         <scene sceneID="KPR-7A-uCt">
@@ -432,7 +425,7 @@
                 <viewControllerPlaceholder storyboardName="Explore" referencedIdentifier="DetailVC" id="IXW-SV-YQG" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oVp-EM-IIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3654" y="1383"/>
+            <point key="canvasLocation" x="4534" y="297"/>
         </scene>
     </scenes>
     <resources>

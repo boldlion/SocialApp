@@ -23,6 +23,7 @@ struct DatabaseLocation {
     static let following = "following"
     static let feed = "feed"
     static let hashtag = "hashtag"
+    static let notification = "notification"
 }
 
 struct Colors {

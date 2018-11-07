@@ -89,7 +89,9 @@ class DatabaseService {
                 newHastTagRef.updateChildValues([postId: true])
             }
         }
-        let timestamp = Int(Date.timeIntervalSinceReferenceDate)
+        
+        // *** Timestamp *** //
+        let timestamp = Int(Date().timeIntervalSince1970)
         
         var postDictionary = [ "uid"       : userId,
                                "caption"   : caption,
@@ -111,13 +113,31 @@ class DatabaseService {
             else {
                 // user_posts > userId > postId
                 let refUserposts = Api.User_Posts.REF_USER_POSTS.child(userId).child(postId)
-                refUserposts.setValue(true, withCompletionBlock: { errorUserPosts, dbRef in
+                refUserposts.setValue(["timestamp": timestamp], withCompletionBlock: { errorUserPosts, dbRef in
                     if errorUserPosts != nil {
                         onError(errorUserPosts!.localizedDescription)
                         return
                     }
-                    // feed > currentUserId > postId
-                    Api.Feed.REF_FEED.child(userId).child(postId).setValue(true)
+                    // feed > currentUserId > postId > timestamp
+                    Api.Feed.REF_FEED.child(userId).child(postId).setValue(["timestamp": timestamp])
+                    
+                    // update the feed for each of the followers of the current user
+                    Api.Follow.REF_FOLLOWERS.child(userId).observeSingleEvent(of: .value, with: { snapshot in
+                        let arraySnapshot = snapshot.children.allObjects as! [DataSnapshot]
+                        arraySnapshot.forEach({ child in
+                            Api.Feed.REF_FEED.child(child.key).child(postId).setValue(["timestamp" : timestamp])
+                            
+                            // notification > userId > feed
+                            let newNotifcationId = Api.Notification.REF_NOTIFICATION.child(child.key).childByAutoId().key
+                            let newNotifcationReference = Api.Notification.REF_NOTIFICATION.child(child.key).child(newNotifcationId)
+                            
+                            newNotifcationReference.setValue(["from" : userId,
+                                                              "type" : "feed",
+                                                              "objectId" : postId,
+                                                              "timestamp": timestamp
+                                                            ])
+                        })
+                    })
                     onSuccess()
                 })
             }
