@@ -32,7 +32,6 @@ class FeedApi {
 
         REF_FEED.child(id).observe(.childRemoved, with: { snapshot in
             let key = snapshot.key
-            
             Api.Post.observePostSingleEvent(withId: key, completion: { post in
                 completion(post)
             }, onError: { errorPost in

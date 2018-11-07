@@ -56,7 +56,7 @@ class PostVC: UIViewController {
             })
         }
         else {
-            SVProgressHUD.showError(withStatus: "Image is mandatory, please, select one.")
+            SVProgressHUD.showError(withStatus: "Image/Video is mandatory, please, select one.")
             return
         }
     }

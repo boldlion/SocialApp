@@ -111,8 +111,11 @@ class DashboardTVCell: UITableViewCell {
             player = AVPlayer(url: videoUrl)
             playerLayer = AVPlayerLayer(player: player)
             
-            if let pLayer = playerLayer, let vidPlayer = player {
+            if let pLayer = playerLayer, let vidPlayer = player, let postRatio = post?.ratio {
+                
                 pLayer.frame = postImageView.frame
+                playerLayer?.frame.size.width = UIScreen.main.bounds.width
+                playerLayer?.frame.size.height = UIScreen.main.bounds.width / postRatio
                 pLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 contentView.layer.addSublayer(pLayer)
                 self.volumeView.layer.zPosition = 1

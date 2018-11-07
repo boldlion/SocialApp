@@ -27,7 +27,6 @@ class ExploreVC: UIViewController {
     }
     
     func fetchTopPosts() {
-        SVProgressHUD.showProgress(5, status: "Loading...")
         posts.removeAll()
         collectionView.reloadData()
         Api.Post.observeTopPosts(completion: { post in
