@@ -114,7 +114,7 @@ class DashboardTVCell: UITableViewCell {
             if let pLayer = playerLayer, let vidPlayer = player, let postRatio = post?.ratio {
                 
                 pLayer.frame = postImageView.frame
-                playerLayer?.frame.size.width = UIScreen.main.bounds.width
+                playerLayer?.frame.size.width = UIScreen.main.bounds.width 
                 playerLayer?.frame.size.height = UIScreen.main.bounds.width / postRatio
                 pLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 contentView.layer.addSublayer(pLayer)
