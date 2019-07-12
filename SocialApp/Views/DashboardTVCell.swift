@@ -12,7 +12,7 @@ import SDWebImage
 import KILabel
 import AVFoundation
 
-protocol DashboardTVCellDelegate {
+protocol DashboardTVCellDelegate: AnyObject {
     func showCommentForPost(with id: String)
     func goToProfile()
     func goToProfileUser(with id: String)
@@ -73,13 +73,13 @@ class DashboardTVCell: UITableViewCell {
     
     func updateView() {
         if let caption = post?.caption {
-            captionLabel.hashtagLinkTapHandler = { label, string, range in
+            captionLabel.hashtagLinkTapHandler = { [unowned self] label, string, range in
                 let tag = String(string.dropFirst())
                 self.delegate?.goToHashtag(tag: tag)
             }
-            captionLabel.userHandleLinkTapHandler = { label, string, range in
+            captionLabel.userHandleLinkTapHandler = { [unowned self] label, string, range in
                 let mention = String(string.dropFirst())
-                Api.Users.observeUserByUsername(username: mention.lowercased(), completion: { user in
+                Api.Users.observeUserByUsername(username: mention.lowercased(), completion: { [unowned self] user in
                     guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
                     if let id = user.id {
                         if id == currentUserUid {
@@ -118,7 +118,7 @@ class DashboardTVCell: UITableViewCell {
                 playerLayer?.frame.size.height = UIScreen.main.bounds.width / postRatio
                 pLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 contentView.layer.addSublayer(pLayer)
-                self.volumeView.layer.zPosition = 1
+                volumeView.layer.zPosition = 1
                 vidPlayer.play()
                 vidPlayer.isMuted = videoIsMuted
                 layoutIfNeeded()
@@ -153,8 +153,9 @@ class DashboardTVCell: UITableViewCell {
             
             timestampLabel.text = timestampText
         }
-        
-        self.updateLike(post: post!)
+        if let p = post {
+            updateLike(post: p)
+        }
     }
     
     @IBAction func volumeTapped(_ sender: UIButton) {
@@ -204,7 +205,7 @@ class DashboardTVCell: UITableViewCell {
     
     @objc func likeTapped() {
         guard let id = post?.id else { return }
-        Api.Post.incrementOrDecrementLikesOfPost(withId: id, completion: { post in
+        Api.Post.incrementOrDecrementLikesOfPost(withId: id, completion: { [unowned self] post in
             self.post?.likes = post.likes
             self.post?.isLiked = post.isLiked
             self.post?.likesCount = post.likesCount
@@ -263,4 +264,7 @@ class DashboardTVCell: UITableViewCell {
         }
     }
     
+    deinit {
+        print("Dashboard Cell Deinitialised")
+    }
 }

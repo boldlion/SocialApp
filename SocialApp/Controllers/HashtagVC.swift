@@ -30,7 +30,7 @@ class HashtagVC: UIViewController {
     
     func loadPosts() {
         Api.Hashtag.fetchPostsForTag(withTag: tag, completion: { postId in
-            Api.Post.observePostSingleEvent(withId: postId, completion: { post in
+            Api.Post.observePostSingleEvent(withId: postId, completion: { [unowned self] post in
                 self.posts.append(post)
                 self.collectionView.reloadData()
             }, onError: { error in

@@ -23,8 +23,8 @@ class AuthApi {
     }
     
     // MARK:- REGISTER NEW USER
-    static func registerWith(data: Data, displayName: String, username: String, email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void)  {
-        Auth.auth().createUser(withEmail: email, password: password, completion: { user, error in
+    func registerWith(data: Data, displayName: String, username: String, email: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void)  {
+        Auth.auth().createUser(withEmail: email, password: password, completion: { [unowned self] user, error in
             if error != nil {
                 onError(error!.localizedDescription)
                 return
@@ -42,7 +42,7 @@ class AuthApi {
     }
     
     // MARK: - Set new user account data
-    static func setUserInformation(data: Data, displayName: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
+    func setUserInformation(data: Data, displayName: String, username: String, email: String, uid: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
         
         DatabaseService.sendProfileImageToStorage(with: data, onError: { errorMessage in
             onError(errorMessage)
@@ -75,7 +75,7 @@ class AuthApi {
     }
     
     // MARK: Update User Info
-    static func updateUserInformation(email: String, displayName: String, imageData: Data, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
+    func updateUserInformation(email: String, displayName: String, imageData: Data, onSuccess: @escaping () -> Void, onError: @escaping (_ errorMessage: String?) -> Void) {
         guard let uid = Api.Users.CURRENT_USER?.uid else { return }
         
         Api.Users.CURRENT_USER?.updateEmail(to: email, completion: { error in
@@ -91,7 +91,7 @@ class AuthApi {
                         onError(error!.localizedDescription)
                         return
                     }
-                    storageRef.downloadURL(completion: { url, error in
+                    storageRef.downloadURL(completion: { [unowned self] url, error in
                         guard let downloadUrl = url else { return }
                         let profileImageUrlString = downloadUrl.absoluteString
                         self.updateDatabase(profileImageULR: profileImageUrlString, email: email, displayName: displayName, onSuccess: onSuccess, onError:onError )
@@ -101,7 +101,7 @@ class AuthApi {
         })
     }
     
-    static func updateDatabase(profileImageULR: String, email: String, displayName: String, onSuccess: @escaping () -> Void,onError: @escaping (_ errorMessage: String?) -> Void) {
+    func updateDatabase(profileImageULR: String, email: String, displayName: String, onSuccess: @escaping () -> Void,onError: @escaping (_ errorMessage: String?) -> Void) {
         let dictionary = [ "profileImageUrl": profileImageULR,
                            "displayName": displayName,
                            "email" : email ]

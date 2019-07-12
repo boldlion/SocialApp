@@ -16,7 +16,7 @@ class ProfileUserVC: UIViewController {
     var user: UserModel!
     var posts = [Post]()
     var userId = ""
-    var delegate: HeaderProfileCollectionReusableViewDelegate?
+    weak var delegate: HeaderProfileCollectionReusableViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,10 +27,10 @@ class ProfileUserVC: UIViewController {
     }
     
     func fetchUser() {
-        Api.Users.fetchUser(withId: userId, completion: { user in
+        Api.Users.fetchUser(withId: userId, completion: { [unowned self] user in
             guard let uid = user.id else { return }
             self.user = user
-            self.isFollowing(userId: uid, completion: { isFollowing in
+            self.isFollowing(userId: uid, completion: { [unowned self] isFollowing in
                 user.isFollowing = isFollowing
                 self.navigationItem.title = user.displayName
                 self.collectionView.reloadData()
@@ -49,7 +49,7 @@ class ProfileUserVC: UIViewController {
     
     func fetchUserPosts() {
         Api.User_Posts.observeUserPosts(withUserId: userId, completion: { postId in
-            Api.Post.observePostSingleEvent(withId: postId, completion: { post in
+            Api.Post.observePostSingleEvent(withId: postId, completion: { [unowned self] post in
                 self.posts.append(post)
                 self.collectionView.reloadData()
             }, onError: { postError in
@@ -99,7 +99,7 @@ extension ProfileUserVC: UICollectionViewDataSource {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderProfileCollectionReusableView", for: indexPath) as! HeaderProfileCollectionReusableView
         if let currentUser = user {
             header.user = currentUser
-            header.delegate = self.delegate
+            header.delegate = delegate
             header.delegateSettings = self
             header.delegateShowFollowersAndFollowing = self
         }

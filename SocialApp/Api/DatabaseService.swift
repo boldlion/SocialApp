@@ -76,7 +76,7 @@ class DatabaseService {
     static func sendPostDataToDatabase(photoImageUrlString: String, videoUrl: String? = nil, ratio: CGFloat, caption: String, onSuccess: @escaping () -> Void, onError: @escaping (String) -> Void) {
         guard let userId = Api.Users.CURRENT_USER?.uid else { return }
         let postsRef = Database.database().reference().child(DatabaseLocation.posts)
-        let postId = postsRef.childByAutoId().key
+        guard let postId = postsRef.childByAutoId().key else { return }
         let newPostId = postsRef.child(postId)
         
         // **** HASHTAG FEATURE **** //
@@ -128,7 +128,7 @@ class DatabaseService {
                             Api.Feed.REF_FEED.child(child.key).child(postId).setValue(["timestamp" : timestamp])
                             
                             // notification > userId > feed
-                            let newNotifcationId = Api.Notification.REF_NOTIFICATION.child(child.key).childByAutoId().key
+                            guard let newNotifcationId = Api.Notification.REF_NOTIFICATION.child(child.key).childByAutoId().key else { return }
                             let newNotifcationReference = Api.Notification.REF_NOTIFICATION.child(child.key).child(newNotifcationId)
                             
                             newNotifcationReference.setValue(["from" : userId,
@@ -148,7 +148,7 @@ class DatabaseService {
     // MARK: - SEND COMMENTS
     static func sendComment(with text: String, postId: String, onError: @escaping (String) -> Void, onSuccess: @escaping () -> Void) {
         let commentRef = Database.database().reference().child(DatabaseLocation.comments)
-        let commentId = commentRef.childByAutoId().key
+        guard let commentId = commentRef.childByAutoId().key else { return }
         let newCommentRef = commentRef.child(commentId)
         
         guard let userUid = Api.Users.CURRENT_USER?.uid else { return }

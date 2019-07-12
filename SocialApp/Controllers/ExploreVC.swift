@@ -29,7 +29,7 @@ class ExploreVC: UIViewController {
     func fetchTopPosts() {
         posts.removeAll()
         collectionView.reloadData()
-        Api.Post.observeTopPosts(completion: { post in
+        Api.Post.observeTopPosts(completion: { [unowned self] post in
             SVProgressHUD.dismiss()
             self.posts.append(post)
             self.collectionView.reloadData()
@@ -48,7 +48,7 @@ class ExploreVC: UIViewController {
     
     @objc func refreshPosts() {
         fetchTopPosts()
-        self.refresh.endRefreshing()
+        refresh.endRefreshing()
     }
 }
 

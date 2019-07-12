@@ -23,9 +23,9 @@ class ActivityVC: UIViewController {
     }
     
     func fetchNotifications() {
-        Api.Notification.observeNotifications(completion: { notification in
+        Api.Notification.observeNotifications(completion: { [unowned self] notification in
             guard let uid = notification.from else { return }
-            self.fetchUserOfNotification(with: uid, completion: {
+            self.fetchUserOfNotification(with: uid, completion: { [unowned self] in
                 self.notifications.insert(notification, at: 0)
                 self.tableView.reloadData()
             })
@@ -35,7 +35,7 @@ class ActivityVC: UIViewController {
     }
     
     func fetchUserOfNotification(with uid: String, completion: @escaping () -> Void) {
-        Api.Users.fetchUser(withId: uid, completion: { user in
+        Api.Users.fetchUser(withId: uid, completion: { [unowned self] user in
             self.users.insert(user, at: 0)
             completion()
         }, onError: { error in

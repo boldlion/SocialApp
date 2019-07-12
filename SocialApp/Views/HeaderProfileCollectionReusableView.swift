@@ -10,16 +10,16 @@ import UIKit
 import SVProgressHUD
 import SDWebImage
 
-protocol HeaderProfileCollectionReusableViewDelegate {
+protocol HeaderProfileCollectionReusableViewDelegate : AnyObject {
     func updateFollowButton(forUser user: UserModel)
 }
 
-protocol HeaderProfileShowFollowersAndFollowingDelegate {
+protocol HeaderProfileShowFollowersAndFollowingDelegate : AnyObject {
     func showFollowersForUser(withId id: String)
     func showFollowingForUser(withId id: String)
 }
 
-protocol HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC {
+protocol HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC : AnyObject {
     func goToSettingVC()
 }
 
@@ -35,9 +35,9 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
     
     @IBOutlet weak var editProfileButton: UIButton!
     
-    var delegate: HeaderProfileCollectionReusableViewDelegate?
-    var delegateSettings: HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC?
-    var delegateShowFollowersAndFollowing: HeaderProfileShowFollowersAndFollowingDelegate?
+    weak var delegate: HeaderProfileCollectionReusableViewDelegate?
+    weak var delegateSettings: HeaderProfileCollectionReusableViewDelegateSwitchToSettingTVC?
+    weak var delegateShowFollowersAndFollowing: HeaderProfileShowFollowersAndFollowingDelegate?
     
     var user: UserModel? {
         didSet {
@@ -62,15 +62,15 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
             self.profileImage.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "profile_placeholder"))
         }
         
-        Api.User_Posts.fetchUserPostsCount(forUserId: userId, completion: { count in
+        Api.User_Posts.fetchUserPostsCount(forUserId: userId, completion: { [unowned self] count in
             self.myPostCountLabel.text = String(count)
         })
         
-        Api.Follow.fetchFollowersCount(forUserId: userId, completion: { count in
+        Api.Follow.fetchFollowersCount(forUserId: userId, completion: { [unowned self] count in
             self.followersCountLabel.text = String(count)
         })
         
-        Api.Follow.fetchFollowingCount(forUserId: userId, completion: { count in
+        Api.Follow.fetchFollowingCount(forUserId: userId, completion: { [unowned self] count in
             self.follwingCountLabel.text = String(count)
         })
         
@@ -116,7 +116,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         guard let userId = user?.id else { return }
         
         if user!.isFollowing == false {
-            Api.Follow.followAction(withUser: userId, completion: {
+            Api.Follow.followAction(withUser: userId, completion: { [unowned self] in
                 self.configureUnfollowButton()
                 self.user!.isFollowing = true
                 self.delegate?.updateFollowButton(forUser: self.user!)
@@ -130,7 +130,7 @@ class HeaderProfileCollectionReusableView: UICollectionReusableView {
         guard let userId = user?.id else { return }
         
         if user!.isFollowing! == true {
-            Api.Follow.unfollowAction(withUser: userId, completion: {
+            Api.Follow.unfollowAction(withUser: userId, completion: { [unowned self] in
                 self.configureFollowButton()
                 self.user!.isFollowing = false
                 self.delegate?.updateFollowButton(forUser: self.user!)

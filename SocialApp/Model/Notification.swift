@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotificationC {
+struct NotificationC {
     
     var id: String?
     var from: String?
@@ -21,7 +21,7 @@ extension NotificationC {
     
     static func transformDataToNotification(dict: [String: Any], key: String) -> NotificationC {
         
-        let notification = NotificationC()
+        var notification = NotificationC()
         
         notification.id = key
         notification.from = dict["from"] as? String

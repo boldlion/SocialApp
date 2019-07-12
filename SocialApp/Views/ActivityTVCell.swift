@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import SVProgressHUD
 
-protocol ActivityTVCellDelegate {
+protocol ActivityTVCellDelegate : AnyObject {
     func goToDetailVC(withPostId id: String)
 }
 
@@ -22,7 +22,7 @@ class ActivityTVCell: UITableViewCell {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var postPhoto: UIImageView!
     
-    var delegate: ActivityTVCellDelegate?
+    weak var delegate: ActivityTVCellDelegate?
     
     var user: UserModel? {
         didSet {
@@ -59,7 +59,7 @@ class ActivityTVCell: UITableViewCell {
             case "feed":
                 descriptionLabel.text = "shared a new post"
                 if let postId = notification?.objectId {
-                    Api.Post.observePostSingleEvent(withId: postId, completion: { post in
+                    Api.Post.observePostSingleEvent(withId: postId, completion: { [unowned self] post in
                         guard let postImagString = post.photoUrl, let url = URL(string: postImagString) else { return }
                         self.postPhoto.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
                     }, onError: { error in

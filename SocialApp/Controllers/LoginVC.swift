@@ -25,7 +25,7 @@ class LoginVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if Api.Users.CURRENT_USER != nil {
-            self.performSegue(withIdentifier: "SegueToTabbar", sender: nil)
+            performSegue(withIdentifier: "SegueToTabbar", sender: nil)
         }
     }
 
@@ -36,22 +36,18 @@ class LoginVC: UIViewController {
         guard let email = emailTextField.text else { return }
         guard let password = passwordTextField.text else { return }
         
-        AuthApi.loginWith(email: email, password: password, onSuccess: {
+        AuthApi.loginWith(email: email, password: password, onSuccess: { [unowned self] in
             SVProgressHUD.dismiss()
             self.performSegue(withIdentifier: "SegueToTabbar", sender: nil)
-        }, onError: {
-            error in
+        }, onError: { error in
             SVProgressHUD.showError(withStatus: error!)
         })
     }
     
     @IBAction func lostPassTapped(_ sender: UIButton) {
- 
+        // TODO
     }
     
-    @IBAction func registerTapped(_ sender: UIButton) {
-        
-    }
 }
 
 extension LoginVC : UITextFieldDelegate {

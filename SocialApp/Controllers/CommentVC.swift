@@ -41,31 +41,31 @@ class CommentVC: UIViewController {
         activityIndicator.startAnimating()
         guard let id = postId else { return }
         Api.Post_Comment.observePostCommentsForPost(withId: id, completion: { commentId in
-            Api.Comment.observeCommentsForPost(withId: commentId, completion: { comment in
+            Api.Comment.observeCommentsForPost(withId: commentId, completion: { [unowned self] comment in
                 guard let userId = comment.uid else { return }
-                self.fetchUsers(withId: userId, completion: {
+                self.fetchUsers(withId: userId, completion: { [unowned self] in
                     self.stopAndHideActivityIndicator()
                     self.comments.append(comment)
                     self.tableView.reloadData()
-                }, onErrror: { errorUsers in
+                }, onErrror: { [unowned self] errorUsers in
                     self.stopAndHideActivityIndicator()
                     SVProgressHUD.showError(withStatus: errorUsers)
                 })
-            }, onError: { err in
+            }, onError: { [unowned self] err in
                 self.stopAndHideActivityIndicator()
                 SVProgressHUD.showError(withStatus: err)
             })
-        }, onError: { error in
+        }, onError: { [unowned self] error in
             self.stopAndHideActivityIndicator()
             SVProgressHUD.showError(withStatus: error)
         })
     }
     
     func fetchUsers(withId id: String, completion: @escaping () -> Void, onErrror: @escaping (String) -> Void) {
-        Api.Users.fetchUser(withId: id, completion: { user in
+        Api.Users.fetchUser(withId: id, completion: { [unowned self] user in
             self.users.append(user)
             completion()
-        }, onError: { error in
+        }, onError: { [unowned self] error in
             self.stopAndHideActivityIndicator()
             SVProgressHUD.showError(withStatus: error)
         })
@@ -78,7 +78,7 @@ class CommentVC: UIViewController {
         if let comment = commentTextField.text  {
             DatabaseService.sendComment(with: comment, postId: id, onError: { error in
                 SVProgressHUD.showError(withStatus: error)
-           }, onSuccess: {
+           }, onSuccess: { [unowned self] in
                 self.empty()
            })
         }
@@ -119,7 +119,7 @@ class CommentVC: UIViewController {
     @objc func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
 
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.3, animations: { [unowned self] in
                 self.constraintToBottom.constant = -keyboardSize.height
                 self.view.layoutIfNeeded()
             })
@@ -127,7 +127,7 @@ class CommentVC: UIViewController {
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
-        UIView.animate(withDuration: 0, animations: {
+        UIView.animate(withDuration: 0, animations: { [unowned self] in
             self.constraintToBottom.constant = 0
             self.view.layoutIfNeeded()
         })

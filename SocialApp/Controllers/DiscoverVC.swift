@@ -26,7 +26,7 @@ class DiscoverVC: UIViewController {
         Api.Users.fetchAllUsers(completion: { user in
             guard let uid = user.id else { return }
             
-            self.isFollowing(userId: uid, completion: { isFollowing in
+            self.isFollowing(userId: uid, completion: { [unowned self] isFollowing in
                 user.isFollowing = isFollowing
                 self.users.append(user)
                 self.tableView.reloadData()

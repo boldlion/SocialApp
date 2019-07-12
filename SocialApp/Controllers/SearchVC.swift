@@ -29,7 +29,7 @@ class SearchVC: UIViewController {
         searchBar.placeholder = "Search for username"
         searchBar.frame.size.width = view.frame.size.width - 55
         let searchItem = UIBarButtonItem(customView: searchBar)
-        self.navigationItem.rightBarButtonItem = searchItem
+        navigationItem.rightBarButtonItem = searchItem
     }
     
     func doSearch() {
@@ -38,10 +38,10 @@ class SearchVC: UIViewController {
             self.tableView.reloadData()
             Api.Users.queryUsers(withtext: searchText, onError: { error in
                 SVProgressHUD.showError(withStatus: error)
-            }, completion: { user in
+            }, completion: { [unowned self] user in
                 guard let uid = user.id else { return }
            
-                self.isFollowing(userId: uid, completion: { isFollowing in
+                self.isFollowing(userId: uid, completion: { [unowned self] isFollowing in
                     user.isFollowing = isFollowing
                     self.users.append(user)
                     self.tableView.reloadData()

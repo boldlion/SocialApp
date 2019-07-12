@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class Post {
+struct Post {
     var id: String?
     var uid: String?
     var photoUrl: String?
@@ -23,7 +23,7 @@ class Post {
 extension Post {
     
     static func transformDataToPost(dictionary: [String : Any], key: String) -> Post {
-        let post = Post()
+        var post = Post()
         post.id = key
         post.uid = dictionary["uid"] as? String
         post.photoUrl = dictionary["photoUrl"] as? String

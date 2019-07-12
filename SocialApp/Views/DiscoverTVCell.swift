@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 import SVProgressHUD
 
-protocol DiscoverTVCellDelegate {
+protocol DiscoverTVCellDelegate : AnyObject {
     func goToUserProfile(withId id: String)
 }
 
@@ -20,7 +20,7 @@ class DiscoverTVCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
     
-    var delegateShowUserProfile: DiscoverTVCellDelegate?
+    weak var delegateShowUserProfile: DiscoverTVCellDelegate?
 
     var user: UserModel? {
         didSet {
@@ -56,7 +56,7 @@ class DiscoverTVCell: UITableViewCell {
         guard let userId = user?.id else { return }
         if user!.isFollowing == false {
 
-            Api.Follow.followAction(withUser: userId, completion: {
+            Api.Follow.followAction(withUser: userId, completion: { [unowned self] in
                 self.followButton.isHidden = false
                 self.configureUnfollowButton()
                 self.user!.isFollowing = true
@@ -70,7 +70,7 @@ class DiscoverTVCell: UITableViewCell {
         guard let userId = user?.id else { return }
         
         if user!.isFollowing! == true {
-            Api.Follow.unfollowAction(withUser: userId, completion: {
+            Api.Follow.unfollowAction(withUser: userId, completion: { [unowned self] in
                 self.followButton.isHidden = false
                 self.configureFollowButton()
                 self.user!.isFollowing = false

@@ -30,9 +30,9 @@ class FollowingVC: UIViewController {
     
     func fetchFollowing() {
         Api.Follow.fetchFollowing(forUserId: userId, completion: { followerId in
-            Api.Users.fetchUser(withId: followerId, completion: { user in
+            Api.Users.fetchUser(withId: followerId, completion: { [unowned self] user in
                 guard let uid = user.id else { return }
-                self.isFollowing(userId: uid, completion: { isFollowing in
+                self.isFollowing(userId: uid, completion: { [unowned self] isFollowing in
                     user.isFollowing = isFollowing
                     self.users.append(user)
                     self.tableView.reloadData()

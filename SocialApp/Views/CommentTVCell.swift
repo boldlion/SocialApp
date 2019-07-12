@@ -11,7 +11,7 @@ import SDWebImage
 import KILabel
 import SVProgressHUD
 
-protocol CommentTVCellDelegate {
+protocol CommentTVCellDelegate : AnyObject {
     func goToProfileUser(with id: String)
     func goToProfile()
     func goToHashtag(tag: String)
@@ -23,7 +23,7 @@ class CommentTVCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var commentLabel: KILabel!
     
-    var delegateCommentTVCell: CommentTVCellDelegate?
+    weak var delegateCommentTVCell: CommentTVCellDelegate?
 
     var comment: Comment? {
         didSet {
@@ -39,9 +39,9 @@ class CommentTVCell: UITableViewCell {
     
     func updateView() {
         if let commentText = comment?.text {
-            commentLabel.userHandleLinkTapHandler = { label, string, range in
+            commentLabel.userHandleLinkTapHandler = { [unowned self] label, string, range in
                 let mention = String(string.dropFirst())
-                Api.Users.observeUserByUsername(username: mention.lowercased(), completion: { user in
+                Api.Users.observeUserByUsername(username: mention.lowercased(), completion: { [unowned self] user in
                     guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
                     if let id = user.id {
                         if id == currentUserUid {
@@ -56,7 +56,7 @@ class CommentTVCell: UITableViewCell {
                 })
             }
             
-            commentLabel.hashtagLinkTapHandler = { label, string, range in
+            commentLabel.hashtagLinkTapHandler = { [unowned self] label, string, range in
                 let tag = String(string.dropFirst())
                 self.delegateCommentTVCell?.goToHashtag(tag: tag)
             }

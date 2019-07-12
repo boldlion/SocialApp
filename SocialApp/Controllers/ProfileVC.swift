@@ -26,7 +26,7 @@ class ProfileVC: UIViewController {
     }
     
     func fetchUser() {
-        Api.Users.observeCurrentUser(completion: { user in
+        Api.Users.observeCurrentUser(completion: { [unowned self] user in
             self.user = user
             self.navigationItem.title = user.displayName
             self.collectionView.reloadData()
@@ -37,7 +37,7 @@ class ProfileVC: UIViewController {
     
     func fetchUserPosts() {
         Api.User_Posts.observeCurrentUserPosts(completion: { postId in
-            Api.Post.observePostSingleEvent(withId: postId, completion: { post in
+            Api.Post.observePostSingleEvent(withId: postId, completion: { [unowned self] post in
                 self.posts.append(post)
                 self.collectionView.reloadData()
             }, onError: { postError in

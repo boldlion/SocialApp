@@ -10,7 +10,7 @@ import UIKit
 import SVProgressHUD
 import SDWebImage
 
-protocol SettingsTVCDelegate {
+protocol SettingsTVCDelegate : AnyObject {
     func updateUserInfo()
 }
 
@@ -22,7 +22,7 @@ class SettingTVC: UITableViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     
-    var delegate: SettingsTVCDelegate?
+    weak var delegate: SettingsTVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class SettingTVC: UITableViewController {
     }
     
     func fetchUser() {
-        Api.Users.observeCurrentUser(completion: { user in
+        Api.Users.observeCurrentUser(completion: { [unowned self] user in
             self.user = user
             self.nameTextField.text = user.displayName
             self.emailTextField.text = user.email
@@ -52,7 +52,7 @@ class SettingTVC: UITableViewController {
         guard let email = emailTextField.text else { return }
         if let profileImg = profileImage.image, let imageData = profileImg.jpegData(compressionQuality: 0.1)  {
             SVProgressHUD.showProgress(5, status: "Updating...")
-            AuthApi.updateUserInformation(email: email, displayName: name, imageData: imageData, onSuccess: {
+            Api.Auth.updateUserInformation(email: email, displayName: name, imageData: imageData, onSuccess: { [unowned self] in
                 SVProgressHUD.showSuccess(withStatus: "Updated!")
                 self.delegate?.updateUserInfo()
             }, onError: { errorMessage in
@@ -62,7 +62,7 @@ class SettingTVC: UITableViewController {
     }
     
     @IBAction func logoutTapped(_ sender: UIButton) {
-        AuthApi.logout(onSuccess: {
+        AuthApi.logout(onSuccess: { [unowned self] in
             let storyboard = UIStoryboard(name: "Auth", bundle: nil)
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
             self.present(loginVC, animated: true, completion: nil)

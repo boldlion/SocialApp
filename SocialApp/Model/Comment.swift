@@ -6,7 +6,7 @@
 //  Copyright © 2018 Bold Lion. All rights reserved.
 //
 
-class Comment {
+struct Comment {
     var id: String?
     var uid: String?
     var text: String?
@@ -16,7 +16,7 @@ class Comment {
 extension Comment {
     
     static func transformDataToComment( dict: [String: Any], key: String) -> Comment {
-        let comment = Comment()
+        var comment = Comment()
         comment.id = key
         comment.text = dict ["text"] as? String
         comment.uid = dict["uid"] as? String

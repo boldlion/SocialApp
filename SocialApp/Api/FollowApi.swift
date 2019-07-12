@@ -17,7 +17,7 @@ class FollowApi {
         guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
         
         // followers > userId > currentUser : true
-        REF_FOLLOWERS.child(id).child(currentUserUid).setValue(true, withCompletionBlock: { error, databaseRef in
+        REF_FOLLOWERS.child(id).child(currentUserUid).setValue(true, withCompletionBlock: { [unowned self] error, databaseRef in
             if error != nil {
                 onError(error!.localizedDescription)
                 return
@@ -51,15 +51,15 @@ class FollowApi {
         guard let currentUserUid = Api.Users.CURRENT_USER?.uid else { return }
 
         // followers> userId > currentUser : true (remove)
-        REF_FOLLOWERS.child(id).child(currentUserUid).removeValue(completionBlock: { error, databaseRef in
+        REF_FOLLOWERS.child(id).child(currentUserUid).removeValue(completionBlock: { [unowned self] error, databaseRef in
             if error != nil {
-                print(error!.localizedDescription)
+                onError(error!.localizedDescription)
                 return
             }
             // following> currentUser > userId : true (remove)
             self.REF_FOLLOWING.child(currentUserUid).child(id).removeValue(completionBlock: { error, databaseRef in
                 if error != nil {
-                    print(error!.localizedDescription)
+                    onError(error!.localizedDescription)
                     return
                 }
                 // feed > currentUser > postId (remove)
@@ -70,7 +70,6 @@ class FollowApi {
                         }
                     }
                 })
-                
                 completion()
             })
         })

@@ -36,12 +36,12 @@ class RegisterVC: UIViewController {
         
         if let image = selectedImage {
             let data = image.jpegData(compressionQuality: 0.1)
-            AuthApi.registerWith(data        : data!,
+            Api.Auth.registerWith(data        : data!,
                                  displayName : displayNameTextField.text!,
                                  username    : usernameTextField.text!,
                                  email       : emailTextField.text!,
                                  password    : passwordTextField.text!,
-                                 onSuccess:  {
+                                 onSuccess:  { [unowned self] in
                                     SVProgressHUD.dismiss()
                                     self.performSegue(withIdentifier: "SegueRegisterToTabbar", sender: nil)
                                  },

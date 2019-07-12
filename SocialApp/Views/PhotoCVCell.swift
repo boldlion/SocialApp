@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-protocol PhotoCVCellDelegate {
+protocol PhotoCVCellDelegate: AnyObject {
     func goToDetailVC(withId id: String)
 }
 
@@ -17,7 +17,7 @@ class PhotoCVCell: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
     
-    var delegate: PhotoCVCellDelegate?
+    weak var delegate: PhotoCVCellDelegate?
     
     var post: Post? {
         didSet {

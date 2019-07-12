@@ -47,7 +47,7 @@ class PostVC: UIViewController {
         if let postImage = selectedImage, let imageData = postImage.jpegData(compressionQuality: 0.1)  {
             let photoRatio = postImage.size.width / postImage.size.height
             
-            DatabaseService.uploadDataToServer(data: imageData, videoUrl: videoUrl, ratio: photoRatio, caption: captionTextView.text!, onSuccess: {
+            DatabaseService.uploadDataToServer(data: imageData, videoUrl: videoUrl, ratio: photoRatio, caption: captionTextView.text!, onSuccess: { [unowned self] in
                 SVProgressHUD.dismiss()
                 self.clear()
                 self.tabBarController?.selectedIndex = 0
@@ -100,9 +100,9 @@ class PostVC: UIViewController {
     }
     
     func clear() {
-        self.captionTextView.text = ""
-        self.selectedImage = nil
-        self.photoImageView.image = UIImage(named: "placeholder")
+        captionTextView.text = ""
+        selectedImage = nil
+        photoImageView.image = UIImage(named: "placeholder")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

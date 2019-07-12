@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol FilterVCDelegate {
+protocol FilterVCDelegate: AnyObject {
     func updatePhoto(image: UIImage)
 }
 
@@ -17,7 +17,7 @@ class FilterVC: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var filterPhotoView: UIImageView!
     
-    var delegate: FilterVCDelegate?
+    weak var delegate: FilterVCDelegate?
     var selectedPhoto = UIImage()
     var filters = [ "CIColorCube", "CIPhotoEffectMono", "CIColorMonochrome", "CIColorPosterize", "CIFalseColor", "CIMaximumComponent", "CIMinimumComponent", "CIPhotoEffectChrome", "CIPhotoEffectFade" ]
     

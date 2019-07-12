@@ -30,10 +30,10 @@ class DetailVC: UIViewController {
     }
     
     func fetchPost() {
-        Api.Post.observePostSingleEvent(withId: postId, completion: { post in
+        Api.Post.observePostSingleEvent(withId: postId, completion: { [unowned self] post in
             self.post = post
             guard let uid = post.uid else { return }
-            self.fetchUserOfPost(with: uid, completion: {
+            self.fetchUserOfPost(with: uid, completion: { [unowned self] in
                 self.tableView.reloadData()
             })
         }, onError: { error in
@@ -42,7 +42,7 @@ class DetailVC: UIViewController {
     }
     
     func fetchUserOfPost(with uid: String, completion: @escaping () -> Void) {
-        Api.Users.fetchUser(withId: uid, completion: { user in
+        Api.Users.fetchUser(withId: uid, completion: { [unowned self] user in
             self.user = user
             completion()
         }, onError: { error in
