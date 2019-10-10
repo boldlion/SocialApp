@@ -27,7 +27,7 @@ class DashboardVC: UIViewController {
     
     func fetchPosts() {
         SVProgressHUD.setStatus("Loading... Please wait!")
-        Api.Feed.observeFeedPosts(completion: { post in
+        Api.Feed.observeFeedPosts(completion: { [unowned self] post in
             guard let uid = post.uid else { return }
             self.fetchUserOfPost(with: uid, completion: { [unowned self] in
                 SVProgressHUD.dismiss()

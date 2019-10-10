@@ -171,7 +171,21 @@ class DashboardTVCell: UITableViewCell {
     }
     
     func updateLike(post: Post) {
-        let imageName = post.likes == nil || !post.isLiked! ? "post_like" : "post_likeSelected"
+        
+        var imageName = ""
+        
+        if let isPostLiked = post.isLiked {
+            if isPostLiked == true {
+                imageName = "post_likeSelected"
+            }
+            else {
+                imageName = "post_like"
+            }
+        }
+        else {
+            imageName = "post_like"
+        }
+        
         likeImageView.image = UIImage(named: imageName)
         
         guard let count = post.likesCount else { return } 
