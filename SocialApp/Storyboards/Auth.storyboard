@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,13 +24,11 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="tVl-De-vZq"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LQ4-gX-rs7">
                                         <rect key="frame" x="0.0" y="60" width="354" height="40"/>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
@@ -55,7 +52,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Y6D-IC-KLc" kind="presentation" id="rVx-RN-gje"/>
+                                    <segue destination="Y6D-IC-KLc" kind="presentation" modalPresentationStyle="fullScreen" id="rVx-RN-gje"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpe-nm-gqT">
@@ -103,7 +100,7 @@
                         <outlet property="emailTextField" destination="X3V-kt-KXR" id="WWa-VF-98H"/>
                         <outlet property="loginButton" destination="CCi-gP-1mm" id="NC4-vh-ilb"/>
                         <outlet property="passwordTextField" destination="LQ4-gX-rs7" id="Zdg-wz-pT8"/>
-                        <segue destination="QZ6-s8-ddT" kind="show" identifier="SegueToTabbar" id="mru-k5-b4w"/>
+                        <segue destination="QZ6-s8-ddT" kind="presentation" identifier="SegueToTabbar" modalPresentationStyle="fullScreen" id="mru-k5-b4w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -147,25 +144,21 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="1Sa-dr-2tP"/>
                                         </constraints>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="name"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d33-ir-31K">
                                         <rect key="frame" x="0.0" y="60" width="374" height="40"/>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="username"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pv5-Sa-P5h">
                                         <rect key="frame" x="0.0" y="120" width="374" height="40"/>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9pd-pS-bIY">
                                         <rect key="frame" x="0.0" y="180" width="374" height="40"/>
-                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" textContentType="email"/>
                                     </textField>
@@ -208,6 +201,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LE7-Im-GHF"/>
                     </view>
+                    <navigationItem key="navigationItem" id="N4t-pV-Aal"/>
                     <connections>
                         <outlet property="displayNameTextField" destination="074-8m-HAs" id="cH6-ZK-ZXo"/>
                         <outlet property="emailTextField" destination="9pd-pS-bIY" id="xnw-KQ-rpY"/>
@@ -225,7 +219,9 @@
         <!--Tabbar-->
         <scene sceneID="S3d-y0-NtF">
             <objects>
-                <viewControllerPlaceholder storyboardName="Tabbar" referencedIdentifier="Tabbar" id="QZ6-s8-ddT" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Tabbar" referencedIdentifier="Tabbar" id="QZ6-s8-ddT" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="dMy-PT-nXx"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4fa-x8-G34" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="549" y="548"/>

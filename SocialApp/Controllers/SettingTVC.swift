@@ -65,6 +65,7 @@ class SettingTVC: UITableViewController {
         AuthApi.logout(onSuccess: { [unowned self] in
             let storyboard = UIStoryboard(name: "Auth", bundle: nil)
             let loginVC = storyboard.instantiateViewController(withIdentifier: "LoginVC")
+            loginVC.modalPresentationStyle = .fullScreen
             self.present(loginVC, animated: true, completion: nil)
         }, onError: { error in
             SVProgressHUD.showError(withStatus: error)
