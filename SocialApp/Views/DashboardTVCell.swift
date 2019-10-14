@@ -33,7 +33,7 @@ class DashboardTVCell: UITableViewCell {
     @IBOutlet weak var volumeButton: UIButton!
     @IBOutlet weak var timestampLabel: UILabel!
     
-    var delegate: DashboardTVCellDelegate?
+    weak var delegate: DashboardTVCellDelegate?
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
     
@@ -153,9 +153,16 @@ class DashboardTVCell: UITableViewCell {
             
             timestampLabel.text = timestampText
         }
-        if let p = post {
-            updateLike(post: p)
-        }
+        guard let postID = post?.id else { return }
+        
+        // Note: If post's likes was updated, it needs to refetch the new count and state to feed the cell new data, instead of the old data from the cached posts array
+        Api.Post.observePostSingleEvent(withId: postID, completion: { [unowned self] updatedPost in
+            self.updateLike(post: updatedPost)
+            
+        }, onError: { errorMessage in
+            SVProgressHUD.showError(withStatus: errorMessage)
+        })
+        
     }
     
     @IBAction func volumeTapped(_ sender: UIButton) {
